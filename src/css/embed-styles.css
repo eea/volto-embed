@@ -1,0 +1,17 @@
+.privacy-protection {
+  background-color: #EEE;
+  padding: 2rem;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.privacy-button {
+  margin-top: 2rem;
+}
+
+.privacy-toggle {
+  margin: 0.4rem auto 2rem auto;
+}
