@@ -43,7 +43,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
           />
         </Message>
 
-        <div class="privacy-button">
+        <div className="privacy-button">
           <Button
             primary
             onClick={() => {
