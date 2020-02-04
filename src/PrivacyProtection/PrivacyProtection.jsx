@@ -45,6 +45,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
 
         <div class="privacy-button">
           <Button
+            primary
             onClick={() => {
               setShow(true);
               if (remember) {
