@@ -31,7 +31,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
   const [show, setShow] = useState(defaultShow);
   const [remember, setRemember] = useState(defaultShow);
 
-  return show ? (
+  return !data.enabled || show ? (
     children
   ) : (
     <div className="privacy-protection" {...props}>

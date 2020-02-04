@@ -5,7 +5,13 @@ const IframeSchema = {
     {
       id: 'default',
       title: 'Default',
-      fields: ['url', 'align', 'privacy_statement', 'privacy_cookie_key'],
+      fields: [
+        'url',
+        'align',
+        'privacy_statement',
+        'privacy_cookie_key',
+        'enabled',
+      ],
     },
   ],
 
@@ -27,9 +33,14 @@ const IframeSchema = {
       title: 'Privacy cookie key',
       description: 'Identifies similar external content',
     },
+    enabled: {
+      title: 'Use privacy screen?',
+      description: 'Enable/disable the privacy protection',
+      type: 'boolean',
+    },
   },
 
-  required: ['url', 'privacy_statement', 'privacy_cookie_key'],
+  required: ['url'],
 };
 
 export default IframeSchema;
