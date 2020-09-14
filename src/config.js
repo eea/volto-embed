@@ -7,5 +7,6 @@ export function applyConfig(config) {
     view: ViewIframeBlock,
     edit: EditIframeBlock,
   };
+
   return config;
 }

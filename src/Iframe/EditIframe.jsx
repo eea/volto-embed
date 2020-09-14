@@ -3,7 +3,6 @@
  * @module components/manage/Blocks/Maps/Edit
  */
 
-import { BlockEditForm } from 'volto-addons/BlockForm';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Input, Message } from 'semantic-ui-react';
@@ -11,6 +10,7 @@ import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import cx from 'classnames';
 
 import { Icon, SidebarPortal } from '@plone/volto/components';
+import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
@@ -205,14 +205,14 @@ class Edit extends Component {
                   value={this.state.url}
                   // Prevents propagation to the Dropzone and the opening
                   // of the upload browser dialog
-                  onClick={e => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
                 />
                 {this.state.url && (
                   <Button.Group>
                     <Button
                       basic
                       className="cancel"
-                      onClick={e => {
+                      onClick={(e) => {
                         e.stopPropagation();
                         this.setState({ url: '' });
                       }}
@@ -225,7 +225,7 @@ class Edit extends Component {
                   <Button
                     basic
                     primary
-                    onClick={e => {
+                    onClick={(e) => {
                       e.stopPropagation();
                       this.onSubmitUrl();
                     }}
@@ -252,7 +252,7 @@ class Edit extends Component {
           </Message>
         )}
         <SidebarPortal selected={this.props.selected}>
-          <BlockEditForm
+          <InlineForm
             schema={schema}
             title={schema.title}
             onChangeField={(id, value) => {
