@@ -26,7 +26,6 @@ const messages = defineMessages({
 
 const View = ({ data, intl }) => {
   const [visible, setVisibility] = useState(false);
-  // console.log('map', data);
   // partialVisibility={true}
   return (
     <div
@@ -47,9 +46,9 @@ const View = ({ data, intl }) => {
         })}
         style={{ height: '100%' }}
       >
-        <PrivacyProtection data={data}>
+        <PrivacyProtection data={data.dataprotection || {}}>
           <VisibilitySensor
-            onChange={isVisible => {
+            onChange={(isVisible) => {
               !visible && isVisible && setVisibility(true);
             }}
             partialVisibility={true}
