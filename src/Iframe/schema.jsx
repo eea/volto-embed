@@ -5,13 +5,7 @@ const IframeSchema = {
     {
       id: 'default',
       title: 'Default',
-      fields: [
-        'url',
-        'align',
-        'privacy_statement',
-        'privacy_cookie_key',
-        'enabled',
-      ],
+      fields: ['url', 'align'],
     },
   ],
 
@@ -23,20 +17,6 @@ const IframeSchema = {
       title: 'Alignment',
       widget: 'align',
       type: 'string',
-    },
-    privacy_statement: {
-      title: 'Privacy statement',
-      description: 'Short notification text',
-      widget: 'cktext',
-    },
-    privacy_cookie_key: {
-      title: 'Privacy cookie key',
-      description: 'Identifies similar external content',
-    },
-    enabled: {
-      title: 'Use privacy screen?',
-      description: 'Enable/disable the privacy protection',
-      type: 'boolean',
     },
   },
 

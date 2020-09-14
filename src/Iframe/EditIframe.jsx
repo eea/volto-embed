@@ -15,6 +15,7 @@ import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
 import schema from './schema';
+import { addPrivacyProtectionToSchema } from '../PrivacyProtection';
 
 const messages = defineMessages({
   MapsBlockInputPlaceholder: {
@@ -165,6 +166,7 @@ class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    console.log('props', this.props);
     return (
       <div
         className={cx(
@@ -253,7 +255,7 @@ class Edit extends Component {
         )}
         <SidebarPortal selected={this.props.selected}>
           <InlineForm
-            schema={schema}
+            schema={addPrivacyProtectionToSchema(schema)}
             title={schema.title}
             onChangeField={(id, value) => {
               this.props.onChangeBlock(this.props.block, {
