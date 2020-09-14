@@ -29,6 +29,7 @@ function canShow(domain_key) {
 }
 
 const PrivacyProtection = ({ children, data, block, ...props }) => {
+  const { dataprotection = {} } = data;
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(data.privacy_cookie_key);
   const [show, setShow] = useState(defaultShow);
@@ -44,7 +45,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
     >
       {visible ? (
         <div>
-          {!data.enabled || show ? (
+          {!dataprotection.enabled || show ? (
             children
           ) : (
             <div className="privacy-protection" {...props}>
@@ -52,7 +53,9 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
                 <Message>
                   <div
                     className="privacy-statement"
-                    dangerouslySetInnerHTML={{ __html: data.privacy_statement }}
+                    dangerouslySetInnerHTML={{
+                      __html: dataprotection.privacy_statement,
+                    }}
                   />
                 </Message>
 
@@ -62,7 +65,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
                     onClick={() => {
                       setShow(true);
                       if (remember) {
-                        saveCookie(data.privacy_cookie_key);
+                        saveCookie(dataprotection.privacy_cookie_key);
                       }
                     }}
                   >

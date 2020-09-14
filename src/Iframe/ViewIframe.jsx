@@ -23,7 +23,6 @@ const messages = defineMessages({
  */
 
 const View = ({ data, intl }) => {
-  // partialVisibility={true}
   return (
     <div
       className={cx(
@@ -43,7 +42,7 @@ const View = ({ data, intl }) => {
         })}
         style={{ height: '100%' }}
       >
-        <PrivacyProtection data={data.dataprotection || {}}>
+        <PrivacyProtection data={data}>
           <iframe
             title={intl.formatMessage(messages.EmbededGoogleMaps)}
             src={data.url}
