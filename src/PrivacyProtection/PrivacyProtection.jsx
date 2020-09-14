@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import cookie from 'react-cookie';
-// import getUrls from 'get-urls';
 import { Button, Checkbox, Message } from 'semantic-ui-react';
 import { settings } from '~/config';
-import './../css/embed-styles.css';
 
-const key = domain_key => `accept-${domain_key}`;
+import '../css/embed-styles.css';
+
+const key = (domain_key) => `accept-${domain_key}`;
 
 const getExpDays = () =>
   typeof settings.embedCookieExpirationDays !== 'undefined'
