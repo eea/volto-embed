@@ -3,12 +3,10 @@
  * @module components/manage/Blocks/Maps/View
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import VisibilitySensor from 'react-visibility-sensor';
-import { Placeholder } from 'semantic-ui-react';
 import PrivacyProtection from 'volto-embed/PrivacyProtection';
 
 const messages = defineMessages({
@@ -25,7 +23,6 @@ const messages = defineMessages({
  */
 
 const View = ({ data, intl }) => {
-  const [visible, setVisibility] = useState(false);
   // partialVisibility={true}
   return (
     <div
@@ -47,28 +44,14 @@ const View = ({ data, intl }) => {
         style={{ height: '100%' }}
       >
         <PrivacyProtection data={data.dataprotection || {}}>
-          <VisibilitySensor
-            onChange={(isVisible) => {
-              !visible && isVisible && setVisibility(true);
-            }}
-            partialVisibility={true}
-            offset={{ bottom: 200 }}
-          >
-            {visible ? (
-              <iframe
-                title={intl.formatMessage(messages.EmbededGoogleMaps)}
-                src={data.url}
-                className="google-map"
-                frameBorder="0"
-                allowFullScreen
-                style={{ height: '45vh' }}
-              />
-            ) : (
-              <Placeholder style={{ height: '100%', width: '100%' }}>
-                <Placeholder.Image rectangular />
-              </Placeholder>
-            )}
-          </VisibilitySensor>
+          <iframe
+            title={intl.formatMessage(messages.EmbededGoogleMaps)}
+            src={data.url}
+            className="google-map"
+            frameBorder="0"
+            allowFullScreen
+            style={{ height: '45vh' }}
+          />
         </PrivacyProtection>
       </div>
     </div>
