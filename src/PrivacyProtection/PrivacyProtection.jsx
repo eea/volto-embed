@@ -28,7 +28,7 @@ function canShow(domain_key) {
   return cookie.load(key(domain_key)) === 'true';
 }
 
-const PrivacyProtection = ({ children, data, block, ...props }) => {
+export default ({ children, data = {}, block, ...rest }) => {
   const { dataprotection = {} } = data;
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(data.privacy_cookie_key);
@@ -48,7 +48,7 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
           {!dataprotection.enabled || show ? (
             children
           ) : (
-            <div className="privacy-protection" {...props}>
+            <div className="privacy-protection" {...rest}>
               <div className="wrapped">
                 <Message>
                   <div
@@ -102,5 +102,3 @@ const PrivacyProtection = ({ children, data, block, ...props }) => {
     </VisibilitySensor>
   );
 };
-
-export default PrivacyProtection;
