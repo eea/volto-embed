@@ -1,12 +1,14 @@
 import { ProtectionSchema } from './schema';
 
 export const addPrivacyProtectionToSchema = (schema) => {
-  const [firstFieldset, ...rest] = schema.fieldsets;
   return {
     ...schema,
     fieldsets: [
-      { ...firstFieldset, fields: [...firstFieldset.fields, 'dataprotection'] },
-      ...rest,
+      ...schema.fieldsets,
+      {
+        fields: ['dataprotection'],
+        title: 'Data Protection'
+      },
     ],
     properties: {
       ...schema.properties,
