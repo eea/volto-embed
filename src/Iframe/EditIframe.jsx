@@ -175,6 +175,15 @@ class Edit extends Component {
           this.props.data.align,
         )}
       >
+        <Button
+          size="tiny"
+          onClick={e => {
+            e.stopPropagation();
+            this.props.onSelectBlock(this.props.block);
+          }}
+        >
+          Edit block
+        </Button>
         {this.props.data.url ? (
           <div
             className={cx('maps-inner', {
