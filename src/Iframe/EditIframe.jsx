@@ -166,7 +166,6 @@ class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
-    console.log('props', this.props);
     return (
       <div
         className={cx(

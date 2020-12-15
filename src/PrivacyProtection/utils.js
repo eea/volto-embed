@@ -7,7 +7,7 @@ export const addPrivacyProtectionToSchema = (schema) => {
       ...schema.fieldsets,
       {
         fields: ['dataprotection'],
-        title: 'Data Protection'
+        title: 'Data Protection',
       },
     ],
     properties: {

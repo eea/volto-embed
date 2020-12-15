@@ -1,6 +1,16 @@
-import { applyConfig } from './config';
+import { ViewIframe, EditIframe } from '@eeacms/volto-embed/Iframe';
 
-export { addPrivacyProtectionToSchema } from './PrivacyProtection';
-export PrivacyProtection from './PrivacyProtection/PrivacyProtection';
+export {
+  PrivacyProtection,
+  addPrivacyProtectionToSchema,
+} from '@eeacms/volto-embed/PrivacyProtection';
 
-export default applyConfig;
+export default (config) => {
+  config.blocks.blocksConfig.maps = {
+    ...config.blocks.blocksConfig.maps,
+    view: ViewIframe,
+    edit: EditIframe,
+  };
+
+  return config;
+};
