@@ -1,12 +1,14 @@
 import { openSidebar, closeSidebar } from '../index';
 
 export const changePageTitle = (title) => {
-  return cy
-    .get('.documentFirstHeading > .public-DraftStyleDefault-block')
+  cy.get('.documentFirstHeading > .public-DraftStyleDefault-block')
     .clear()
     .type(title)
     .get('.documentFirstHeading span[data-text]')
     .contains(title);
+  cy.get('.documentFirstHeading > .public-DraftStyleDefault-block').type(
+    '{enter}',
+  );
 };
 
 export const addBlock = (groupTitle, groupId, blockId) => {
