@@ -1,5 +1,5 @@
 {
-  "name": "@eeacms/volto-embed",
+  "name": "volto-embed",
   "version": "1.0.0",
   "description": "Embed external content",
   "main": "src/index.js",

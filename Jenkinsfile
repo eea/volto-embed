@@ -3,7 +3,6 @@ pipeline {
 
   environment {
         GIT_NAME = "volto-embed"
-        NAMESPACE = "@eeacms"
         SONARQUBE_TAGS = "volto.eea.europa.eu"
     }
 

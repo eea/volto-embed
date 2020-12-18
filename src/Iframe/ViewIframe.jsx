@@ -7,7 +7,7 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { PrivacyProtection } from '@eeacms/volto-embed/PrivacyProtection';
+import { PrivacyProtection } from 'volto-embed/PrivacyProtection';
 
 const messages = defineMessages({
   EmbededGoogleMaps: {

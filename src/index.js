@@ -1,9 +1,9 @@
-import { ViewIframe, EditIframe } from '@eeacms/volto-embed/Iframe';
+import { ViewIframe, EditIframe } from 'volto-embed/Iframe';
 
 export {
   PrivacyProtection,
   addPrivacyProtectionToSchema,
-} from '@eeacms/volto-embed/PrivacyProtection';
+} from 'volto-embed/PrivacyProtection';
 
 export default (config) => {
   config.blocks.blocksConfig.maps = {
