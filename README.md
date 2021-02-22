@@ -24,19 +24,19 @@ See `src/Iframe/ViewIframe` for details on how to implement.
    $ npm install -g yo @plone/generator-volto
    $ yo @plone/volto my-volto-project --addon volto-embed
 
-   $ cd my-volto-project
-   $ yarn add -W volto-embed
+   ~~$ cd my-volto-project~~
+   ~~$ yarn add -W @eeacms/volto-embed~~
    ```
 
 1. If you already have a volto project, just update `package.json`:
 
    ```JSON
    "addons": [
-       "volto-embed"
+      "volto-embed"
    ],
 
    "dependencies": {
-       "volto-embed": "^1.0.0"
+      "volto-embed": "github:eea/volto-embed#master"
    }
    ```
 
