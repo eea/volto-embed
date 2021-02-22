@@ -104,3 +104,6 @@ dist
 .tern-port
 
 *~
+
+# Cypress video
+cypress/videos

@@ -2,67 +2,30 @@ pipeline {
   agent any
 
   environment {
-        GIT_NAME = "volto-embed"
-        SONARQUBE_TAGS = "volto.eea.europa.eu"
-    }
+    GIT_NAME = "volto-embed"
+    SONARQUBE_TAGS = "volto.eea.europa.eu"
+  }
 
   stages {
-
     stage('Code') {
       steps {
         parallel(
 
           "ES lint": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/volto-test eslint'''
+              sh '''docker pull plone/volto-addon-ci:11.1.0; docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci:11.1.0 eslint'''
             }
           },
 
           "Style lint": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-stylelint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/volto-test stylelint'''
+              sh '''docker pull plone/volto-addon-ci:11.1.0; docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci:11.1.0 stylelint'''
             }
           },
 
           "Prettier": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-prettier" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/volto-test prettier'''
-            }
-          }
-        )
-      }
-    }
-
-    stage('Tests') {
-      steps {
-        parallel(
-
-          "Volto": {
-            node(label: 'docker') {
-              script {
-                try {
-                  sh '''docker pull eeacms/volto-test'''
-                  sh '''docker run -i --name="$BUILD_TAG-volto" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/volto-test'''
-                  sh '''mkdir -p xunit-reports'''
-                  sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/coverage xunit-reports/'''
-                  sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/junit.xml xunit-reports/'''
-                  sh '''docker cp $BUILD_TAG-volto:/opt/frontend/my-volto-project/unit_tests_log.txt xunit-reports/'''
-                  stash name: "xunit-reports", includes: "xunit-reports/**/*"
-                  junit 'xunit-reports/junit.xml'
-                  archiveArtifacts artifacts: 'xunit-reports/unit_tests_log.txt', fingerprint: true
-                  publishHTML (target : [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'xunit-reports/coverage/lcov-report',
-                    reportFiles: 'index.html',
-                    reportName: 'UTCoverage',
-                    reportTitles: 'Unit Tests Code Coverage'
-                  ])
-                } finally {
-                  sh '''docker rm -v $BUILD_TAG-volto'''
-                }
-              }
+              sh '''docker pull plone/volto-addon-ci:11.1.0; docker run -i --rm --name="$BUILD_TAG-eslint" -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci:11.1.0 prettier'''
             }
           }
         )
@@ -72,13 +35,12 @@ pipeline {
     stage('Integration tests') {
       steps {
         parallel(
-
           "Cypress": {
             node(label: 'docker') {
               script {
                 try {
-                  sh '''docker pull plone; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" plone fg'''
-                  sh '''docker pull eeacms/volto-test; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/volto-test cypress'''
+                  sh '''docker pull eeacms/plonesaas; docker run -d --name="$BUILD_TAG-plone" -e SITE="Plone" -e PROFILES="profile-plone.restapi:blocks" eeacms/plonesaas fg'''
+                  sh '''docker pull plone/volto-addon-ci:11.1.0; docker run -i --name="$BUILD_TAG-cypress" --link $BUILD_TAG-plone:plone -e NAMESPACE="$NAMESPACE" -e DEPENDENCIES="$DEPENDENCIES" -e GIT_NAME=$GIT_NAME -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" plone/volto-addon-ci:11.1.0 cypress'''
                 } finally {
                   sh '''mkdir -p cypress-reports'''
                   sh '''docker cp $BUILD_TAG-cypress:/opt/frontend/my-volto-project/src/addons/$GIT_NAME/cypress/videos cypress-reports/'''
