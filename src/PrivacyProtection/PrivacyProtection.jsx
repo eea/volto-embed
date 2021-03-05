@@ -3,15 +3,15 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder } from 'semantic-ui-react';
 import cookie from 'react-cookie';
 import { Button, Checkbox, Message } from 'semantic-ui-react';
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 import '../css/embed-styles.css';
 
 const key = (domain_key) => `accept-${domain_key}`;
 
 const getExpDays = () =>
-  typeof settings.embedCookieExpirationDays !== 'undefined'
-    ? settings.embedCookieExpirationDays
+  typeof config.settings.embedCookieExpirationDays !== 'undefined'
+    ? config.settings.embedCookieExpirationDays
     : 90;
 
 function saveCookie(domain_key) {
@@ -87,7 +87,7 @@ export default ({ children, data = {}, block, ...rest }) => {
 
                 <p className="discreet">
                   Your choice will be saved in a cookie managed by{' '}
-                  {settings.ownDomain || '.eea.europa.eu'} that will expire in{' '}
+                  {config.settings.ownDomain || '.eea.europa.eu'} that will expire in{' '}
                   {getExpDays()} days.
                 </p>
               </div>
