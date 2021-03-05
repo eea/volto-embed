@@ -87,8 +87,8 @@ export default ({ children, data = {}, block, ...rest }) => {
 
                 <p className="discreet">
                   Your choice will be saved in a cookie managed by{' '}
-                  {config.settings.ownDomain || '.eea.europa.eu'} that will expire in{' '}
-                  {getExpDays()} days.
+                  {config.settings.ownDomain || '.eea.europa.eu'} that will
+                  expire in {getExpDays()} days.
                 </p>
               </div>
             </div>
