@@ -1,4 +1,4 @@
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 export const ProtectionSchema = () => ({
   title: 'Data Protection',
@@ -15,7 +15,7 @@ export const ProtectionSchema = () => ({
     privacy_statement: {
       title: 'Privacy statement',
       description: 'Short notification text',
-      widget: settings.defaultBlockType, // TODO: is it really applied?
+      widget: config.settings.defaultBlockType, // TODO: is it really applied?
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',
