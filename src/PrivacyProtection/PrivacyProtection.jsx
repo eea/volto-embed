@@ -31,7 +31,7 @@ function canShow(domain_key) {
 export default ({ children, data = {}, block, ...rest }) => {
   const { dataprotection = {} } = data;
   const [visible, setVisibility] = useState(false);
-  const defaultShow = canShow(data.privacy_cookie_key);
+  const defaultShow = canShow(dataprotection.privacy_cookie_key);
   const [show, setShow] = useState(defaultShow);
   const [remember, setRemember] = useState(defaultShow);
 
