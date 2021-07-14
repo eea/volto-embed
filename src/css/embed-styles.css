@@ -3,7 +3,6 @@
   height: 100%;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem;
   background-color: #eee;
   text-align: center;
 }
@@ -13,5 +12,25 @@
 }
 
 .privacy-toggle {
-  margin: 0.4rem auto 2rem auto;
+  margin: 0.8rem auto 2rem auto;
+}
+
+.wrapped {
+  background: white;
+  width: 400px;
+  margin: 0 auto;
+  padding: 1.4rem;
+  border-radius: 5px;
+}
+
+.discreet {
+  font-size: 14px;
+  color: grey;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.35);
 }

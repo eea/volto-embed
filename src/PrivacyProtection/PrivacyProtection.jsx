@@ -28,12 +28,14 @@ function canShow(domain_key) {
   return cookie.load(key(domain_key)) === 'true';
 }
 
-export default ({ children, data = {}, block, ...rest }) => {
+export default ({ children, data = {}, block, background, ...rest }) => {
   const { dataprotection = {} } = data;
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(dataprotection.privacy_cookie_key);
   const [show, setShow] = useState(defaultShow);
   const [remember, setRemember] = useState(defaultShow);
+
+  const bgImg = background ? background : '';
 
   return (
     <VisibilitySensor
@@ -48,48 +50,59 @@ export default ({ children, data = {}, block, ...rest }) => {
           {!dataprotection.enabled || show ? (
             children
           ) : (
-            <div className="privacy-protection" {...rest}>
-              <div className="wrapped">
-                <Message>
+            <div
+              className="privacy-protection"
+              style={
+                bgImg
+                  ? {
+                      backgroundImage: `url(${bgImg})`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                    }
+                  : {}
+              }
+              {...rest}
+            >
+              <div className="overlay">
+                <div className="wrapped">
                   <div
                     className="privacy-statement"
                     dangerouslySetInnerHTML={{
                       __html: dataprotection.privacy_statement,
                     }}
                   />
-                </Message>
+                  <div className="privacy-button">
+                    <Button
+                      primary
+                      onClick={() => {
+                        setShow(true);
+                        if (remember) {
+                          saveCookie(dataprotection.privacy_cookie_key);
+                        }
+                      }}
+                    >
+                      Show external content
+                    </Button>
+                  </div>
 
-                <div className="privacy-button">
-                  <Button
-                    primary
-                    onClick={() => {
-                      setShow(true);
-                      if (remember) {
-                        saveCookie(dataprotection.privacy_cookie_key);
-                      }
-                    }}
-                  >
-                    Show external content
-                  </Button>
+                  <div className="privacy-toggle">
+                    <Checkbox
+                      toggle
+                      label="Remember my choice"
+                      id={`remember-choice-${block}`}
+                      onChange={(ev, { checked }) => {
+                        setRemember(checked);
+                      }}
+                      checked={remember}
+                    />
+                  </div>
+
+                  <p className="discreet">
+                    Your choice will be saved in a cookie managed by{' '}
+                    {config.settings.ownDomain || '.eea.europa.eu'} that will
+                    expire in {getExpDays()} days.
+                  </p>
                 </div>
-
-                <div className="privacy-toggle">
-                  <Checkbox
-                    toggle
-                    label="Remember my choice"
-                    id={`remember-choice-${block}`}
-                    onChange={(ev, { checked }) => {
-                      setRemember(checked);
-                    }}
-                    checked={remember}
-                  />
-                </div>
-
-                <p className="discreet">
-                  Your choice will be saved in a cookie managed by{' '}
-                  {config.settings.ownDomain || '.eea.europa.eu'} that will
-                  expire in {getExpDays()} days.
-                </p>
               </div>
             </div>
           )}
