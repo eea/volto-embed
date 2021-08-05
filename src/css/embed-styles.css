@@ -16,16 +16,16 @@
 }
 
 .wrapped {
-  background: white;
   width: 400px;
-  margin: 0 auto;
   padding: 1.4rem;
+  margin: 0 auto;
+  background: white;
   border-radius: 5px;
 }
 
 .discreet {
-  font-size: 14px;
   color: grey;
+  font-size: 14px;
 }
 
 .overlay {
