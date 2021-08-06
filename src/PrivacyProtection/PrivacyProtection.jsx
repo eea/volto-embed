@@ -4,8 +4,8 @@ import { Placeholder } from 'semantic-ui-react';
 import cookie from 'react-cookie';
 import { Button, Checkbox } from 'semantic-ui-react';
 import config from '@plone/volto/registry';
-
 import '../css/embed-styles.css';
+import { createImageUrl } from './helpers';
 
 const key = (domain_key) => `accept-${domain_key}`;
 
@@ -31,6 +31,13 @@ function canShow(domain_key) {
 export default ({ children, data = {}, block, ...rest }) => {
   const { dataprotection = {} } = data;
   const { background_image: bgImg } = dataprotection;
+  const [image, setImage] = React.useState(null);
+
+  React.useEffect(() => {
+    if (bgImg) {
+      setImage(createImageUrl(bgImg));
+    }
+  }, [bgImg]);
 
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(dataprotection.privacy_cookie_key);
@@ -56,7 +63,7 @@ export default ({ children, data = {}, block, ...rest }) => {
               style={
                 bgImg
                   ? {
-                      backgroundImage: `url(data:${bgImg['content-type']};${bgImg.encoding},${bgImg.data})`,
+                      backgroundImage: `url(${image})`,
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
                       backgroundSize: 'cover',
