@@ -13,7 +13,7 @@ export default (config) => {
   };
   config.settings.allowed_cors_destinations = [
     ...config.settings.allowed_cors_destinations,
-    '*.eea.europa.eu',
+    'screenshot.eea.europa.eu',
   ];
   return config;
 };
