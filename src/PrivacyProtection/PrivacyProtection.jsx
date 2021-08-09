@@ -3,9 +3,11 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder } from 'semantic-ui-react';
 import cookie from 'react-cookie';
 import { Button, Checkbox } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 import config from '@plone/volto/registry';
 import '../css/embed-styles.css';
 import { createImageUrl } from './helpers';
+import { getProxiedExternalContent } from '@eeacms/volto-corsproxy/actions';
 
 const key = (domain_key) => `accept-${domain_key}`;
 
@@ -30,14 +32,25 @@ function canShow(domain_key) {
 
 export default ({ children, data = {}, block, ...rest }) => {
   const { dataprotection = {} } = data;
-  const { background_image: bgImg } = dataprotection;
+  const { background_image: bgImg, enabled = false } = dataprotection;
   const [image, setImage] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (bgImg) {
-      setImage(createImageUrl(bgImg));
+      setImage(createImageUrl(bgImg)); //create imageUrl from uploaded image
     }
   }, [bgImg]);
+
+  React.useEffect(() => {
+    if (enabled) {
+      fetch(
+        `https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=https://maps.eea.europa.eu/EEAViewer/?appid=5a28d4d9831243e28bd4f8f1a6cbdb6e&w=1920&waitfor=5000`,
+      )
+        .then((e) => e.blob())
+        .then((blob) => setImage(URL.createObjectURL(blob)));
+    }
+  }, [enabled, data.url, dispatch]);
 
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(dataprotection.privacy_cookie_key);
@@ -61,7 +74,7 @@ export default ({ children, data = {}, block, ...rest }) => {
               className="privacy-protection"
               {...rest}
               style={
-                bgImg
+                image
                   ? {
                       backgroundImage: `url(${image})`,
                       backgroundRepeat: 'no-repeat',
