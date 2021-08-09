@@ -48,9 +48,7 @@ export default ({ children, data = {}, block, ...rest }) => {
         getProxiedExternalContent(
           `https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${data.url}&w=1920&waitfor=5000`,
         ),
-      )
-        .then((e) => e.blob())
-        .then((blob) => setImage(URL.createObjectURL(blob)));
+      ).then((blob) => setImage(URL.createObjectURL(blob)));
     }
   }, [enabled, data.url, dispatch]);
 
