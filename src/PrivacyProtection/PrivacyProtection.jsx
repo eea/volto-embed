@@ -45,7 +45,7 @@ export default ({ children, data = {}, block, ...rest }) => {
   React.useEffect(() => {
     if (enabled) {
       fetch(
-        `https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=https://maps.eea.europa.eu/EEAViewer/?appid=5a28d4d9831243e28bd4f8f1a6cbdb6e&w=1920&waitfor=5000`,
+        `https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${data.url}&w=1920&waitfor=5000`,
       )
         .then((e) => e.blob())
         .then((blob) => setImage(URL.createObjectURL(blob)));
