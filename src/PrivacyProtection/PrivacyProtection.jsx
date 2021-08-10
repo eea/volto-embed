@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import config from '@plone/volto/registry';
 import '../css/embed-styles.css';
 import { createImageUrl } from './helpers';
-import { getProxiedExternalContent } from '@eeacms/volto-corsproxy/actions';
+import { getBaseUrl } from '@plone/volto/helpers';
 
 const key = (domain_key) => `accept-${domain_key}`;
 
@@ -30,7 +30,7 @@ function canShow(domain_key) {
   return cookie.load(key(domain_key)) === 'true';
 }
 
-export default ({ children, data = {}, block, ...rest }) => {
+export default ({ children, data = {}, block, path, ...rest }) => {
   const { dataprotection = {} } = data;
   const { background_image: bgImg, enabled = false } = dataprotection;
   const [image, setImage] = React.useState(null);
@@ -44,16 +44,17 @@ export default ({ children, data = {}, block, ...rest }) => {
 
   React.useEffect(() => {
     if (enabled) {
-      dispatch(
-        getProxiedExternalContent(
-          `https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${data.url}&w=1920&waitfor=5000`,
-          { headers: { Accept: '*' } },
-        ),
+      fetch(
+        `${getBaseUrl(
+          path || '',
+        )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${
+          data.url
+        }&w=1920&waitfor=4000`,
       )
         .then((e) => e.blob())
         .then((blob) => setImage(URL.createObjectURL(blob)));
     }
-  }, [enabled, data.url, dispatch]);
+  }, [enabled, data.url, path, dispatch]);
 
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(dataprotection.privacy_cookie_key);
