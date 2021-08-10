@@ -43,7 +43,7 @@ export default ({ children, data = {}, block, path, ...rest }) => {
   }, [bgImg]);
 
   React.useEffect(() => {
-    if (enabled) {
+    if (enabled && !bgImg) {
       fetch(
         `${getBaseUrl(
           path || '',
@@ -54,7 +54,7 @@ export default ({ children, data = {}, block, path, ...rest }) => {
         .then((e) => e.blob())
         .then((blob) => setImage(URL.createObjectURL(blob)));
     }
-  }, [enabled, data.url, path, dispatch]);
+  }, [enabled, data.url, path, dispatch, bgImg]);
 
   const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(dataprotection.privacy_cookie_key);
