@@ -33,7 +33,8 @@ export const ProtectionSchema = () => ({
     },
     background_image: {
       title: 'Background image',
-      description: 'Set a placeholder image',
+      description:
+        'Set a placeholder image. This will override the existing one',
       widget: 'file',
     },
   },
