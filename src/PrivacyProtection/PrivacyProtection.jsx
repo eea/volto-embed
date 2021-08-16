@@ -5,7 +5,6 @@ import cookie from 'react-cookie';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
-import { serializeNodes } from 'volto-slate/editor/render';
 import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
 import '../css/embed-styles.css';
@@ -121,19 +120,12 @@ export default injectIntl(
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    {typeof dataprotection.privacy_statement === 'string' ? (
-                      <div
-                        className="privacy-statement"
-                        dangerouslySetInnerHTML={{
-                          __html: dataprotection.privacy_statement,
-                        }}
-                      />
-                    ) : (
-                      <div className="privacy-statement">
-                        {serializeNodes(dataprotection.privacy_statement || [])}
-                      </div>
-                    )}
-
+                    <div
+                      className="privacy-statement"
+                      dangerouslySetInnerHTML={{
+                        __html: dataprotection.privacy_statement,
+                      }}
+                    />
                     <div className="privacy-button">
                       <Button
                         primary
