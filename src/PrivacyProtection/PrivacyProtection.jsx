@@ -121,9 +121,19 @@ export default injectIntl(
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    <div className="privacy-statement">
-                      {serializeNodes(dataprotection.privacy_statement || [])}
-                    </div>
+                    {typeof dataprotection.privacy_statement === 'string' ? (
+                      <div
+                        className="privacy-statement"
+                        dangerouslySetInnerHTML={{
+                          __html: dataprotection.privacy_statement,
+                        }}
+                      />
+                    ) : (
+                      <div className="privacy-statement">
+                        {serializeNodes(dataprotection.privacy_statement || [])}
+                      </div>
+                    )}
+
                     <div className="privacy-button">
                       <Button
                         primary
