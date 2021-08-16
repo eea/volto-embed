@@ -1,5 +1,3 @@
-import config from '@plone/volto/registry';
-
 export const ProtectionSchema = () => ({
   title: 'Data Protection',
 
