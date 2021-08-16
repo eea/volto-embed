@@ -7,7 +7,12 @@ export const ProtectionSchema = () => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['privacy_statement', 'privacy_cookie_key', 'enabled'],
+      fields: [
+        'privacy_statement',
+        'privacy_cookie_key',
+        'enabled',
+        'background_image',
+      ],
     },
   ],
 
@@ -25,6 +30,12 @@ export const ProtectionSchema = () => ({
       title: 'Use privacy screen?',
       description: 'Enable/disable the privacy protection',
       type: 'boolean',
+    },
+    background_image: {
+      title: 'Background image',
+      description:
+        'Set a placeholder image. This will override the existing one',
+      widget: 'file',
     },
   },
 

@@ -11,6 +11,9 @@ export default (config) => {
     view: ViewIframe,
     edit: EditIframe,
   };
-
+  config.settings.allowed_cors_destinations = [
+    ...config.settings.allowed_cors_destinations,
+    'screenshot.eea.europa.eu',
+  ];
   return config;
 };
