@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import cookie from 'react-cookie';
+import { serializeNodes } from 'volto-slate/editor/render';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
@@ -120,12 +121,9 @@ export default injectIntl(
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    <div
-                      className="privacy-statement"
-                      dangerouslySetInnerHTML={{
-                        __html: dataprotection.privacy_statement,
-                      }}
-                    />
+                    <div className="privacy-statement">
+                      {serializeNodes(dataprotection.privacy_statement || [])}
+                    </div>
                     <div className="privacy-button">
                       <Button
                         primary
