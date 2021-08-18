@@ -19,6 +19,7 @@ export const ProtectionSchema = () => ({
       title: 'Privacy statement',
       description: 'Short notification text',
       widget: 'slate_richtext',
+      className: 'slate-Widget',
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',
