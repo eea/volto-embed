@@ -46,7 +46,7 @@ function canShow(domain_key) {
 }
 
 export default injectIntl(
-  ({ children, data = {}, block, isEditMode, intl, path, ...rest }) => {
+  ({ children, data = {}, id, isEditMode, intl, path, ...rest }) => {
     const { dataprotection = {} } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
@@ -143,7 +143,7 @@ export default injectIntl(
                         <Checkbox
                           toggle
                           label="Remember my choice"
-                          id={`remember-choice-${block}`}
+                          id={`remember-choice-${id}`}
                           onChange={(ev, { checked }) => {
                             setRemember(checked);
                           }}
