@@ -46,7 +46,16 @@ function canShow(domain_key) {
 }
 
 export default injectIntl(
-  ({ children, data = {}, id, isEditMode, intl, path, ...rest }) => {
+  ({
+    children,
+    data = {},
+    id,
+    isEditMode,
+    onChangeBlock,
+    intl,
+    path,
+    ...rest
+  }) => {
     const { dataprotection = {} } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
@@ -58,8 +67,26 @@ export default injectIntl(
       }
     }, [bgImg]);
 
+    const [visible, setVisibility] = useState(false);
+    const defaultShow = canShow(dataprotection.privacy_cookie_key);
+    const [show, setShow] = useState(defaultShow);
+    const [remember, setRemember] = useState(defaultShow);
+
     React.useEffect(() => {
-      if (enabled && !bgImg) {
+      if (isEditMode && defaultShow && !enabled) {
+        onChangeBlock(id, {
+          ...data,
+          dataprotection: {
+            ...dataprotection,
+            enabled: true,
+          },
+        });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [defaultShow]);
+
+    React.useEffect(() => {
+      if (enabled && !bgImg && !show) {
         fetch(
           `${getBaseUrl(
             path || '',
@@ -81,12 +108,7 @@ export default injectIntl(
             }
           });
       }
-    }, [enabled, data.url, path, dispatch, bgImg, intl, isEditMode]);
-
-    const [visible, setVisibility] = useState(false);
-    const defaultShow = canShow(dataprotection.privacy_cookie_key);
-    const [show, setShow] = useState(defaultShow);
-    const [remember, setRemember] = useState(defaultShow);
+    }, [enabled, data.url, path, dispatch, bgImg, show, intl, isEditMode]);
 
     return (
       <VisibilitySensor
