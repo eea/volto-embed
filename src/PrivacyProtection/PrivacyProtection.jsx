@@ -83,7 +83,7 @@ export default injectIntl(
         });
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [defaultShow]);
+    }, []);
 
     React.useEffect(() => {
       if (enabled && !bgImg && !show) {
