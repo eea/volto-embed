@@ -24,7 +24,8 @@ export const ProtectionSchema = () => ({
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',
-      description: 'Use default for Esri maps,otherwise change',
+      description: 'Use default for Esri maps, otherwise change',
+      defaultValue: 'esri-maps',
     },
     enabled: {
       title: 'Data protection disclaimer enabled',

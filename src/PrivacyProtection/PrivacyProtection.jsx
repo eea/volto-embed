@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import cookie from 'react-cookie';
+//import { find, without } from 'lodash';
 import { serializeNodes } from 'volto-slate/editor/render';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -10,7 +11,12 @@ import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
 import '../css/embed-styles.css';
 import { createImageUrl } from './helpers';
-import { getBaseUrl } from '@plone/volto/helpers';
+
+import {
+  getBaseUrl,
+  // getBlocksFieldname,
+  // getBlocksLayoutFieldname,
+} from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 
 const messages = defineMessages({
@@ -54,12 +60,37 @@ export default injectIntl(
     onChangeBlock,
     intl,
     path,
+    properties,
     ...rest
   }) => {
     const { dataprotection = {} } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
     const dispatch = useDispatch();
+
+    // const blocksFieldname = getBlocksFieldname(properties);
+    // const blocksLayoutFieldname = getBlocksLayoutFieldname(properties);
+
+    // const getPrivacyEnabledBlock = (key) => {
+    //   const en = find(without(key, id), (block) => {
+    //     if (properties[blocksFieldname]?.[block][blocksLayoutFieldname].items) {
+    //       getPrivacyEnabledBlock(
+    //         properties[blocksFieldname]?.[block][blocksLayoutFieldname].items,
+    //       );
+    //     }
+    //     return (
+    //       properties[blocksFieldname]?.[block]?.['@type'] ===
+    //       'data_connected_embed'
+    //     );
+    //   });
+    //   if (en) {
+    //     return (
+    //       properties[blocksFieldname]?.[en].dataprotection.enabled &&
+    //       properties[blocksFieldname]?.[en].dataprotection
+    //         .privacy_cookie_key === key
+    //     );
+    //   }
+    // };
 
     React.useEffect(() => {
       if (bgImg) {
@@ -69,6 +100,9 @@ export default injectIntl(
 
     const [visible, setVisibility] = useState(false);
     const defaultShow = canShow(dataprotection.privacy_cookie_key);
+    // const isIdentical = getPrivacyEnabledBlock(
+    //   properties[blocksLayoutFieldname].items,
+    // );
     const [show, setShow] = useState(defaultShow);
     const [remember, setRemember] = useState(defaultShow);
 
