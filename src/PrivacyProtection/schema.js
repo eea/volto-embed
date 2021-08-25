@@ -20,7 +20,6 @@ export const ProtectionSchema = () => ({
       description: 'Defined in template. Change only if necessary',
       widget: 'slate_richtext',
       className: 'slate-Widget',
-      value: 'defualt',
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',
