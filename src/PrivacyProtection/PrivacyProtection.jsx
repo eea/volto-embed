@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import cookie from 'react-cookie';
+//import { find, without } from 'lodash';
+import { serializeNodes } from 'volto-slate/editor/render';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
@@ -9,6 +11,7 @@ import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
 import '../css/embed-styles.css';
 import { createImageUrl } from './helpers';
+
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 
@@ -45,7 +48,17 @@ function canShow(domain_key) {
 }
 
 export default injectIntl(
-  ({ children, data = {}, block, isEditMode, intl, path, ...rest }) => {
+  ({
+    children,
+    data = {},
+    id,
+    isEditMode,
+    onChangeBlock,
+    intl,
+    path,
+    properties,
+    ...rest
+  }) => {
     const { dataprotection = {} } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
@@ -57,8 +70,26 @@ export default injectIntl(
       }
     }, [bgImg]);
 
+    const [visible, setVisibility] = useState(false);
+    const defaultShow = canShow(dataprotection.privacy_cookie_key);
+    const [show, setShow] = useState(defaultShow);
+    const [remember, setRemember] = useState(defaultShow);
+
+    // React.useEffect(() => {
+    //   if (isEditMode && defaultShow && !enabled) {
+    //     onChangeBlock(id, {
+    //       ...data,
+    //       dataprotection: {
+    //         ...dataprotection,
+    //         enabled: true,
+    //       },
+    //     });
+    //   }
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
+
     React.useEffect(() => {
-      if (enabled && !bgImg) {
+      if (enabled && !bgImg && !show) {
         fetch(
           `${getBaseUrl(
             path || '',
@@ -80,12 +111,7 @@ export default injectIntl(
             }
           });
       }
-    }, [enabled, data.url, path, dispatch, bgImg, intl, isEditMode]);
-
-    const [visible, setVisibility] = useState(false);
-    const defaultShow = canShow(dataprotection.privacy_cookie_key);
-    const [show, setShow] = useState(defaultShow);
-    const [remember, setRemember] = useState(defaultShow);
+    }, [enabled, data.url, path, dispatch, bgImg, show, intl, isEditMode]);
 
     return (
       <VisibilitySensor
@@ -120,12 +146,9 @@ export default injectIntl(
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    <div
-                      className="privacy-statement"
-                      dangerouslySetInnerHTML={{
-                        __html: dataprotection.privacy_statement,
-                      }}
-                    />
+                    <div className="privacy-statement">
+                      {serializeNodes(dataprotection.privacy_statement || [])}
+                    </div>
                     <div className="privacy-button">
                       <Button
                         primary
@@ -145,7 +168,7 @@ export default injectIntl(
                         <Checkbox
                           toggle
                           label="Remember my choice"
-                          id={`remember-choice-${block}`}
+                          id={`remember-choice-${id}`}
                           onChange={(ev, { checked }) => {
                             setRemember(checked);
                           }}

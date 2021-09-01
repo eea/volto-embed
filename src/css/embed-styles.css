@@ -16,11 +16,12 @@
 }
 
 .wrapped {
-  width: 400px;
+  width: 300px;
   padding: 1.4rem;
   margin: 0 auto;
   background: white;
   border-radius: 5px;
+  opacity: 0.6;
 }
 
 .discreet {
@@ -33,4 +34,8 @@
   height: 100%;
   padding: 2rem;
   background-color: rgba(0, 0, 0, 0.35);
+}
+
+.slate-Widget {
+  left: 855px !important;
 }

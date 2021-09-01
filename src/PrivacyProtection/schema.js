@@ -1,5 +1,3 @@
-import config from '@plone/volto/registry';
-
 export const ProtectionSchema = () => ({
   title: 'Data Protection',
 
@@ -19,22 +17,24 @@ export const ProtectionSchema = () => ({
   properties: {
     privacy_statement: {
       title: 'Privacy statement',
-      description: 'Short notification text',
-      widget: config.settings.defaultBlockType, // TODO: is it really applied?
+      description: 'Defined in template. Change only if necessary',
+      widget: 'slate_richtext',
+      className: 'slate-Widget',
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',
-      description: 'Identifies similar external content',
+      description: 'Use default for Esri maps, otherwise change',
+      defaultValue: 'esri-maps',
     },
     enabled: {
-      title: 'Use privacy screen?',
+      title: 'Data protection disclaimer enabled',
       description: 'Enable/disable the privacy protection',
       type: 'boolean',
     },
     background_image: {
       title: 'Background image',
       description:
-        'Set a placeholder image. This will override the existing one',
+        'The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here',
       widget: 'file',
     },
   },
