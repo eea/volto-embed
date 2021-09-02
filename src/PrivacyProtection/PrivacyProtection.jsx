@@ -59,7 +59,7 @@ export default injectIntl(
     properties,
     ...rest
   }) => {
-    const { dataprotection = {} } = data;
+    const { dataprotection = {}, height } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
     const dispatch = useDispatch();
@@ -74,19 +74,20 @@ export default injectIntl(
     const defaultShow = canShow(dataprotection.privacy_cookie_key);
     const [show, setShow] = useState(defaultShow);
     const [remember, setRemember] = useState(defaultShow);
+    const browserCookie = __CLIENT__ && document.cookie;
+    const styles = {
+      height: `${height}px`,
+    };
 
-    // React.useEffect(() => {
-    //   if (isEditMode && defaultShow && !enabled) {
-    //     onChangeBlock(id, {
-    //       ...data,
-    //       dataprotection: {
-    //         ...dataprotection,
-    //         enabled: true,
-    //       },
-    //     });
-    //   }
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
+    React.useEffect(
+      () => {
+        if (!isEditMode && defaultShow) {
+          setShow(true);
+        }
+      },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [browserCookie],
+    );
 
     React.useEffect(() => {
       if (enabled && !bgImg && !show) {
@@ -122,7 +123,7 @@ export default injectIntl(
         offset={{ bottom: 200 }}
       >
         {visible ? (
-          <div>
+          <div style={height ? styles : {}}>
             {!dataprotection.enabled || show ? (
               children
             ) : !image ? (
