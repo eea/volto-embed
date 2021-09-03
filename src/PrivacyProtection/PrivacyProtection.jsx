@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import cookie from 'react-cookie';
+
 //import { find, without } from 'lodash';
 import { serializeNodes } from 'volto-slate/editor/render';
 import { Button, Checkbox } from 'semantic-ui-react';
@@ -47,6 +48,23 @@ function canShow(domain_key) {
   return cookie.load(key(domain_key)) === 'true';
 }
 
+const cookieExist = (domain_key) => cookie.load(key(domain_key));
+
+const CookieWatcher = (cookie, pollingRate = 250) => {
+  // state for cookie existence
+  const [exist, setExist] = useState(cookieExist(cookie));
+
+  React.useEffect(() => {
+    const interval = setInterval(
+      () => setExist(cookieExist(cookie)),
+      pollingRate,
+    );
+    return () => clearInterval(interval);
+  });
+
+  return exist;
+};
+
 export default injectIntl(
   ({
     children,
@@ -74,7 +92,9 @@ export default injectIntl(
     const defaultShow = canShow(dataprotection.privacy_cookie_key);
     const [show, setShow] = useState(defaultShow);
     const [remember, setRemember] = useState(defaultShow);
-    const browserCookie = __CLIENT__ && document.cookie;
+
+    const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
+
     const styles = {
       height: `${height}px`,
     };
@@ -86,7 +106,7 @@ export default injectIntl(
         }
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [browserCookie],
+      [checkExistance],
     );
 
     React.useEffect(() => {
