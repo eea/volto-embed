@@ -80,7 +80,16 @@ export default injectIntl(
     const { dataprotection = {}, height } = data;
     const { background_image: bgImg, enabled = false } = dataprotection;
     const [image, setImage] = React.useState(null);
+    const [visible, setVisibility] = useState(false);
+    const defaultShow = canShow(dataprotection.privacy_cookie_key);
+    const [show, setShow] = useState(defaultShow);
+    const [remember, setRemember] = useState(defaultShow);
     const dispatch = useDispatch();
+    const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
+
+    const styles = {
+      height: `${height}px`,
+    };
 
     React.useEffect(() => {
       if (bgImg) {
@@ -88,17 +97,7 @@ export default injectIntl(
       }
     }, [bgImg]);
 
-    const [visible, setVisibility] = useState(false);
-    const defaultShow = canShow(dataprotection.privacy_cookie_key);
-    const [show, setShow] = useState(defaultShow);
-    const [remember, setRemember] = useState(defaultShow);
-
-    const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
-
-    const styles = {
-      height: `${height}px`,
-    };
-
+    //Effect hook for polling the cookie_key
     React.useEffect(
       () => {
         if (!isEditMode && defaultShow) {
@@ -109,6 +108,7 @@ export default injectIntl(
       [checkExistance],
     );
 
+    //screenshot api
     React.useEffect(() => {
       if (enabled && !bgImg && !show) {
         fetch(
