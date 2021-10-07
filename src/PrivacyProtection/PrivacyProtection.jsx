@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import cookie from 'react-cookie';
@@ -15,6 +16,7 @@ import { createImageUrl } from './helpers';
 
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
+import { getConnectedDataParametersForContext } from '@eeacms/volto-datablocks/helpers';
 
 const messages = defineMessages({
   success: {
@@ -86,6 +88,24 @@ export default injectIntl(
     const [remember, setRemember] = useState(defaultShow);
     const dispatch = useDispatch();
     const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
+    const queryParam = useSelector((state) => {
+      return {
+        connected_data_parameters: getConnectedDataParametersForContext(
+          state?.connected_data_parameters,
+          state.router?.location?.pathname,
+        ),
+      };
+    });
+    const param = queryParam
+      ? queryParam.connected_data_parameters?.[0]?.query?.[0]?.v?.[0] ||
+        queryParam.connected_data_parameters?.[0]?.v?.[0]
+      : null;
+
+    // create a url with params
+    const url =
+      param && data.url
+        ? decodeURIComponent(data.url).replace('<<NUTS_CODE>>', param)
+        : data.url;
 
     const styles = {
       height: `${height}px`,
@@ -114,9 +134,7 @@ export default injectIntl(
         fetch(
           `${getBaseUrl(
             '',
-          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${
-            data.url
-          }&w=1920&waitfor=4000`,
+          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${url}&w=1920&waitfor=4000`,
         )
           .then((e) => e.blob())
           .then((blob) => {
@@ -132,7 +150,7 @@ export default injectIntl(
             }
           });
       }
-    }, [enabled, data.url, path, dispatch, bgImg, show, intl, isEditMode]);
+    }, [enabled, url, path, dispatch, bgImg, show, intl, isEditMode]);
 
     return (
       <VisibilitySensor
