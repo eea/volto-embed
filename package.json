@@ -16,6 +16,7 @@
   ],
   "addons": [
     "@eeacms/volto-corsproxy",
+    "@eeacms/volto-datablocks",
     "volto-slate:asDefault"
   ],
   "dependencies": {
