@@ -134,7 +134,7 @@ export default injectIntl(
         fetch(
           `${getBaseUrl(
             '',
-          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${url}&w=1920&waitfor=6000${
+          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${url}&w=1920&waitfor=4000${
             param ? `&waitforselector=img[src*=${param}]` : ''
           }`,
         )
