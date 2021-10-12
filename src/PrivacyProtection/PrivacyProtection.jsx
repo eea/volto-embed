@@ -134,9 +134,7 @@ export default injectIntl(
         fetch(
           `${getBaseUrl(
             '',
-          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${url}&w=1920&waitfor=4000${
-            param ? `&waitforselector=img[src*=${param}]` : ''
-          }`,
+          )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(url)}&w=1920&waitfor=4000`,
         )
           .then((e) => e.blob())
           .then((blob) => {
@@ -152,7 +150,7 @@ export default injectIntl(
             }
           });
       }
-    }, [enabled, url, path, param, dispatch, bgImg, show, intl, isEditMode]);
+    }, [enabled, url, path, dispatch, bgImg, show, intl, isEditMode]);
 
     return (
       <VisibilitySensor
