@@ -152,7 +152,7 @@ export default injectIntl(
             }
           });
       }
-    }, [enabled, url, path, dispatch, bgImg, show, intl, isEditMode]);
+    }, [enabled, url, path, param, dispatch, bgImg, show, intl, isEditMode]);
 
     return (
       <VisibilitySensor
