@@ -16,6 +16,8 @@
 }
 
 .wrapped {
+  position:relative;
+  top:40%;
   width: 300px;
   padding: 1.4rem;
   margin: 0 auto;
