@@ -109,6 +109,7 @@ export default injectIntl(
 
     const styles = {
       height: `${height}px`,
+      position: 'relative',
     };
 
     React.useEffect(() => {
