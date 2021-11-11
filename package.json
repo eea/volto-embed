@@ -20,9 +20,9 @@
     "volto-slate:asDefault"
   ],
   "dependencies": {
-    "volto-slate": "2.9.1",
+    "volto-slate": "*",
     "@eeacms/volto-datablocks": "*",
-    "@eeacms/volto-corsproxy": "2.1.2",
+    "@eeacms/volto-corsproxy": "*",
     "react-visibility-sensor": "5.1.1"
   },
   "devDependencies": {
