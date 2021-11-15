@@ -85,7 +85,9 @@ export default injectIntl(
     const [visible, setVisibility] = useState(false);
     const defaultShow = canShow(dataprotection.privacy_cookie_key);
     const [show, setShow] = useState(defaultShow);
-    const [remember, setRemember] = useState(defaultShow);
+    const [remember, setRemember] = useState(
+      cookieExist(dataprotection.privacy_cookie_key) ? defaultShow : true,
+    );
     const dispatch = useDispatch();
     const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
     const queryParam = useSelector((state) => {
@@ -180,8 +182,8 @@ export default injectIntl(
                     ? {
                         backgroundImage: `url(${image})`,
                         backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
                         backgroundSize: 'cover',
+                        backgroundPosition: 'center -70px',
                       }
                     : {}
                 }
@@ -223,6 +225,13 @@ export default injectIntl(
                       Your choice will be saved in a cookie managed by{' '}
                       {config.settings.ownDomain || '.eea.europa.eu'} that will
                       expire in {getExpDays()} days.
+                    </p>
+                    <p className="discreet">
+                      This map is hosted by a third party, Environmental Systems
+                      Research Institute. By showing the external content you
+                      accept the terms and conditions of{' '}
+                      <a href="https://www.esri.com">esri.com</a>. This includes their
+                      cookie policies, which we have no control over.
                     </p>
                   </div>
                 </div>
