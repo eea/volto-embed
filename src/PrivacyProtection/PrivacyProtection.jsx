@@ -230,8 +230,8 @@ export default injectIntl(
                       This map is hosted by a third party, Environmental Systems
                       Research Institute. By showing the external content you
                       accept the terms and conditions of{' '}
-                      <a href="https://www.esri.com">esri.com</a>. This includes their
-                      cookie policies, which we have no control over.
+                      <a href="https://www.esri.com">esri.com</a>. This includes
+                      their cookie policies, which we have no control over.
                     </p>
                   </div>
                 </div>
