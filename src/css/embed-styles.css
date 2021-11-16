@@ -29,7 +29,8 @@
   transform: translate(-50%, -50%);
 }
 
-.discreet {
+.discreet,
+.discreet > p {
   color: grey;
   font-size: 14px;
 }

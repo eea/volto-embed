@@ -17,6 +17,7 @@ import { createImageUrl } from './helpers';
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 import { getConnectedDataParametersForContext } from '@eeacms/volto-datablocks/helpers';
+import { ProtectionSchema } from './schema';
 
 const messages = defineMessages({
   success: {
@@ -113,7 +114,6 @@ export default injectIntl(
       height: `${height}px`,
       position: 'relative',
     };
-
     React.useEffect(() => {
       if (bgImg) {
         setImage(createImageUrl(bgImg)); //create imageUrl from uploaded image
@@ -190,9 +190,6 @@ export default injectIntl(
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    <div className="privacy-statement">
-                      {serializeNodes(dataprotection.privacy_statement || [])}
-                    </div>
                     <div className="privacy-button">
                       <Button
                         primary
@@ -227,11 +224,11 @@ export default injectIntl(
                       expire in {getExpDays()} days.
                     </p>
                     <p className="discreet">
-                      This map is hosted by a third party, Environmental Systems
-                      Research Institute. By showing the external content you
-                      accept the terms and conditions of{' '}
-                      <a href="https://www.esri.com">esri.com</a>. This includes
-                      their cookie policies, which we have no control over.
+                      {serializeNodes(
+                        dataprotection.privacy_statement ||
+                          ProtectionSchema().properties.privacy_statement
+                            .defaultValue,
+                      )}
                     </p>
                   </div>
                 </div>
