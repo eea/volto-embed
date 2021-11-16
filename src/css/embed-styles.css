@@ -24,12 +24,13 @@
   margin: 0 auto;
   background: white;
   border-radius: 5px;
-  opacity: 0.6;
+  opacity: 0.8;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 
-.discreet {
+.discreet,
+.discreet > p {
   color: grey;
   font-size: 14px;
 }

@@ -20,6 +20,29 @@ export const ProtectionSchema = () => ({
       description: 'Defined in template. Change only if necessary',
       widget: 'slate_richtext',
       className: 'slate-Widget',
+      defaultValue: [
+        {
+          children: [
+            {
+              text:
+                'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
+            },
+            {
+              type: 'a',
+              url: 'https://www.esri.com',
+              children: [
+                {
+                  text: 'esri.com',
+                },
+              ],
+            },
+            {
+              text:
+                '. This includes their cookie policies, which we have no control over.',
+            },
+          ],
+        },
+      ],
     },
     privacy_cookie_key: {
       title: 'Privacy cookie key',

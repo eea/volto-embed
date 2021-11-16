@@ -17,6 +17,7 @@ import { createImageUrl } from './helpers';
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 import { getConnectedDataParametersForContext } from '@eeacms/volto-datablocks/helpers';
+import { ProtectionSchema } from './schema';
 
 const messages = defineMessages({
   success: {
@@ -85,7 +86,9 @@ export default injectIntl(
     const [visible, setVisibility] = useState(false);
     const defaultShow = canShow(dataprotection.privacy_cookie_key);
     const [show, setShow] = useState(defaultShow);
-    const [remember, setRemember] = useState(defaultShow);
+    const [remember, setRemember] = useState(
+      cookieExist(dataprotection.privacy_cookie_key) ? defaultShow : true,
+    );
     const dispatch = useDispatch();
     const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
     const queryParam = useSelector((state) => {
@@ -111,7 +114,6 @@ export default injectIntl(
       height: `${height}px`,
       position: 'relative',
     };
-
     React.useEffect(() => {
       if (bgImg) {
         setImage(createImageUrl(bgImg)); //create imageUrl from uploaded image
@@ -180,17 +182,14 @@ export default injectIntl(
                     ? {
                         backgroundImage: `url(${image})`,
                         backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
                         backgroundSize: 'cover',
+                        backgroundPosition: 'center -70px',
                       }
                     : {}
                 }
               >
                 <div className="overlay">
                   <div className="wrapped">
-                    <div className="privacy-statement">
-                      {serializeNodes(dataprotection.privacy_statement || [])}
-                    </div>
                     <div className="privacy-button">
                       <Button
                         primary
@@ -223,6 +222,13 @@ export default injectIntl(
                       Your choice will be saved in a cookie managed by{' '}
                       {config.settings.ownDomain || '.eea.europa.eu'} that will
                       expire in {getExpDays()} days.
+                    </p>
+                    <p className="discreet">
+                      {serializeNodes(
+                        dataprotection.privacy_statement ||
+                          ProtectionSchema().properties.privacy_statement
+                            .defaultValue,
+                      )}
                     </p>
                   </div>
                 </div>
