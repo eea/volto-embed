@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-embed",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Embed external content",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -20,7 +20,7 @@
     "volto-slate"
   ],
   "dependencies": {
-    "volto-slate": "*",
+    "volto-slate": "4.2.1",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-corsproxy": "*",
     "react-visibility-sensor": "5.1.1"
