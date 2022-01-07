@@ -20,7 +20,7 @@
     "volto-slate"
   ],
   "dependencies": {
-    "volto-slate": "*",
+    "volto-slate": "4.2.1",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-corsproxy": "*",
     "react-visibility-sensor": "5.1.1"
