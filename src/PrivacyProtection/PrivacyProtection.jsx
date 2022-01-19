@@ -187,7 +187,7 @@ export default injectIntl(
           <div className="privacy-protection-wrapper" style={styles}>
             {!dataprotection.enabled || show ? (
               children
-            ) : !__DEVELOPMENT__ && image ? (
+            ) : !__DEVELOPMENT__ && !image ? (
               <Dimmer active>
                 <Loader />
               </Dimmer>
