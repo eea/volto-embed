@@ -11,13 +11,14 @@ import { defineMessages, injectIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
-import '../css/embed-styles.css';
-import { createImageUrl } from './helpers';
-
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 import { getConnectedDataParametersForContext } from '@eeacms/volto-datablocks/helpers';
+
+import { createImageUrl } from './helpers';
 import { ProtectionSchema } from './schema';
+
+import './styles.less';
 
 const messages = defineMessages({
   success: {
@@ -68,6 +69,27 @@ const CookieWatcher = (cookie, pollingRate = 250) => {
   return exist;
 };
 
+const getFilteredURL = (url, connected_data_parameters = []) => {
+  if (!connected_data_parameters?.length) return url;
+  let decodedURL = decodeURIComponent(url);
+  const queries = decodedURL.match(/(?<=(<<))(.*?)(?=(>>))/g);
+  if (!queries.length) return url;
+  const keys = connected_data_parameters.map((param) => param.i);
+  for (let poz in queries) {
+    const key = queries[poz];
+    const paramPoz = keys.indexOf(key);
+    if (paramPoz > -1) {
+      decodedURL = decodedURL.replace(
+        `<<${key}>>`,
+        connected_data_parameters[paramPoz].v[0],
+      );
+
+      continue;
+    }
+  }
+  return decodedURL;
+};
+
 export default injectIntl(
   ({
     children,
@@ -91,27 +113,17 @@ export default injectIntl(
     );
     const dispatch = useDispatch();
     const checkExistance = CookieWatcher(dataprotection.privacy_cookie_key);
-    const queryParam = useSelector((state) => {
-      return {
-        connected_data_parameters: getConnectedDataParametersForContext(
-          state?.connected_data_parameters,
-          state.router?.location?.pathname,
-        ),
-      };
+    const connected_data_parameters = useSelector((state) => {
+      return getConnectedDataParametersForContext(
+        state?.connected_data_parameters,
+        state.router?.location?.pathname,
+      );
     });
-    const param = queryParam
-      ? queryParam.connected_data_parameters?.[0]?.query?.[0]?.v?.[0] ||
-        queryParam.connected_data_parameters?.[0]?.v?.[0]
-      : null;
 
-    // create a url with params
-    const url =
-      param && data.url
-        ? decodeURIComponent(data.url).replace('<<NUTS_CODE>>', param)
-        : data.url;
+    const url = getFilteredURL(data.url, connected_data_parameters);
 
     const styles = {
-      height: `${height}px`,
+      minHeight: `${height || 200}px`,
       position: 'relative',
     };
     React.useEffect(() => {
@@ -153,6 +165,12 @@ export default injectIntl(
                 />,
               );
             }
+          })
+          .catch(() => {
+            if (__DEVELOPMENT__) {
+              /* eslint-disable-next-line */
+              console.log('Please enable your VPN!');
+            }
           });
       }
     }, [enabled, url, path, dispatch, bgImg, show, intl, isEditMode]);
@@ -166,10 +184,10 @@ export default injectIntl(
         offset={{ bottom: 200 }}
       >
         {visible ? (
-          <div style={height ? styles : {}}>
+          <div className="privacy-protection-wrapper" style={styles}>
             {!dataprotection.enabled || show ? (
               children
-            ) : !image ? (
+            ) : !__DEVELOPMENT__ && !image ? (
               <Dimmer active>
                 <Loader />
               </Dimmer>
