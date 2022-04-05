@@ -159,7 +159,7 @@ const PrivacyProtection = (props) => {
         .catch(() => {
           if (__DEVELOPMENT__) {
             /* eslint-disable-next-line */
-              console.log('Please enable your VPN!');
+            console.log("Please enable your VPN!");
           }
         });
     }
