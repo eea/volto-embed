@@ -22,7 +22,7 @@ const messages = defineMessages({
  * @extends Component
  */
 
-const View = ({ data, intl }) => {
+const View = ({ data, intl, id }) => {
   return (
     <div
       className={cx(
@@ -42,7 +42,7 @@ const View = ({ data, intl }) => {
         })}
         style={{ height: '100%' }}
       >
-        <PrivacyProtection data={data}>
+        <PrivacyProtection data={data} id={id}>
           <iframe
             title={intl.formatMessage(messages.EmbededGoogleMaps)}
             src={data.url}
