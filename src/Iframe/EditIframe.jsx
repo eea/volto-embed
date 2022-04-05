@@ -16,6 +16,7 @@ import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
 import schema from './schema';
 import { addPrivacyProtectionToSchema } from '../PrivacyProtection';
+import { PrivacyProtection } from '../PrivacyProtection';
 
 const messages = defineMessages({
   MapsBlockInputPlaceholder: {
@@ -182,15 +183,20 @@ class Edit extends Component {
               'full-width': this.props.data.align === 'full',
             })}
           >
-            <iframe
-              title={this.props.intl.formatMessage(
-                messages.GoogleMapsEmbeddedBlock,
-              )}
-              src={this.props.data.url}
-              className="google-map"
-              frameBorder="0"
-              allowFullScreen
-            />
+            <PrivacyProtection
+              data={this.props.data}
+              editable={this.props.editable}
+            >
+              <iframe
+                title={this.props.intl.formatMessage(
+                  messages.GoogleMapsEmbeddedBlock,
+                )}
+                src={this.props.data.url}
+                className="google-map"
+                frameBorder="0"
+                allowFullScreen
+              />
+            </PrivacyProtection>
           </div>
         ) : (
           <Message>
