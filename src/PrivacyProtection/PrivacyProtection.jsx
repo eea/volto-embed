@@ -13,7 +13,10 @@ import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
 import { getBaseUrl } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
-import { getConnectedDataParametersForContext } from '@eeacms/volto-datablocks/helpers';
+import {
+  getConnectedDataParametersForContext,
+  getFilteredURL,
+} from '@eeacms/volto-datablocks/helpers';
 
 import { createImageUrl } from './helpers';
 import { ProtectionSchema } from './schema';
@@ -67,32 +70,6 @@ const CookieWatcher = (domain_key, cookies, pollingRate = 250) => {
   });
 
   return exist;
-};
-
-const getFilteredURL = (url, connected_data_parameters = []) => {
-  if (!connected_data_parameters?.length) return url;
-  let decodedURL = decodeURIComponent(url);
-  const queries = decodedURL.match(/(<<)(.*?)*>>/g); //safari: don't use lookbehind
-  if (!queries?.length) return url;
-
-  const filteredQueries = queries.map((query) =>
-    query.replace('<<', '').replace('>>', ''),
-  );
-
-  const keys = connected_data_parameters.map((param) => param.i);
-  for (let poz in filteredQueries) {
-    const key = filteredQueries[poz];
-    const paramPoz = keys.indexOf(key);
-    if (paramPoz > -1) {
-      decodedURL = decodedURL.replace(
-        `<<${key}>>`,
-        connected_data_parameters[paramPoz].v[0],
-      );
-
-      continue;
-    }
-  }
-  return decodedURL;
 };
 
 const PrivacyProtection = (props) => {
