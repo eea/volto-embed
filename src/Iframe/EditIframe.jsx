@@ -4,6 +4,7 @@
  */
 
 import React, { Component } from 'react';
+import { isString } from 'lodash';
 import PropTypes from 'prop-types';
 import { Button, Input, Message } from 'semantic-ui-react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
@@ -85,6 +86,32 @@ class Edit extends Component {
     };
     this.onSubmitUrl = this.onSubmitUrl.bind(this);
     this.onKeyDownVariantMenuForm = this.onKeyDownVariantMenuForm.bind(this);
+  }
+
+  /**
+   * Backward compatibility
+   * @method componentDidMount
+   * @returns {undefined}
+   */
+  componentDidMount() {
+    const { privacy_statement } = this.props.data.dataprotection || {};
+    if (isString(privacy_statement)) {
+      this.props.onChangeBlock(this.props.block, {
+        ...this.props.data,
+        dataprotection: {
+          ...(this.props.data.dataprotection || {}),
+          privacy_statement: [
+            {
+              children: [
+                {
+                  text: privacy_statement,
+                },
+              ],
+            },
+          ],
+        },
+      });
+    }
   }
 
   /**
