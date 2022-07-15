@@ -94,7 +94,7 @@ class Edit extends Component {
    * @returns {undefined}
    */
   componentDidMount() {
-    const { privacy_statement } = this.props.data.dataprotection;
+    const { privacy_statement } = this.props.data.dataprotection || {};
     if (isString(privacy_statement)) {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
