@@ -16,11 +16,9 @@
   ],
   "addons": [
     "@eeacms/volto-corsproxy",
-    "@eeacms/volto-datablocks",
-    "volto-slate"
+    "@eeacms/volto-datablocks"
   ],
   "dependencies": {
-    "volto-slate": "*",
     "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-corsproxy": "*",
     "react-visibility-sensor": "5.1.1"
