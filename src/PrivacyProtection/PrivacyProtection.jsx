@@ -5,7 +5,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
 import { withCookies } from 'react-cookie';
 //import { find, without } from 'lodash';
-import { serializeNodes } from 'volto-slate/editor/render';
+import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
