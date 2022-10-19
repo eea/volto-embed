@@ -155,7 +155,6 @@ const PrivacyProtection = (props) => {
         });
     }
   }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
-
   return (
     <VisibilitySensor
       onChange={(isVisible) => {
@@ -169,7 +168,7 @@ const PrivacyProtection = (props) => {
           className="privacy-protection-wrapper"
           style={{
             position: 'relative',
-            height: height ? `${height}px` : 'auto',
+            height: height && (!enabled || !show) ? `${height}px` : 'auto',
             minHeight: '200px',
             overflow: 'hidden',
           }}
