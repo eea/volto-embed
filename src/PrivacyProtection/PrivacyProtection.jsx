@@ -73,7 +73,16 @@ const CookieWatcher = (domain_key, cookies, pollingRate = 250) => {
 };
 
 const PrivacyProtection = (props) => {
-  const { children, data = {}, id, editable, intl, path, cookies } = props;
+  const {
+    children,
+    data = {},
+    id,
+    editable,
+    intl,
+    path,
+    cookies,
+    height = '',
+  } = props;
   const {
     enabled = false,
     privacy_statement,
@@ -146,7 +155,6 @@ const PrivacyProtection = (props) => {
         });
     }
   }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
-
   return (
     <VisibilitySensor
       onChange={(isVisible) => {
@@ -158,7 +166,12 @@ const PrivacyProtection = (props) => {
       {visible ? (
         <div
           className="privacy-protection-wrapper"
-          style={{ position: 'relative', minHeight: '200px' }}
+          style={{
+            position: 'relative',
+            height: height && (!enabled || !show) ? `${height}px` : 'auto',
+            minHeight: '200px',
+            overflow: 'hidden',
+          }}
         >
           {!enabled || show ? (
             children
