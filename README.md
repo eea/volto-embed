@@ -64,7 +64,7 @@ See `src/Iframe/ViewIframe` for details on how to implement.
 
 ## Release
 
-See [RELEASE.md](https://github.com/eea/volto-addon-template/blob/master/RELEASE.md).
+See [RELEASE.md](https://github.com/eea/volto-embed/blob/master/RELEASE.md).
 
 ## How to contribute
 
