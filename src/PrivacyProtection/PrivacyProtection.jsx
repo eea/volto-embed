@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { compose } from 'redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
-import { Placeholder, Dimmer, Loader } from 'semantic-ui-react';
+import {
+  Placeholder,
+  Dimmer,
+  Loader,
+  Button,
+  Checkbox,
+} from 'semantic-ui-react';
 import { withCookies } from 'react-cookie';
-//import { find, without } from 'lodash';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
-import { Button, Checkbox } from 'semantic-ui-react';
 import { defineMessages, injectIntl } from 'react-intl';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
 import { getBaseUrl } from '@plone/volto/helpers';
