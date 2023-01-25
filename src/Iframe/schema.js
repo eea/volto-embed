@@ -1,4 +1,4 @@
-const IframeSchema = {
+const schema = {
   title: 'Embed external content',
 
   fieldsets: [
@@ -23,4 +23,4 @@ const IframeSchema = {
   required: ['url'],
 };
 
-export default IframeSchema;
+export default schema;

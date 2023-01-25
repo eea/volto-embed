@@ -19,13 +19,13 @@
     "@eeacms/volto-datablocks"
   ],
   "dependencies": {
-    "@eeacms/volto-datablocks": "*",
     "@eeacms/volto-corsproxy": "*",
+    "@eeacms/volto-datablocks": "*",
     "react-visibility-sensor": "5.1.1"
   },
   "devDependencies": {
-    "@plone/scripts": "*",
     "@cypress/code-coverage": "^3.10.0",
+    "@plone/scripts": "*",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "md5": "^2.3.0"
   },
