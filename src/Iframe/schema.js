@@ -5,7 +5,7 @@ const schema = {
     {
       id: 'default',
       title: 'Default',
-      fields: ['url', 'align'],
+      fields: ['url', 'align', 'height'],
     },
   ],
 
@@ -17,6 +17,19 @@ const schema = {
       title: 'Alignment',
       widget: 'align',
       type: 'string',
+    },
+    height: {
+      title: (
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
+        >
+          CSS height
+        </a>
+      ),
+      default: '45vh',
+      description: 'Iframe height',
     },
   },
 
