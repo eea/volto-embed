@@ -33,7 +33,9 @@ const View = ({ data, intl, id }) => {
         data.align,
       )}
       style={
-        data.align === 'full' ? { position: 'static', height: data.height } : {}
+        data.align === 'full'
+          ? { position: 'static', height: data.height }
+          : { height: data.height }
       }
     >
       <div
