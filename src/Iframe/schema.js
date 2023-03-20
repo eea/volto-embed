@@ -28,7 +28,8 @@ const schema = {
           CSS height
         </a>
       ),
-      description: 'Iframe max height',
+      default: '45vh',
+      description: 'Iframe height',
     },
   },
 

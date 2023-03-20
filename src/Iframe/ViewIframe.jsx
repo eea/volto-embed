@@ -33,9 +33,7 @@ const View = ({ data, intl, id }) => {
         data.align,
       )}
       style={
-        data.align === 'full'
-          ? { position: 'static', height: data.height || '45vh' }
-          : {}
+        data.align === 'full' ? { position: 'static', height: data.height } : {}
       }
     >
       <div
@@ -51,7 +49,7 @@ const View = ({ data, intl, id }) => {
             className="google-map"
             frameBorder="0"
             allowFullScreen
-            style={{ height: data.height || '45vh' }}
+            style={{ height: data.height }}
           />
         </PrivacyProtection>
       </div>
