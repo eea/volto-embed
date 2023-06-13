@@ -129,7 +129,7 @@ const PrivacyProtection = (props) => {
 
   //screenshot api
   React.useEffect(() => {
-    if (enabled && !bgImg && !show) {
+    if (enabled && !bgImg && !show && url) {
       fetch(
         `${getBaseUrl(
           '',
