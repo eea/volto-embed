@@ -18,9 +18,6 @@
     "@eeacms/volto-corsproxy",
     "@eeacms/volto-datablocks"
   ],
-  "resolutions": {
-    "react-countup/countup.js": "2.5.0"
-  },
   "dependencies": {
     "@eeacms/volto-corsproxy": "*",
     "@eeacms/volto-datablocks": "*",
