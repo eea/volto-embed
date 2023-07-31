@@ -14,48 +14,59 @@
 [![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
 
-GDPR-compliant external resource embedding components for Volto.
 
-Right now it does several things:
+[Volto](https://github.com/plone/volto) add-on
 
-- it replaces the Map default block with a variant that's data-protected
-- it provides a component `<PrivacyProtection>` which can be used to wrap other
-  components that wrap sensitive content
-- it provides a function `addPrivacyProtectionToSchema` which adds the fields
-  that are required to configure the "data protection" for any component
-  wrapped in `<PrivacyProtection>`.
+## Features
 
-See `src/Iframe/ViewIframe` for details on how to implement.
+Demo GIF
 
 ## Getting started
 
-1. Create new volto project if you don't already have one:
+### Try volto-embed with Docker
 
+      git clone https://github.com/eea/volto-embed.git
+      cd volto-embed
+      make
+      make start
+
+Go to http://localhost:3000
+
+### Add volto-embed to your Volto project
+
+1. Make sure you have a [Plone backend](https://plone.org/download) up-and-running at http://localhost:8080/Plone
+
+   ```Bash
+   docker compose up backend
    ```
-   $ npm install -g yo @plone/generator-volto
-   $ yo @plone/volto my-volto-project --addon volto-embed
 
-   $ cd my-volto-project
-   $ yarn add -W @eeacms/volto-embed      // Not yet available
-   ```
+1. Start Volto frontend
 
-1. If you already have a volto project, just update `package.json`:
+* If you already have a volto project, just update `package.json`:
 
    ```JSON
    "addons": [
-      "volto-embed"
+       "@eeacms/volto-embed"
    ],
 
    "dependencies": {
-      "volto-embed": "github:eea/volto-embed#master"
+       "@eeacms/volto-embed": "*"
    }
+   ```
+
+* If not, create one:
+
+   ```
+   npm install -g yo @plone/generator-volto
+   yo @plone/volto my-volto-project --canary --addon @eeacms/volto-embed
+   cd my-volto-project
    ```
 
 1. Install new add-ons and restart Volto:
 
    ```
-   $ yarn
-   $ yarn start
+   yarn
+   yarn start
    ```
 
 1. Go to http://localhost:3000
