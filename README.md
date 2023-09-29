@@ -14,12 +14,18 @@
 [![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
 [![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
 
+GDPR-compliant external resource embedding components for Volto.
 
-[Volto](https://github.com/plone/volto) add-on
+Right now it does several things:
 
-## Features
+- it replaces the Map default block with a variant that's data-protected
+- it provides a component `<PrivacyProtection>` which can be used to wrap other
+  components that wrap sensitive content
+- it provides a function `addPrivacyProtectionToSchema` which adds the fields
+  that are required to configure the "data protection" for any component
+  wrapped in `<PrivacyProtection>`.
 
-Demo GIF
+See `src/Iframe/ViewIframe` for details on how to implement.
 
 ## Getting started
 
