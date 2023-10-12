@@ -25,6 +25,9 @@ module.exports = {
     '^.+\\.(jpg)$': 'jest-file',
     '^.+\\.(svg)$': './node_modules/@plone/volto/jest-svgsystem-transform.js',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!@eeacms)/volto-datablocks/helpers',
+  ],
   coverageThreshold: {
     global: {
       branches: 5,
