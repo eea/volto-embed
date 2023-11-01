@@ -7,7 +7,9 @@ import React from 'react';
 import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { PrivacyProtection } from '../PrivacyProtection';
+import { compose } from 'redux';
+import { withBlockExtensions } from '@plone/volto/helpers';
+import { PrivacyProtection } from '@eeacms/volto-embed';
 
 const messages = defineMessages({
   EmbededGoogleMaps: {
@@ -32,17 +34,11 @@ const View = ({ data, intl, id }) => {
         },
         data.align,
       )}
-      style={
-        data.align === 'full'
-          ? { position: 'static', height: data.height }
-          : { height: data.height }
-      }
     >
       <div
-        className={cx({
-          'full-width-block': data.align === 'full',
+        className={cx('maps-inner', {
+          'full-width': data.align === 'full',
         })}
-        style={{ height: '100%' }}
       >
         <PrivacyProtection data={data} id={id}>
           <iframe
@@ -51,7 +47,7 @@ const View = ({ data, intl, id }) => {
             className="google-map"
             frameBorder="0"
             allowFullScreen
-            style={{ height: data.height }}
+            style={data.height ? { height: data.height } : {}}
           />
         </PrivacyProtection>
       </div>
@@ -68,4 +64,4 @@ View.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default injectIntl(View);
+export default compose(injectIntl, withBlockExtensions)(View);
