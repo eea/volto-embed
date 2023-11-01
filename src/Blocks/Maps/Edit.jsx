@@ -9,17 +9,15 @@ import PropTypes from 'prop-types';
 import { Button, Input, Message } from 'semantic-ui-react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import cx from 'classnames';
-
+import { isEqual } from 'lodash';
+import { withBlockExtensions } from '@plone/volto/helpers';
+import { compose } from 'redux';
 import { Icon, SidebarPortal } from '@plone/volto/components';
-import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
-import schema from './schema';
-import {
-  PrivacyProtection,
-  addPrivacyProtectionToSchema,
-} from '../PrivacyProtection';
+import { PrivacyProtection } from '@eeacms/volto-embed';
+import MapsSidebar from './MapsSidebar';
 
 const messages = defineMessages({
   MapsBlockInputPlaceholder: {
@@ -88,6 +86,19 @@ class Edit extends Component {
     };
     this.onSubmitUrl = this.onSubmitUrl.bind(this);
     this.onKeyDownVariantMenuForm = this.onKeyDownVariantMenuForm.bind(this);
+  }
+
+  /**
+   * @param {*} nextProps
+   * @returns {boolean}
+   * @memberof Edit
+   */
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.selected ||
+      nextProps.selected ||
+      !isEqual(this.props.data, nextProps.data)
+    );
   }
 
   /**
@@ -196,6 +207,9 @@ class Edit extends Component {
    * @returns {string} Markup for the component.
    */
   render() {
+    const placeholder =
+      this.props.data.placeholder ||
+      this.props.intl.formatMessage(messages.MapsBlockInputPlaceholder);
     return (
       <div
         className={cx(
@@ -224,6 +238,11 @@ class Edit extends Component {
                 className="google-map"
                 frameBorder="0"
                 allowFullScreen
+                style={
+                  this.props.data.height
+                    ? { height: this.props.data.height }
+                    : {}
+                }
               />
             </PrivacyProtection>
           </div>
@@ -235,9 +254,7 @@ class Edit extends Component {
                 <Input
                   onKeyDown={this.onKeyDownVariantMenuForm}
                   onChange={this.onChangeUrl}
-                  placeholder={this.props.intl.formatMessage(
-                    messages.MapsBlockInputPlaceholder,
-                  )}
+                  placeholder={placeholder}
                   value={this.state.url}
                   // Prevents propagation to the Dropzone and the opening
                   // of the upload browser dialog
@@ -287,22 +304,13 @@ class Edit extends Component {
             </center>
           </Message>
         )}
+        {!this.props.selected && <div className="map-overlay" />}
         <SidebarPortal selected={this.props.selected}>
-          <InlineForm
-            schema={addPrivacyProtectionToSchema(schema)}
-            title={schema.title}
-            onChangeField={(id, value) => {
-              this.props.onChangeBlock(this.props.block, {
-                ...this.props.data,
-                [id]: value,
-              });
-            }}
-            formData={this.props.data}
-          />
+          <MapsSidebar {...this.props} resetSubmitUrl={this.resetSubmitUrl} />
         </SidebarPortal>
       </div>
     );
   }
 }
 
-export default injectIntl(Edit);
+export default compose(injectIntl, withBlockExtensions)(Edit);
