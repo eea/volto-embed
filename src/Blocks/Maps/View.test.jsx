@@ -26,6 +26,12 @@ config.blocks.blocksConfig = {
 
 test('renders a view map component', () => {
   const store = mockStore({
+    connected_data_parameters: {},
+    router: {
+      location: {
+        pathname: '',
+      },
+    },
     intl: {
       locale: 'en',
       messages: {},

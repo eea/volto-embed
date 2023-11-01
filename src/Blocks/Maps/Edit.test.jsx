@@ -27,6 +27,12 @@ const mockStore = configureStore();
 
 test('renders an edit map block component', () => {
   const store = mockStore({
+    connected_data_parameters: {},
+    router: {
+      location: {
+        pathname: '',
+      },
+    },
     intl: {
       locale: 'en',
       messages: {},
