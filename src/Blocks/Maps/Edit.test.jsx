@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
 import configureStore from 'redux-mock-store';
@@ -22,53 +23,60 @@ const store = mockStore(() => ({
 
 describe('Edit', () => {
   it('renders without crashing', () => {
-    render(
-      <Provider store={store}>
+    act(() => {
+      render(
         <Provider store={store}>
-          <Edit
-            selected={false}
-            block="block"
-            index={1}
-            data={{
-              url: 'test',
-            }}
-            pathname="/"
-            onChangeBlock={() => {}}
-            onSelectBlock={() => {}}
-            onDeleteBlock={() => {}}
-            onFocusPreviousBlock={() => {}}
-            onFocusNextBlock={() => {}}
-            handleKeyDown={() => {}}
-          />
-        </Provider>
-      </Provider>,
-    );
+          <Provider store={store}>
+            <Edit
+              selected={false}
+              block="block"
+              index={1}
+              data={{
+                url: 'test',
+              }}
+              pathname="/"
+              onChangeBlock={() => {}}
+              onSelectBlock={() => {}}
+              onDeleteBlock={() => {}}
+              onFocusPreviousBlock={() => {}}
+              onFocusNextBlock={() => {}}
+              handleKeyDown={() => {}}
+            />
+          </Provider>
+        </Provider>,
+      );
+    });
   });
 
   it('submits url when button is clicked', () => {
-    const { container, getByPlaceholderText } = render(
-      <Provider store={store}>
+    let container, getByPlaceholderText;
+    act(() => {
+      const { _container, _getByPlaceholderText } = render(
         <Provider store={store}>
-          <Edit
-            selected={false}
-            block="block"
-            index={1}
-            data={{
-              dataprotection: {
-                privacy_statement: 'test',
-              },
-            }}
-            pathname="/"
-            onChangeBlock={() => {}}
-            onSelectBlock={() => {}}
-            onDeleteBlock={() => {}}
-            onFocusPreviousBlock={() => {}}
-            onFocusNextBlock={() => {}}
-            handleKeyDown={() => {}}
-          />
-        </Provider>
-      </Provider>,
-    );
+          <Provider store={store}>
+            <Edit
+              selected={false}
+              block="block"
+              index={1}
+              data={{
+                dataprotection: {
+                  privacy_statement: 'test',
+                },
+              }}
+              pathname="/"
+              onChangeBlock={() => {}}
+              onSelectBlock={() => {}}
+              onDeleteBlock={() => {}}
+              onFocusPreviousBlock={() => {}}
+              onFocusNextBlock={() => {}}
+              handleKeyDown={() => {}}
+            />
+          </Provider>
+        </Provider>,
+      );
+      container = _container;
+      getByPlaceholderText = _getByPlaceholderText;
+    });
 
     const input = getByPlaceholderText('Enter map Embed Code');
     fireEvent.click(input);
