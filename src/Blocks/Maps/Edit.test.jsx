@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import config from '@plone/volto/registry';
 import { render, fireEvent, screen } from '@testing-library/react';
