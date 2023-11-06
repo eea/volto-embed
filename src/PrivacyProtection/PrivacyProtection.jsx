@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import cx from 'classnames';
 import { compose } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -77,6 +78,7 @@ const CookieWatcher = (domain_key, cookies, pollingRate = 250) => {
 
 const PrivacyProtection = (props) => {
   const {
+    className,
     children,
     data = {},
     id,
@@ -168,7 +170,7 @@ const PrivacyProtection = (props) => {
     >
       {visible ? (
         <div
-          className="privacy-protection-wrapper"
+          className={cx('privacy-protection-wrapper', className)}
           style={{
             position: 'relative',
             height: height && (!enabled || !show) ? `${height}px` : 'auto',
