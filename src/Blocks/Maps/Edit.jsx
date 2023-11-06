@@ -16,7 +16,7 @@ import { Icon, SidebarPortal } from '@plone/volto/components';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
-import { PrivacyProtection } from '@eeacms/volto-embed';
+import PrivacyProtection from '@eeacms/volto-embed/PrivacyProtection/PrivacyProtection';
 import MapsSidebar from './MapsSidebar';
 
 const messages = defineMessages({
