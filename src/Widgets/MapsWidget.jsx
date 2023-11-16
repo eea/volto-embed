@@ -29,6 +29,10 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
   );
 
   function getSrc(embed) {
+    if (!embed || embed.trim() === 0) {
+      setError(true);
+      return '';
+    }
     // Optimization, don't need the src
     if (!embed.trim().startsWith('<iframe')) {
       return embed;
