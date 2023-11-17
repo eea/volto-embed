@@ -1,67 +1,53 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
-  Maps: {
-    id: 'Maps',
-    defaultMessage: 'Maps',
-  },
-  AltText: {
-    id: 'Alt text',
-    defaultMessage: 'Alt text',
-  },
-  MapsURL: {
-    id: 'Maps URL',
-    defaultMessage: 'Maps URL',
-  },
-  Alignment: {
-    id: 'Alignment',
-    defaultMessage: 'Alignment',
-  },
   CSSHeight: {
-    id: 'CSSHeight',
+    id: 'CSS height',
     defineMessages: 'CSS height',
   },
   CSSHeightDescription: {
-    id: 'CSSHeightDescription',
+    id: 'Iframe height',
     defineMessages: 'Iframe height',
   },
 });
 
-export const MapsSchema = (props) => ({
-  title: props.intl.formatMessage(messages.Maps),
-  block: 'Maps',
-  fieldsets: [
-    {
-      id: 'default',
-      title: 'Default',
-      fields: ['url', 'title', 'align', 'height'],
-    },
-  ],
+export const MapsSchema = (props) => {
+  return {
+    title: props.intl.messages['Maps'],
+    block: 'Maps',
+    fieldsets: [
+      {
+        id: 'default',
+        title: 'Default',
+        fields: ['url', 'title', 'align', 'height'],
+      },
+    ],
 
-  properties: {
-    url: {
-      title: props.intl.formatMessage(messages.MapsURL),
-      widget: 'url',
+    properties: {
+      url: {
+        title: props.intl.messages['Maps URL'],
+        widget: 'url',
+      },
+      title: {
+        title: props.intl.messages['Alt text'],
+      },
+      align: {
+        title: props.intl.messages['Alignment'],
+        widget: 'align',
+      },
+      height: {
+        title: (
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
+          >
+            {props.intl.formatMessage(messages.CSSHeight)}
+          </a>
+        ),
+        description: props.intl.formatMessage(messages.CSSHeightDescription),
+      },
     },
-    title: {
-      title: props.intl.formatMessage(messages.AltText),
-    },
-    align: {
-      title: props.intl.formatMessage(messages.Alignment),
-      widget: 'align',
-    },
-    height: {
-      title: (
-        <a
-          rel="noreferrer"
-          target="_blank"
-          href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
-        >
-          {props.intl.formatMessage(messages.CSSHeight)}
-        </a>
-      ),
-      description: props.intl.formatMessage(messages.CSSHeightDescription),
-    },
-  },
-  required: [],
-});
+    required: [],
+  };
+};

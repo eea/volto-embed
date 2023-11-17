@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
+import { isNumber } from 'lodash';
 import { compose } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import VisibilitySensor from 'react-visibility-sensor';
 import {
   Placeholder,
   Dimmer,
@@ -21,6 +21,7 @@ import {
   getConnectedDataParametersForContext,
   getFilteredURL,
 } from '@eeacms/volto-datablocks/helpers';
+import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 
 import { createImageUrl } from './helpers';
 import { ProtectionSchema } from './schema';
@@ -86,7 +87,6 @@ const PrivacyProtection = (props) => {
     intl,
     path,
     cookies,
-    height = '',
   } = props;
   const {
     enabled = false,
@@ -96,7 +96,6 @@ const PrivacyProtection = (props) => {
   } = data.dataprotection || {};
 
   const [image, setImage] = React.useState(null);
-  const [visible, setVisibility] = useState(false);
   const defaultShow = canShow(privacy_cookie_key, cookies);
   const [show, setShow] = useState(defaultShow);
   const [remember, setRemember] = useState(
@@ -111,6 +110,12 @@ const PrivacyProtection = (props) => {
     );
   });
   const url = getFilteredURL(data.url, connected_data_parameters);
+
+  const height = React.useMemo(() => {
+    if (!props.height || enabled || !show) return 'auto';
+    if (isNumber(props.height)) return `${props.height}px`;
+    return props.height;
+  }, [props.height, enabled, show]);
 
   React.useEffect(() => {
     if (bgImg) {
@@ -160,96 +165,91 @@ const PrivacyProtection = (props) => {
         });
     }
   }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
+
   return (
     <VisibilitySensor
-      onChange={(isVisible) => {
-        !visible && isVisible && setVisibility(true);
-      }}
-      partialVisibility={true}
-      offset={{ bottom: 200 }}
-    >
-      {visible ? (
-        <div
-          className={cx('privacy-protection-wrapper', className)}
-          style={{
-            position: 'relative',
-            height: height && (!enabled || !show) ? `${height}px` : 'auto',
-            minHeight: '200px',
-            overflow: 'hidden',
-          }}
-        >
-          {!enabled || show ? (
-            children
-          ) : !__DEVELOPMENT__ && !image ? (
-            <Dimmer active>
-              <Loader />
-            </Dimmer>
-          ) : (
-            <div
-              className="privacy-protection"
-              style={
-                image
-                  ? {
-                      backgroundImage: `url(${image})`,
-                      backgroundRepeat: 'no-repeat',
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center -70px',
-                    }
-                  : {}
-              }
-            >
-              <div className="overlay">
-                <div className="wrapped">
-                  <div className="privacy-button">
-                    <Button
-                      primary
-                      onClick={() => {
-                        setShow(true);
-                        if (remember) {
-                          saveCookie(privacy_cookie_key, cookies);
-                        }
-                      }}
-                    >
-                      Show external content
-                    </Button>
-                  </div>
-
-                  {!editable && (
-                    <div className="privacy-toggle">
-                      <Checkbox
-                        toggle
-                        label="Remember my choice"
-                        id={`remember-choice-${id}`}
-                        onChange={(ev, { checked }) => {
-                          setRemember(checked);
-                        }}
-                        checked={remember}
-                      />
-                    </div>
-                  )}
-
-                  <p className="discreet">
-                    Your choice will be saved in a cookie managed by{' '}
-                    {config.settings.ownDomain || '.eea.europa.eu'} that will
-                    expire in {getExpDays()} days.
-                  </p>
-                  <p className="discreet">
-                    {serializeNodes(
-                      privacy_statement ||
-                        ProtectionSchema().properties.privacy_statement
-                          .defaultValue,
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      ) : (
+      Placeholder={() => (
         <Placeholder style={{ height: '100%', width: '100%' }}>
           <Placeholder.Image rectangular />
         </Placeholder>
       )}
+    >
+      <div
+        className={cx('privacy-protection-wrapper', className)}
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          height,
+          minHeight: height !== 'auto' ? height : '200px',
+        }}
+      >
+        {!enabled || show ? (
+          children
+        ) : !__DEVELOPMENT__ && !image ? (
+          <Dimmer active>
+            <Loader />
+          </Dimmer>
+        ) : (
+          <div
+            className="privacy-protection"
+            style={
+              image
+                ? {
+                    backgroundImage: `url(${image})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center -70px',
+                  }
+                : {}
+            }
+          >
+            <div className="overlay">
+              <div className="wrapped">
+                <div className="privacy-button">
+                  <Button
+                    primary
+                    onClick={() => {
+                      setShow(true);
+                      if (remember) {
+                        saveCookie(privacy_cookie_key, cookies);
+                      }
+                    }}
+                  >
+                    Show external content
+                  </Button>
+                </div>
+
+                {!editable && (
+                  <div className="privacy-toggle">
+                    <Checkbox
+                      toggle
+                      label="Remember my choice"
+                      id={`remember-choice-${id}`}
+                      onChange={(ev, { checked }) => {
+                        setRemember(checked);
+                      }}
+                      checked={remember}
+                    />
+                  </div>
+                )}
+
+                <p className="discreet">
+                  Your choice will be saved in a cookie managed by{' '}
+                  {config.settings.ownDomain || '.eea.europa.eu'} that will
+                  expire in {getExpDays()} days.
+                </p>
+                <p className="discreet">
+                  {serializeNodes(
+                    privacy_statement ||
+                      ProtectionSchema().properties.privacy_statement
+                        .defaultValue,
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </VisibilitySensor>
   );
 };

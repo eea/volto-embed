@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
+import { isFunction } from 'lodash';
 import { Modal } from 'semantic-ui-react';
+import cx from 'classnames';
 
-const EnlargeWidget = ({ children }) => {
+const Enlarge = ({ children, className, onClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="enlarge">
-      <button className="trigger-button" onClick={() => setIsOpen(true)}>
+      <button
+        className="trigger-button"
+        onClick={() => {
+          if (isFunction(onClick)) {
+            onClick({ setOpen: setIsOpen });
+          } else {
+            setIsOpen(true);
+          }
+        }}
+      >
         <i className="ri-fullscreen-line" />
         Enlarge
       </button>
-      <Modal
-        open={isOpen}
-        closeIcon={
-          <span className="close icon">
-            <i class="ri-close-line" />
-          </span>
-        }
-        onClose={() => setIsOpen(false)}
-        className="enlarge-modal"
-      >
-        <Modal.Content>{children}</Modal.Content>
-      </Modal>
+      {children && (
+        <Modal
+          open={isOpen}
+          closeIcon={
+            <span className="close icon">
+              <i class="ri-close-line" />
+            </span>
+          }
+          onClose={() => setIsOpen(false)}
+          className={cx('enlarge-modal', className)}
+        >
+          <Modal.Content>{children}</Modal.Content>
+        </Modal>
+      )}
     </div>
   );
 };
 
-export default EnlargeWidget;
+export default Enlarge;

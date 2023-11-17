@@ -11,37 +11,70 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: Alignment
+msgid "Alignment"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: Alt text
+msgid "Alt text"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: undefined
+msgid "CSSHeight"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: undefined
+msgid "CSSHeightDescription"
+msgstr ""
+
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Center
 msgid "Center"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
+#: Widgets/MapsWidget
 # defaultMessage: Embed code error, please follow the instructions and try again.
 msgid "Embed code error, please follow the instructions and try again."
 msgstr ""
 
-#: Iframe/ViewIframe
+#: Blocks/EmbedMaps/View
+#: Blocks/Maps/View
+#: Map/Map
 # defaultMessage: Embeded Google Maps
 msgid "Embeded Google Maps"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Enter map Embed Code
 msgid "Enter map Embed Code"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Full
 msgid "Full"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Google Maps Embedded Block
 msgid "Google Maps Embedded Block"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Left
 msgid "Left"
 msgstr ""
@@ -51,12 +84,35 @@ msgstr ""
 msgid "Live image generated"
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/MapsSidebar
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/MapsSidebar
+#: Blocks/Maps/schema
+# defaultMessage: Maps
+msgid "Maps"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: Maps URL
+msgid "Maps URL"
+msgstr ""
+
+#: Blocks/EmbedMaps/MapsSidebar
+#: Blocks/Maps/MapsSidebar
+# defaultMessage: No map selected
+msgid "No map selected"
+msgstr ""
+
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
+#: Widgets/MapsWidget
 # defaultMessage: Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it.
 msgid "Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
 msgstr ""
 
-#: Iframe/EditIframe
+#: Blocks/EmbedMaps/Edit
+#: Blocks/Maps/Edit
 # defaultMessage: Right
 msgid "Right"
 msgstr ""
