@@ -7,20 +7,14 @@ import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 
 function getMaps(props) {
-  let maps = {},
-    content = {};
   const { isBlock } = props;
-  if (!isBlock && props.content?.maps) {
-    content = pickMetadata(props.content);
-    maps = props.content.maps;
-  } else if (props.mapsContent) {
-    content = pickMetadata(props.mapsContent);
-    maps = props.mapsContent.maps;
-  } else if (props.data.maps) {
-    maps = props.data.maps;
-  }
+  const content = (isBlock ? props.mapsContent : props.content) || {};
+  const maps =
+    (isBlock ? props.mapsContent?.maps : props.content?.maps) ||
+    props.data.maps ||
+    {};
   return {
-    ...content,
+    ...pickMetadata(content),
     ...maps,
   };
 }
