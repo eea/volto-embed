@@ -1,5 +1,5 @@
-import Map from '@eeacms/volto-embed/Map/Map';
+import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 
 export default function MapsViewWidget({ id, value }) {
-  return <Map data={value} id={id} />;
+  return <EmbedMap data={value} id={id} />;
 }

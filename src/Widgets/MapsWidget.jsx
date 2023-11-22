@@ -5,7 +5,7 @@ import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
 import { map } from 'lodash';
 import { FormFieldWrapper, InlineForm } from '@plone/volto/components';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';
-import Map from '@eeacms/volto-embed/Map/Map';
+import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
@@ -103,7 +103,7 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
                 computer={8}
                 className="tableau-visualization-column"
               >
-                <Map data={value} id={id} />
+                <EmbedMap data={value} id={id} />
               </Grid.Column>
             </Grid>
           )}
@@ -204,7 +204,7 @@ export default function MapsWidget(props) {
         </Button>
       </div>
       {description && <p className="help">{description}</p>}
-      {value.url && <Map {...props} data={value} />}
+      {value.url && <EmbedMap {...props} data={value} />}
       {mapEditor && (
         <MapEditorModal
           id={id}

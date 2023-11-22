@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
-import Map from '@eeacms/volto-embed/Map/Map';
+import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 
 const MapView = (props) => {
   return (
     <Container>
-      <Map data={props.content.maps} id={props.content['@id']} />
+      <EmbedMap data={props.content.maps} id={props.content['@id']} />
     </Container>
   );
 };

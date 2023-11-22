@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
-import Map from '@eeacms/volto-embed/Map/Map';
+import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 
 function getMaps(props) {
@@ -36,7 +36,7 @@ function View(props) {
     with_enlarge = true,
   } = props.data;
 
-  const url = flattenToAppURL(props.data.url);
+  const url = flattenToAppURL(props.data.url || '');
 
   const maps = getMaps(props);
 
@@ -57,7 +57,7 @@ function View(props) {
 
   return (
     <div className="embed-map">
-      <Map
+      <EmbedMap
         data={{
           ...maps,
           useVisibilitySensor,

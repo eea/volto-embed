@@ -21,7 +21,7 @@ const messages = defineMessages({
   },
 });
 
-function Map({ data, intl, id, screen }) {
+function EmbedMap({ data, intl, id, screen }) {
   const el = useRef();
   const [mobile, setMobile] = useState(false);
 
@@ -78,7 +78,7 @@ function Map({ data, intl, id, screen }) {
         <div className="right-col">
           {data.with_enlarge && (
             <Enlarge className="enlarge-embed-maps">
-              <Map
+              <EmbedMap
                 data={{
                   ...data,
                   height: '100%',
@@ -103,4 +103,4 @@ function Map({ data, intl, id, screen }) {
 export default compose(
   injectIntl,
   connect((state) => ({ screen: state.screen })),
-)(Map);
+)(EmbedMap);

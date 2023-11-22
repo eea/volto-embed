@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
 
-import Map from './Map';
+import EmbedMap from './EmbedMap';
 
 const mockStore = configureStore();
 
@@ -46,7 +46,7 @@ test('renders map component', () => {
   });
   const component = renderer.create(
     <Provider store={store}>
-      <Map
+      <EmbedMap
         id="my-map"
         data={{
           with_notes: false,
