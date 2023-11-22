@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { getContent } from '@plone/volto/actions';
@@ -6,10 +6,28 @@ import { flattenToAppURL } from '@plone/volto/helpers';
 import Map from '@eeacms/volto-embed/Map/Map';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 
+function getMaps(props) {
+  let maps = {},
+    content = {};
+  const { isBlock } = props;
+  if (!isBlock && props.content?.maps) {
+    content = pickMetadata(props.content);
+    maps = props.content.maps;
+  } else if (props.mapsContent) {
+    content = pickMetadata(props.mapsContent);
+    maps = props.mapsContent.maps;
+  } else if (props.data.maps) {
+    maps = props.data.maps;
+  }
+  return {
+    ...content,
+    ...maps,
+  };
+}
+
 function View(props) {
-  const { getContent } = props;
+  const { id, isBlock, getContent, mode } = props;
   const {
-    url,
     useVisibilitySensor = true,
     with_notes = true,
     with_sources = true,
@@ -18,28 +36,16 @@ function View(props) {
     with_enlarge = true,
   } = props.data;
 
-  const maps = useMemo(() => {
-    if (props.mapsContent?.maps) {
-      return {
-        ...props.mapsContent.maps,
-        ...pickMetadata(props.mapsContent),
-      };
-    }
-    if (props.data.maps) {
-      return props.data.maps;
-    }
-    return undefined;
-  }, [props.data.maps, props.mapsContent]);
+  const url = flattenToAppURL(props.data.url);
+
+  const maps = getMaps(props);
 
   useEffect(() => {
-    if (
-      props.mode === 'edit' &&
-      props.data.url &&
-      props.data.url !== props.mapsContent?.['@id']
-    ) {
-      getContent(flattenToAppURL(props.data.url), null, props.id);
+    const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
+    if (isBlock && mode === 'edit' && url && url !== mapsId) {
+      getContent(url, null, id);
     }
-  }, [getContent, props.id, props.mapsContent, props.mode, props.data.url]);
+  }, [id, isBlock, getContent, mode, url, maps]);
 
   if (props.mode === 'edit' && !url) {
     return <Message>Please select a map from block editor.</Message>;
@@ -70,6 +76,7 @@ function View(props) {
 export default connect(
   (state, props) => ({
     mapsContent: state.content.subrequests?.[props.id]?.data,
+    isBlock: !!props.data?.['@type'],
   }),
   { getContent },
 )(View);

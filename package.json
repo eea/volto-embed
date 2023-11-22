@@ -14,14 +14,9 @@
     "plone",
     "react"
   ],
-  "addons": [
-    "@eeacms/volto-corsproxy",
-    "@eeacms/volto-datablocks"
-  ],
   "dependencies": {
     "@eeacms/volto-corsproxy": "*",
-    "@eeacms/volto-datablocks": "*",
-    "react-visibility-sensor": "5.1.1"
+    "@eeacms/volto-datablocks": "github:eea/volto-datablocks#develop"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
