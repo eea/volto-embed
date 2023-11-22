@@ -3,7 +3,7 @@ import EmbedView from './View';
 
 import sliderSVG from '@plone/volto/icons/slider.svg';
 
-const embedConfig = (config) => {
+const applyConfig = (config) => {
   config.blocks.blocksConfig.embed_maps = {
     id: 'embed_maps',
     title: 'Embed Map',
@@ -19,4 +19,4 @@ const embedConfig = (config) => {
   return config;
 };
 
-export default embedConfig;
+export default applyConfig;

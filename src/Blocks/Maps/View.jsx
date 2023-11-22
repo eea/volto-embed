@@ -40,7 +40,11 @@ const View = ({ data, intl, id }) => {
           'full-width': data.align === 'full',
         })}
       >
-        <PrivacyProtection data={data} id={id}>
+        <PrivacyProtection
+          data={data}
+          id={id}
+          useVisibilitySensor={data.useVisibilitySensor}
+        >
           <iframe
             title={intl.formatMessage(messages.EmbededGoogleMaps)}
             src={data.url}

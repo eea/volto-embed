@@ -53,7 +53,12 @@ function Map({ data, intl, id, screen }) {
           'full-width': data.align === 'full',
         })}
       >
-        <PrivacyProtection data={data} id={id} height={data.height}>
+        <PrivacyProtection
+          data={data}
+          id={id}
+          height={data.height}
+          useVisibilitySensor={data.useVisibilitySensor ?? true}
+        >
           <iframe
             title={intl.formatMessage(messages.EmbededGoogleMaps)}
             src={data.url}
@@ -66,7 +71,7 @@ function Map({ data, intl, id, screen }) {
       </div>
       <div className={cx('visualization-toolbar', { mobile })}>
         <div className="left-col">
-          {data.with_notes && <FigureNote note={data.figure_note || []} />}
+          {data.with_notes && <FigureNote notes={data.figure_note || []} />}
           {data.with_sources && <Sources sources={data.sources} />}
           {data.with_more_info && <MoreInfo href={data['@id']} />}
         </div>

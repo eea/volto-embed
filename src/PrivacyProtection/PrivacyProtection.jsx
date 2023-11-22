@@ -87,6 +87,7 @@ const PrivacyProtection = (props) => {
     intl,
     path,
     cookies,
+    useVisibilitySensor = true,
   } = props;
   const {
     enabled = false,
@@ -173,6 +174,7 @@ const PrivacyProtection = (props) => {
           <Placeholder.Image rectangular />
         </Placeholder>
       )}
+      useVisibilitySensor={useVisibilitySensor}
     >
       <div
         className={cx('privacy-protection-wrapper', className)}
