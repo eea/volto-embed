@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { getContent } from '@plone/volto/actions';
@@ -7,12 +7,8 @@ import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 
 function getMaps(props) {
-  const { isBlock } = props;
-  const content = (isBlock ? props.mapsContent : props.content) || {};
-  const maps =
-    (isBlock ? props.mapsContent?.maps : props.content?.maps) ||
-    props.data.maps ||
-    {};
+  const content = props.mapsContent || {};
+  const maps = content.maps || props.data?.maps || {};
   return {
     ...pickMetadata(content),
     ...maps,
@@ -20,7 +16,7 @@ function getMaps(props) {
 }
 
 function View(props) {
-  const { id, isBlock, getContent, mode } = props;
+  const { id, getContent, mode } = props;
   const {
     useVisibilitySensor = true,
     with_notes = true,
@@ -32,14 +28,14 @@ function View(props) {
 
   const url = flattenToAppURL(props.data.url || '');
 
-  const maps = getMaps(props);
+  const maps = useMemo(() => getMaps(props), [props]);
 
   useEffect(() => {
     const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
-    if (isBlock && mode === 'edit' && url && url !== mapsId) {
+    if (mode === 'edit' && url && url !== mapsId) {
       getContent(url, null, id);
     }
-  }, [id, isBlock, getContent, mode, url, maps]);
+  }, [id, getContent, mode, url, maps]);
 
   if (props.mode === 'edit' && !url) {
     return <Message>Please select a map from block editor.</Message>;
@@ -70,7 +66,6 @@ function View(props) {
 export default connect(
   (state, props) => ({
     mapsContent: state.content.subrequests?.[props.id]?.data,
-    isBlock: !!props.data?.['@type'],
   }),
   { getContent },
 )(View);
