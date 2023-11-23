@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders toolbar components 1`] = `
+<div
+  className="visualization-toolbar"
+>
+  <div
+    className="left-col"
+  >
+    <div
+      className="figure-note"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="trigger-button"
+      >
+        Note
+      </button>
+    </div>
+    <div
+      className="sources"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="trigger-button"
+      >
+        Sources
+      </button>
+    </div>
+    <div
+      className="more-info"
+    >
+      <a
+        href="/path/to/embeded/content"
+      >
+        <span>
+          More info
+        </span>
+        <i
+          class="ri-external-link-line"
+        />
+      </a>
+    </div>
+  </div>
+  <div
+    className="right-col"
+  >
+    <div
+      className="enlarge"
+    >
+      <button
+        className="trigger-button"
+        onClick={[Function]}
+      >
+        <i
+          className="ri-fullscreen-line"
+        />
+        Enlarge
+      </button>
+    </div>
+    <div
+      className="share"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="trigger-button"
+      >
+        <i
+          class="ri-share-fill"
+        />
+        <span>
+          Share
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;

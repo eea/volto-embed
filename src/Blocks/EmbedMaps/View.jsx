@@ -1,14 +1,24 @@
 import React, { useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
-import { flattenToAppURL } from '@plone/volto/helpers';
-import Map from '@eeacms/volto-embed/Map/Map';
-
 import { getContent } from '@plone/volto/actions';
+import { flattenToAppURL } from '@plone/volto/helpers';
+import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
+import { pickMetadata } from '@eeacms/volto-embed/helpers';
+
+function getMaps(props) {
+  const content = props.mapsContent || {};
+  const maps = content.maps || props.data?.maps || {};
+  return {
+    ...pickMetadata(content),
+    ...maps,
+  };
+}
 
 function View(props) {
+  const { id, getContent, mode } = props;
   const {
-    url,
+    useVisibilitySensor = true,
     with_notes = true,
     with_sources = true,
     with_more_info = true,
@@ -16,32 +26,16 @@ function View(props) {
     with_enlarge = true,
   } = props.data;
 
-  const maps = useMemo(() => {
-    if (props.data.maps) {
-      return props.data.maps;
-    }
-    if (props.mapsContent?.maps) {
-      return {
-        ...props.mapsContent.maps,
-        '@id': props.mapsContent['@id'],
-        title: props.mapsContent['title'],
-        publisher: props.mapsContent['publisher'],
-        geo_coverage: props.mapsContent['geo_coverage'],
-        temporal_coverage: props.mapsContent['temporal_coverage'],
-        other_organisations: props.mapsContent['other_organisations'],
-        data_provenance: props.mapsContent['data_provenance'],
-        figure_note: props.mapsContent['figure_note'],
-      };
-    }
-    return undefined;
-  }, [props.data.maps, props.mapsContent]);
+  const url = flattenToAppURL(props.data.url || '');
+
+  const maps = useMemo(() => getMaps(props), [props]);
 
   useEffect(() => {
-    if (props.data.url && !props.data.maps) {
-      props.getContent(flattenToAppURL(props.data.url), null, props.id);
+    const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
+    if (mode === 'edit' && url && url !== mapsId) {
+      getContent(url, null, id);
     }
-    /* eslint-disable-next-line */
-  }, [props.data.url]);
+  }, [id, getContent, mode, url, maps]);
 
   if (props.mode === 'edit' && !url) {
     return <Message>Please select a map from block editor.</Message>;
@@ -53,9 +47,10 @@ function View(props) {
 
   return (
     <div className="embed-map">
-      <Map
+      <EmbedMap
         data={{
           ...maps,
+          useVisibilitySensor,
           with_notes,
           with_sources,
           with_more_info,

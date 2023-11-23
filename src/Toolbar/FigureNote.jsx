@@ -38,8 +38,7 @@ export default function FigureNote({ notes = [] }) {
           <button className={cx('trigger-button', { open })}>Note</button>
         </div>
       }
-    >
-      <Popup.Content>{serializeText(notes)}</Popup.Content>
-    </Popup>
+      content={serializeText(notes)}
+    />
   );
 }

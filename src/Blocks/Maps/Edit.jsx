@@ -229,6 +229,7 @@ class Edit extends Component {
             <PrivacyProtection
               data={this.props.data}
               editable={this.props.editable}
+              useVisibilitySensor={this.props.data.useVisibilitySensor ?? true}
             >
               <iframe
                 title={this.props.intl.formatMessage(

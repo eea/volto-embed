@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-embed",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "Embed external content",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -20,8 +20,7 @@
   ],
   "dependencies": {
     "@eeacms/volto-corsproxy": "*",
-    "@eeacms/volto-datablocks": "*",
-    "react-visibility-sensor": "5.1.1"
+    "@eeacms/volto-datablocks": "*"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",

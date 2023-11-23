@@ -21,7 +21,7 @@ const messages = defineMessages({
   },
 });
 
-function Map({ data, intl, id, screen }) {
+function EmbedMap({ data, intl, id, screen }) {
   const el = useRef();
   const [mobile, setMobile] = useState(false);
 
@@ -53,7 +53,12 @@ function Map({ data, intl, id, screen }) {
           'full-width': data.align === 'full',
         })}
       >
-        <PrivacyProtection data={data} id={id} height={data.height}>
+        <PrivacyProtection
+          data={data}
+          id={id}
+          height={data.height}
+          useVisibilitySensor={data.useVisibilitySensor ?? true}
+        >
           <iframe
             title={intl.formatMessage(messages.EmbededGoogleMaps)}
             src={data.url}
@@ -66,14 +71,14 @@ function Map({ data, intl, id, screen }) {
       </div>
       <div className={cx('visualization-toolbar', { mobile })}>
         <div className="left-col">
-          {data.with_notes && <FigureNote note={data.figure_note || []} />}
+          {data.with_notes && <FigureNote notes={data.figure_note || []} />}
           {data.with_sources && <Sources sources={data.sources} />}
           {data.with_more_info && <MoreInfo href={data['@id']} />}
         </div>
         <div className="right-col">
           {data.with_enlarge && (
             <Enlarge className="enlarge-embed-maps">
-              <Map
+              <EmbedMap
                 data={{
                   ...data,
                   height: '100%',
@@ -98,4 +103,4 @@ function Map({ data, intl, id, screen }) {
 export default compose(
   injectIntl,
   connect((state) => ({ screen: state.screen })),
-)(Map);
+)(EmbedMap);
