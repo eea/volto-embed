@@ -37,6 +37,8 @@ function EmbedMap({ data, intl, id, screen }) {
     }
   }, [screen, mobile]);
 
+  if (!data.url) return null;
+
   return (
     <div
       ref={el}
@@ -72,7 +74,9 @@ function EmbedMap({ data, intl, id, screen }) {
       <div className={cx('visualization-toolbar', { mobile })}>
         <div className="left-col">
           {data.with_notes && <FigureNote notes={data.figure_note || []} />}
-          {data.with_sources && <Sources sources={data.sources} />}
+          {data.with_sources && (
+            <Sources sources={data.data_provenance?.data} />
+          )}
           {data.with_more_info && <MoreInfo href={data['@id']} />}
         </div>
         <div className="right-col">

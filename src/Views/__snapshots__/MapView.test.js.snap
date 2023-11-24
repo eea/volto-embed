@@ -2,7 +2,8 @@
 
 exports[`renders map component 1`] = `
 <div
-  className="ui container"
+  className="ui container view-wrapper visualization-view"
+  id="page-document"
 >
   <div
     className="block maps align center"

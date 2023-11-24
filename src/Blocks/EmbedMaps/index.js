@@ -6,7 +6,7 @@ import sliderSVG from '@plone/volto/icons/slider.svg';
 const applyConfig = (config) => {
   config.blocks.blocksConfig.embed_maps = {
     id: 'embed_maps',
-    title: 'Embed Map',
+    title: 'Embed interactive Map',
     icon: sliderSVG,
     group: 'common',
     edit: EmbedMap,
