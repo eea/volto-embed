@@ -37,7 +37,6 @@ function EmbedMap({ data, intl, id, screen }) {
     }
   }, [screen, mobile]);
 
-  console.log('HERE', data);
   if (!data.url) return null;
 
   return (
