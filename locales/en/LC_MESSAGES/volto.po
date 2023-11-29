@@ -21,6 +21,7 @@ msgstr ""
 msgid "Alt text"
 msgstr ""
 
+#: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
 # defaultMessage: CSS height
 msgid "CSS height"
@@ -59,6 +60,7 @@ msgstr ""
 msgid "Google Maps Embedded Block"
 msgstr ""
 
+#: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
 # defaultMessage: Iframe height
 msgid "Iframe height"
