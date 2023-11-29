@@ -4,12 +4,11 @@
  */
 
 import React, { Component } from 'react';
-import { isString } from 'lodash';
+import { isEqual, isString } from 'lodash';
 import PropTypes from 'prop-types';
 import { Button, Input, Message } from 'semantic-ui-react';
 import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import cx from 'classnames';
-import { isEqual } from 'lodash';
 import { withBlockExtensions } from '@plone/volto/helpers';
 import { compose } from 'redux';
 import { Icon, SidebarPortal } from '@plone/volto/components';

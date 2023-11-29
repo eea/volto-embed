@@ -8,7 +8,7 @@ const applyConfig = (config) => {
     id: 'embed_maps',
     title: 'Embed interactive Map',
     icon: sliderSVG,
-    group: 'common',
+    group: 'data_visualizations',
     edit: EmbedMap,
     view: EmbedView,
     restricted: false,

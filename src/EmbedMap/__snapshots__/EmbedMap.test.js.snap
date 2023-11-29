@@ -53,19 +53,6 @@ exports[`renders map component 1`] = `
       className="right-col"
     >
       <div
-        className="enlarge"
-      >
-        <button
-          className="trigger-button"
-          onClick={[Function]}
-        >
-          <i
-            className="ri-fullscreen-line"
-          />
-          Enlarge
-        </button>
-      </div>
-      <div
         className="share"
         onBlur={[Function]}
         onClick={[Function]}
@@ -82,6 +69,19 @@ exports[`renders map component 1`] = `
           <span>
             Share
           </span>
+        </button>
+      </div>
+      <div
+        className="enlarge"
+      >
+        <button
+          className="trigger-button"
+          onClick={[Function]}
+        >
+          <i
+            className="ri-fullscreen-line"
+          />
+          Enlarge
         </button>
       </div>
     </div>

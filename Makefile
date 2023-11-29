@@ -160,3 +160,4 @@ cypress-ci:
 	$(NODE_MODULES)/.bin/wait-on -t 240000  http://localhost:3000
 	NODE_ENV=development make cypress-run
 
+

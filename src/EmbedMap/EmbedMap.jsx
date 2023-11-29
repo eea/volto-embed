@@ -80,6 +80,7 @@ function EmbedMap({ data, intl, id, screen }) {
           {data.with_more_info && <MoreInfo href={data['@id']} />}
         </div>
         <div className="right-col">
+          {data.with_share && <Share href={data['@id']} />}
           {data.with_enlarge && (
             <Enlarge className="enlarge-embed-maps">
               <EmbedMap
@@ -97,7 +98,6 @@ function EmbedMap({ data, intl, id, screen }) {
               />
             </Enlarge>
           )}
-          {data.with_share && <Share href={data['@id']} />}
         </div>
       </div>
     </div>
