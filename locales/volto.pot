@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2023-11-29T13:18:21.431Z\n"
+"POT-Creation-Date: 2023-11-29T13:51:29.116Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -62,12 +62,6 @@ msgstr ""
 msgid "Google Maps Embedded Block"
 msgstr ""
 
-#: Blocks/EmbedMaps/schema
-#: Blocks/Maps/schema
-# defaultMessage: Iframe height
-msgid "Iframe height"
-msgstr ""
-
 #: Blocks/Maps/Edit
 # defaultMessage: Left
 msgid "Left"
@@ -76,6 +70,12 @@ msgstr ""
 #: PrivacyProtection/PrivacyProtection
 # defaultMessage: Live image generated
 msgid "Live image generated"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: Map height
+msgid "Map height"
 msgstr ""
 
 #: Blocks/Maps/MapsSidebar

@@ -10,15 +10,6 @@ const Edit = (props) => {
   const { block, data, selected, onChangeBlock } = props;
   const schema = React.useMemo(() => getSchema(props), [props]);
 
-  React.useEffect(() => {
-    if (!data.height && data.maps?.height) {
-      onChangeBlock(block, {
-        ...data,
-        height: data.maps.height,
-      });
-    }
-  }, [block, onChangeBlock, data]);
-
   return (
     <React.Fragment>
       <View {...props} mode="edit" />

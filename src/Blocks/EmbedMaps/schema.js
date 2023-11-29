@@ -5,15 +5,15 @@ const messages = defineMessages({
     id: 'CSS height',
     defaultMessage: 'CSS height',
   },
-  CSSHeightDescription: {
-    id: 'Iframe height',
-    defaultMessage: 'Iframe height',
+  CSSMapHeightDescription: {
+    id: 'Map height',
+    defaultMessage: 'Map height',
   },
 });
 
 export default (props) => {
   return {
-    title: 'Embed Map',
+    title: 'Embed interactive Map',
     fieldsets: [
       {
         id: 'default',
@@ -47,7 +47,7 @@ export default (props) => {
             {props.intl.formatMessage(messages.CSSHeight)}
           </a>
         ),
-        description: props.intl.formatMessage(messages.CSSHeightDescription),
+        description: props.intl.formatMessage(messages.CSSMapHeightDescription),
       },
       with_notes: {
         title: 'Show note',
@@ -74,11 +74,6 @@ export default (props) => {
         title: 'Show share button',
         type: 'boolean',
         defaultValue: true,
-      },
-      tableau_height: {
-        title: 'Height',
-        type: 'text',
-        defaultValue: '700',
       },
     },
 

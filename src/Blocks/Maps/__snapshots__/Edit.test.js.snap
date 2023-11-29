@@ -86,7 +86,7 @@ exports[`Test Maps Block editing test-1 1`] = `
               CSS height
             </a>
              - 
-            Iframe height
+            Map height
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@ exports[`Test Maps Block editing test-2 1`] = `
               CSS height
             </a>
              - 
-            Iframe height
+            Map height
           </div>
         </div>
       </div>

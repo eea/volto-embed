@@ -21,9 +21,9 @@ const messages = defineMessages({
     id: 'CSS height',
     defaultMessage: 'CSS height',
   },
-  CSSHeightDescription: {
-    id: 'Iframe height',
-    defaultMessage: 'Iframe height',
+  CSSMapHeightDescription: {
+    id: 'Map height',
+    defaultMessage: 'Map height',
   },
 });
 
@@ -61,7 +61,7 @@ export const MapsSchema = (props) => {
             {props.intl.formatMessage(messages.CSSHeight)}
           </a>
         ),
-        description: props.intl.formatMessage(messages.CSSHeightDescription),
+        description: props.intl.formatMessage(messages.CSSMapHeightDescription),
       },
     },
     required: [],

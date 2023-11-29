@@ -60,12 +60,6 @@ msgstr ""
 msgid "Google Maps Embedded Block"
 msgstr ""
 
-#: Blocks/EmbedMaps/schema
-#: Blocks/Maps/schema
-# defaultMessage: Iframe height
-msgid "Iframe height"
-msgstr ""
-
 #: Blocks/Maps/Edit
 # defaultMessage: Left
 msgid "Left"
@@ -74,6 +68,12 @@ msgstr ""
 #: PrivacyProtection/PrivacyProtection
 # defaultMessage: Live image generated
 msgid "Live image generated"
+msgstr ""
+
+#: Blocks/EmbedMaps/schema
+#: Blocks/Maps/schema
+# defaultMessage: Map height
+msgid "Map height"
 msgstr ""
 
 #: Blocks/Maps/MapsSidebar
