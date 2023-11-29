@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { isNaN, isNumber } from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -20,6 +21,14 @@ const messages = defineMessages({
     defaultMessage: 'Embeded Google Maps',
   },
 });
+
+function getHeight(height) {
+  const asNumber = isNumber(Number(height)) && !isNaN(Number(height));
+  if (asNumber) {
+    return `${height}px`;
+  }
+  return height;
+}
 
 function EmbedMap({ data, intl, id, screen }) {
   const el = useRef();
@@ -58,7 +67,7 @@ function EmbedMap({ data, intl, id, screen }) {
         <PrivacyProtection
           data={data}
           id={id}
-          height={data.height}
+          height={getHeight(data.height)}
           useVisibilitySensor={data.useVisibilitySensor ?? true}
         >
           <iframe
@@ -67,7 +76,7 @@ function EmbedMap({ data, intl, id, screen }) {
             className="google-map"
             frameBorder="0"
             allowFullScreen
-            style={data.height ? { height: data.height } : {}}
+            style={data.height ? { height: getHeight(data.height) } : {}}
           />
         </PrivacyProtection>
       </div>
@@ -80,6 +89,7 @@ function EmbedMap({ data, intl, id, screen }) {
           {data.with_more_info && <MoreInfo href={data['@id']} />}
         </div>
         <div className="right-col">
+          {data.with_share && <Share href={data['@id']} />}
           {data.with_enlarge && (
             <Enlarge className="enlarge-embed-maps">
               <EmbedMap
@@ -97,7 +107,6 @@ function EmbedMap({ data, intl, id, screen }) {
               />
             </Enlarge>
           )}
-          {data.with_share && <Share href={data['@id']} />}
         </div>
       </div>
     </div>

@@ -1,19 +1,35 @@
 import { defineMessages } from 'react-intl';
 
 const messages = defineMessages({
+  Maps: {
+    id: 'Maps',
+    defaultMessage: 'Maps',
+  },
+  AltText: {
+    id: 'Alt text',
+    defaultMessage: 'Alt text',
+  },
+  MapsURL: {
+    id: 'Maps URL',
+    defaultMessage: 'Maps URL',
+  },
+  Alignment: {
+    id: 'Alignment',
+    defaultMessage: 'Alignment',
+  },
   CSSHeight: {
     id: 'CSS height',
-    defineMessages: 'CSS height',
+    defaultMessage: 'CSS height',
   },
-  CSSHeightDescription: {
-    id: 'Iframe height',
-    defineMessages: 'Iframe height',
+  CSSMapHeightDescription: {
+    id: 'Map height',
+    defaultMessage: 'Map height',
   },
 });
 
 export const MapsSchema = (props) => {
   return {
-    title: props.intl.messages['Maps'],
+    title: props.intl.formatMessage(messages.Maps),
     block: 'Maps',
     fieldsets: [
       {
@@ -25,14 +41,14 @@ export const MapsSchema = (props) => {
 
     properties: {
       url: {
-        title: props.intl.messages['Maps URL'],
+        title: props.intl.formatMessage(messages.MapsURL),
         widget: 'url',
       },
       title: {
-        title: props.intl.messages['Alt text'],
+        title: props.intl.formatMessage(messages.AltText),
       },
       align: {
-        title: props.intl.messages['Alignment'],
+        title: props.intl.formatMessage(messages.Alignment),
         widget: 'align',
       },
       height: {
@@ -45,7 +61,7 @@ export const MapsSchema = (props) => {
             {props.intl.formatMessage(messages.CSSHeight)}
           </a>
         ),
-        description: props.intl.formatMessage(messages.CSSHeightDescription),
+        description: props.intl.formatMessage(messages.CSSMapHeightDescription),
       },
     },
     required: [],

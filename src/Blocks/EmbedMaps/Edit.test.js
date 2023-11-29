@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
 
@@ -9,32 +8,9 @@ import installEmbedMaps from '.';
 
 installEmbedMaps(config);
 
-const mockStore = configureStore();
-
-jest.mock('@plone/volto/components', () => ({
-  __esModule: true,
-  SidebarPortal: jest.requireActual(
-    '@plone/volto/components/manage/Sidebar/SidebarPortal',
-  ).default,
-  UniversalLink: ({ children, href }) => {
-    return <a href={href}>{children}</a>;
-  },
-}));
-
-const store = mockStore({
-  intl: {
-    locale: 'en',
-    messages: {},
-  },
-  content: {
-    create: {},
-  },
-  connected_data_parameters: {},
-});
-
 test('renders an edit embed map block component', () => {
   const component = renderer.create(
-    <Provider store={store}>
+    <Provider store={global.store}>
       <Edit
         id="my-map"
         data={{
@@ -57,7 +33,7 @@ test('renders an edit embed map block component', () => {
           useVisibilitySensor: false,
         }}
         pathname="/news"
-        selected={false}
+        selected={true}
         block="1234"
         index={1}
         onChangeBlock={() => {}}

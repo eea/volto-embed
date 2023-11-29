@@ -187,7 +187,7 @@ const PrivacyProtection = (props) => {
       >
         {!enabled || show ? (
           children
-        ) : !__DEVELOPMENT__ && !image ? (
+        ) : !__DEVELOPMENT__ && !image && !process.env.JEST_WORKER_ID ? (
           <Dimmer active>
             <Loader />
           </Dimmer>

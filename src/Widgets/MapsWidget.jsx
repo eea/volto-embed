@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useIntl, FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
 import { map } from 'lodash';
@@ -11,6 +11,13 @@ import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
+
+const messages = defineMessages({
+  MapsBlockInputPlaceholder: {
+    id: 'Enter map Embed Code',
+    defaultMessage: 'Enter map Embed Code',
+  },
+});
 
 function MapEditorModal({ id, onClose, onChange, ...rest }) {
   const intl = useIntl();
@@ -24,7 +31,9 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
   );
 
   const placeholder = useMemo(
-    () => value.placeholder || intl.messages?.['Enter map Embed Code'],
+    () =>
+      value.placeholder ||
+      intl.formatMessage(messages.MapsBlockInputPlaceholder),
     [value.placeholder, intl],
   );
 

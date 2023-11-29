@@ -51,6 +51,7 @@ function View(props) {
         data={{
           ...maps,
           useVisibilitySensor,
+          height: props.data.height || maps.height,
           with_notes,
           with_sources,
           with_more_info,

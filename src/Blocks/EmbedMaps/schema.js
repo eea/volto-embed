@@ -1,11 +1,24 @@
-export default () => {
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  CSSHeight: {
+    id: 'CSS height',
+    defaultMessage: 'CSS height',
+  },
+  CSSMapHeightDescription: {
+    id: 'Map height',
+    defaultMessage: 'Map height',
+  },
+});
+
+export default (props) => {
   return {
-    title: 'Embed Map',
+    title: 'Embed interactive Map',
     fieldsets: [
       {
         id: 'default',
         title: 'Default',
-        fields: ['url'],
+        fields: ['url', 'height'],
       },
       {
         id: 'toolbar',
@@ -23,6 +36,18 @@ export default () => {
       url: {
         title: 'Map url',
         widget: 'url',
+      },
+      height: {
+        title: (
+          <a
+            rel="noreferrer"
+            target="_blank"
+            href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
+          >
+            {props.intl.formatMessage(messages.CSSHeight)}
+          </a>
+        ),
+        description: props.intl.formatMessage(messages.CSSMapHeightDescription),
       },
       with_notes: {
         title: 'Show note',
@@ -50,13 +75,8 @@ export default () => {
         type: 'boolean',
         defaultValue: true,
       },
-      tableau_height: {
-        title: 'Height',
-        type: 'text',
-        defaultValue: '700',
-      },
     },
 
-    required: ['tableau_vis_url'],
+    required: [],
   };
 };

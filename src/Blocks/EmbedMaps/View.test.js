@@ -1,6 +1,5 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
 
@@ -9,28 +8,9 @@ import installEmbedMaps from '.';
 
 installEmbedMaps(config);
 
-const mockStore = configureStore();
-
-jest.mock('@plone/volto/components', () => ({
-  __esModule: true,
-  UniversalLink: ({ children, href }) => {
-    return <a href={href}>{children}</a>;
-  },
-}));
-
 test('renders a view embed map block component', () => {
-  const store = mockStore({
-    intl: {
-      locale: 'en',
-      messages: {},
-    },
-    content: {
-      create: {},
-    },
-    connected_data_parameters: {},
-  });
   const component = renderer.create(
-    <Provider store={store}>
+    <Provider store={global.store}>
       <View
         id="my-map"
         data={{

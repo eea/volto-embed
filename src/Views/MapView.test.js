@@ -1,19 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
 
 import MapView from './MapView';
-
-const mockStore = configureStore();
-
-jest.mock('@plone/volto/components', () => ({
-  __esModule: true,
-  UniversalLink: ({ children, href }) => {
-    return <a href={href}>{children}</a>;
-  },
-}));
 
 config.blocks.blocksConfig = {
   ...config.blocks.blocksConfig,
@@ -34,18 +24,8 @@ config.blocks.blocksConfig = {
 };
 
 test('renders map component', () => {
-  const store = mockStore({
-    intl: {
-      locale: 'en',
-      messages: {},
-    },
-    content: {
-      create: {},
-    },
-    connected_data_parameters: {},
-  });
   const component = renderer.create(
-    <Provider store={store}>
+    <Provider store={global.store}>
       <MapView
         content={{
           maps: {
