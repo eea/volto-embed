@@ -8,32 +8,54 @@ exports[`renders toolbar components 1`] = `
     className="left-col"
   >
     <div
-      className="figure-note"
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="popup"
     >
-      <button
-        className="trigger-button"
+      <div
+        className="trigger"
       >
-        Note
-      </button>
+        <div
+          className="figure-note"
+        >
+          <button
+            className="trigger-button"
+          >
+            Note
+          </button>
+        </div>
+      </div>
+      <div
+        className="content"
+      >
+        <p>
+          <span>
+            This is a note
+          </span>
+        </p>
+      </div>
     </div>
     <div
-      className="sources"
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="popup"
     >
-      <button
-        className="trigger-button"
+      <div
+        className="trigger"
       >
-        Sources
-      </button>
+        <div
+          className="sources"
+        >
+          <button
+            className="trigger-button"
+          >
+            Sources
+          </button>
+        </div>
+      </div>
+      <div
+        className="content"
+      >
+        <p>
+          Data provenance is not set for this visualization.
+        </p>
+      </div>
     </div>
     <div
       className="more-info"
@@ -67,23 +89,58 @@ exports[`renders toolbar components 1`] = `
       </button>
     </div>
     <div
-      className="share"
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      className="popup"
     >
-      <button
-        className="trigger-button"
+      <div
+        className="trigger"
       >
-        <i
-          class="ri-share-fill"
-        />
-        <span>
-          Share
-        </span>
-      </button>
+        <div
+          className="share"
+        >
+          <button
+            className="trigger-button"
+          >
+            <i
+              class="ri-share-fill"
+            />
+            <span>
+              Share
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        className="content"
+      >
+        <div
+          className="item"
+        >
+          <span
+            className="label"
+          >
+            Copy link
+          </span>
+          <div
+            className="control"
+          >
+            <div
+              className="ui input share-link"
+            >
+              <input
+                onChange={[Function]}
+                type="text"
+                value="/path/to/embeded/content"
+              />
+            </div>
+            <button
+              className="ui primary button copy-button copy-button"
+              onClick={[Function]}
+            >
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
