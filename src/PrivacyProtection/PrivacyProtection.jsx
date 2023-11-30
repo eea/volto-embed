@@ -110,7 +110,8 @@ const PrivacyProtection = (props) => {
       state.router?.location?.pathname,
     );
   });
-  const url = getFilteredURL(data.url, connected_data_parameters);
+  const mapUrl = data.url || data.vis_url;
+  const url = getFilteredURL(mapUrl, connected_data_parameters);
 
   const height = React.useMemo(() => {
     if (!props.height || enabled || !show) return 'auto';
