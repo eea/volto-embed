@@ -2,6 +2,7 @@ import installBlocks from './Blocks';
 import MapView from './Views/MapView';
 import MapsViewWidget from './Widgets/MapsViewWidget';
 import MapsWidget from './Widgets/MapsWidget';
+import UrlWidget from './Widgets/UrlWidget';
 import InternalUrlWidget from './Widgets/InternalUrlWidget';
 export {
   PrivacyProtection,
@@ -13,6 +14,7 @@ export default function applyConfig(config) {
   config.widgets.id.maps = MapsWidget;
   config.widgets.views.id.maps = MapsViewWidget;
 
+  config.widgets.widget.url = UrlWidget;
   config.widgets.widget.internal_url = InternalUrlWidget;
 
   config.settings.allowed_cors_destinations = [
