@@ -147,7 +147,7 @@ Array [
           className="ui segment form attached"
         >
           <div
-            className="mocked-url-widget"
+            className="mocked-default-widget"
             id="mocked-field-url"
           >
             Map url

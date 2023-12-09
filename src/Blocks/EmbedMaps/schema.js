@@ -35,7 +35,7 @@ export default (props) => {
     properties: {
       url: {
         title: 'Map url',
-        widget: 'url',
+        widget: 'internal_url',
       },
       height: {
         title: (
