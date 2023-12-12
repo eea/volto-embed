@@ -159,8 +159,8 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
                 </div>
                 <div className="message-text">
                   <FormattedMessage
-                    id="Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
-                    defaultMessage="Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
+                    id="Please enter the embed code or URL for the ESRI webmap."
+                    defaultMessage="Please enter the embed code or URL for the ESRI webmap."
                   />
                   {error && (
                     <div style={{ color: 'red' }}>
