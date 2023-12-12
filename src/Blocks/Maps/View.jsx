@@ -12,9 +12,9 @@ import { withBlockExtensions } from '@plone/volto/helpers';
 import PrivacyProtection from '@eeacms/volto-embed/PrivacyProtection/PrivacyProtection';
 
 const messages = defineMessages({
-  EmbededGoogleMaps: {
-    id: 'Embeded Google Maps',
-    defaultMessage: 'Embeded Google Maps',
+  EmbededESRIMaps: {
+    id: 'Embeded ESRI Maps',
+    defaultMessage: 'Embeded ESRI Maps',
   },
 });
 
@@ -46,7 +46,7 @@ const View = ({ data, intl, id }) => {
           useVisibilitySensor={data.useVisibilitySensor}
         >
           <iframe
-            title={intl.formatMessage(messages.EmbededGoogleMaps)}
+            title={intl.formatMessage(messages.EmbededESRIMaps)}
             src={data.url}
             className="google-map"
             frameBorder="0"

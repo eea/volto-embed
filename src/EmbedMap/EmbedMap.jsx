@@ -16,9 +16,9 @@ import PrivacyProtection from '@eeacms/volto-embed/PrivacyProtection/PrivacyProt
 import './style.less';
 
 const messages = defineMessages({
-  EmbededGoogleMaps: {
-    id: 'Embeded Google Maps',
-    defaultMessage: 'Embeded Google Maps',
+  EmbededESRIMaps: {
+    id: 'Embeded ESRI Maps',
+    defaultMessage: 'Embeded ESRI Maps',
   },
 });
 
@@ -71,7 +71,7 @@ function EmbedMap({ data, intl, id, screen }) {
           useVisibilitySensor={data.useVisibilitySensor ?? true}
         >
           <iframe
-            title={intl.formatMessage(messages.EmbededGoogleMaps)}
+            title={intl.formatMessage(messages.EmbededESRIMaps)}
             src={data.url}
             className="google-map"
             frameBorder="0"

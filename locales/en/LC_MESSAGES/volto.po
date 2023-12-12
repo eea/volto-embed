@@ -33,6 +33,11 @@ msgid "Center"
 msgstr ""
 
 #: Blocks/Maps/Edit
+# defaultMessage: ESRI Maps Embedded Block
+msgid "ESRI Maps Embedded Block"
+msgstr ""
+
+#: Blocks/Maps/Edit
 #: Widgets/MapsWidget
 # defaultMessage: Embed code error, please follow the instructions and try again.
 msgid "Embed code error, please follow the instructions and try again."
@@ -40,8 +45,8 @@ msgstr ""
 
 #: Blocks/Maps/View
 #: EmbedMap/EmbedMap
-# defaultMessage: Embeded Google Maps
-msgid "Embeded Google Maps"
+# defaultMessage: Embeded ESRI Maps
+msgid "Embeded ESRI Maps"
 msgstr ""
 
 #: Blocks/Maps/Edit
@@ -53,11 +58,6 @@ msgstr ""
 #: Blocks/Maps/Edit
 # defaultMessage: Full
 msgid "Full"
-msgstr ""
-
-#: Blocks/Maps/Edit
-# defaultMessage: Google Maps Embedded Block
-msgid "Google Maps Embedded Block"
 msgstr ""
 
 #: Blocks/Maps/Edit
@@ -94,8 +94,8 @@ msgstr ""
 
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it.
-msgid "Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
+# defaultMessage: Please enter the embed code or URL for the ESRI webmap.
+msgid "Please enter the embed code or URL for the ESRI webmap."
 msgstr ""
 
 #: Blocks/Maps/Edit
