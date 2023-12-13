@@ -39,9 +39,9 @@ const messages = defineMessages({
     id: 'Full',
     defaultMessage: 'Full',
   },
-  GoogleMapsEmbeddedBlock: {
-    id: 'Google Maps Embedded Block',
-    defaultMessage: 'Google Maps Embedded Block',
+  ESRIMapsEmbeddedBlock: {
+    id: 'ESRI Maps Embedded Block',
+    defaultMessage: 'ESRI Maps Embedded Block',
   },
 });
 
@@ -175,7 +175,7 @@ class Edit extends Component {
   /**
    * get getSrc handler
    * @method getSrc
-   * @param {string} embed Embed HTML code from Google Maps share option
+   * @param {string} embed Embed HTML code from ESRI Maps share option
    * @returns {string} Source URL
    */
   getSrc(embed) {
@@ -232,7 +232,7 @@ class Edit extends Component {
             >
               <iframe
                 title={this.props.intl.formatMessage(
-                  messages.GoogleMapsEmbeddedBlock,
+                  messages.ESRIMapsEmbeddedBlock,
                 )}
                 src={this.props.data.url}
                 className="google-map"
@@ -289,8 +289,8 @@ class Edit extends Component {
               </div>
               <div className="message-text">
                 <FormattedMessage
-                  id="Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
-                  defaultMessage="Please enter the Embed Code provided by Google Maps -> Share -> Embed map. It should contain the <iframe> code on it."
+                  id="Please enter the embed code or URL for the ESRI webmap."
+                  defaultMessage="Please enter the embed code or URL for the ESRI webmap."
                 />
                 {this.state.error && (
                   <div style={{ color: 'red' }}>
