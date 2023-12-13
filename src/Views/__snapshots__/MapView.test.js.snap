@@ -48,7 +48,7 @@ exports[`renders map component 1`] = `
               More info
             </span>
             <i
-              class="ri-external-link-line"
+              className="ri-external-link-line"
             />
           </a>
         </div>
@@ -69,7 +69,7 @@ exports[`renders map component 1`] = `
                 className="trigger-button"
               >
                 <i
-                  class="ri-share-fill"
+                  className="ri-share-fill"
                 />
                 <span>
                   Share
