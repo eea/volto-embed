@@ -13,7 +13,7 @@ export default function MoreInfo({ href }) {
     <div className="more-info">
       <Link href={href} className="trigger-button">
         <span>More info</span>
-        <i class="ri-external-link-line" />
+        <i className="ri-external-link-line" />
       </Link>
     </div>
   );

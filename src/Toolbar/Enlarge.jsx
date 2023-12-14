@@ -26,7 +26,7 @@ const Enlarge = ({ children, className, onClick }) => {
           open={isOpen}
           closeIcon={
             <span className="close icon">
-              <i class="ri-close-line" />
+              <i className="ri-close-line" />
             </span>
           }
           onClose={() => setIsOpen(false)}

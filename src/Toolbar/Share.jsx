@@ -62,7 +62,7 @@ const Share = ({ href = '' }) => {
       trigger={
         <div className="share">
           <button className={cx('trigger-button', { open })}>
-            <i class="ri-share-fill"></i>
+            <i className="ri-share-fill"></i>
             <span>Share</span>
           </button>
         </div>
