@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { isNaN, isNumber } from 'lodash';
+import { isNaN, isNumber, isEmpty } from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl } from 'react-intl';
@@ -31,8 +31,19 @@ function getHeight(height) {
 }
 
 function EmbedMap({ data, intl, id, screen }) {
+  const { parameters, url } = data;
   const el = useRef();
   const [mobile, setMobile] = useState(false);
+  const [iframeSrc, setIframeSrc] = useState(url);
+
+  useEffect(() => {
+    const query_params = new URLSearchParams(parameters).toString();
+    if (isEmpty(parameters)) {
+      setIframeSrc(url);
+    } else {
+      setIframeSrc(url + '&' + query_params);
+    }
+  }, [url, parameters]);
 
   useEffect(() => {
     if (el.current) {
@@ -46,7 +57,7 @@ function EmbedMap({ data, intl, id, screen }) {
     }
   }, [screen, mobile]);
 
-  if (!data.url) return null;
+  if (!url) return null;
 
   return (
     <div
@@ -72,7 +83,7 @@ function EmbedMap({ data, intl, id, screen }) {
         >
           <iframe
             title={intl.formatMessage(messages.EmbededESRIMaps)}
-            src={data.url}
+            src={iframeSrc}
             className="google-map"
             frameBorder="0"
             allowFullScreen
@@ -115,5 +126,7 @@ function EmbedMap({ data, intl, id, screen }) {
 
 export default compose(
   injectIntl,
-  connect((state) => ({ screen: state.screen })),
+  connect((state) => ({
+    screen: state.screen,
+  })),
 )(EmbedMap);

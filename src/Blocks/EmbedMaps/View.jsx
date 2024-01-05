@@ -1,10 +1,18 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { reduce } from 'lodash';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
+
+let timer;
+
+const debounce = (func, ...args) => {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(func, 800, ...args);
+};
 
 function getMaps(props) {
   const content = props.mapsContent || {};
@@ -15,9 +23,42 @@ function getMaps(props) {
   };
 }
 
+function getParameters({ parameters, data_query }) {
+  return {
+    ...reduce(
+      data_query,
+      (acc, { i, v }) => {
+        if (i && v) {
+          return {
+            ...acc,
+            [i]: v[0],
+          };
+        }
+        return acc;
+      },
+      {},
+    ),
+    ...reduce(
+      parameters,
+      (acc, { field, value }) => {
+        if (field && value) {
+          return {
+            ...acc,
+            [field]: value,
+          };
+        }
+        return acc;
+      },
+      {},
+    ),
+  };
+}
+
 function View(props) {
-  const { id, getContent, mode } = props;
+  const { id, getContent, mode, data_query } = props;
   const {
+    height,
+    parameters,
     useVisibilitySensor = true,
     with_notes = true,
     with_sources = true,
@@ -29,6 +70,21 @@ function View(props) {
   const url = flattenToAppURL(props.data.url || '');
 
   const maps = useMemo(() => getMaps(props), [props]);
+
+  const [queryParams, setQueryParams] = useState(() =>
+    getParameters({ parameters, data_query }),
+  );
+
+  useEffect(() => {
+    debounce(() => {
+      setQueryParams(
+        getParameters({
+          parameters,
+          data_query,
+        }),
+      );
+    });
+  }, [data_query, parameters]);
 
   useEffect(() => {
     const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
@@ -51,7 +107,8 @@ function View(props) {
         data={{
           ...maps,
           useVisibilitySensor,
-          height: props.data.height || maps.height,
+          parameters: queryParams,
+          height: height || maps.height,
           with_notes,
           with_sources,
           with_more_info,
@@ -67,6 +124,7 @@ function View(props) {
 export default connect(
   (state, props) => ({
     mapsContent: state.content.subrequests?.[props.id]?.data,
+    data_query: state.content?.data?.data_query,
   }),
   { getContent },
 )(View);
