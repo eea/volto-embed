@@ -88,12 +88,12 @@ function View(props) {
 
   useEffect(() => {
     const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
-    if (mode === 'edit' && url && url !== mapsId) {
+    if (url && url !== mapsId) {
       getContent(url, null, id);
     }
   }, [id, getContent, mode, url, maps]);
 
-  if (props.mode === 'edit' && !url) {
+  if (mode === 'edit' && !url) {
     return <Message>Please select a map from block editor.</Message>;
   }
 
