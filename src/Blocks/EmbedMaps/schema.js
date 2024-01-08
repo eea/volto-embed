@@ -11,6 +11,22 @@ const messages = defineMessages({
   },
 });
 
+const parameters = {
+  title: 'Parameter',
+  fieldsets: [{ id: 'default', title: 'Default', fields: ['field', 'value'] }],
+  properties: {
+    field: {
+      title: 'Name',
+      type: 'text',
+    },
+    value: {
+      title: 'Value',
+      type: 'text',
+    },
+  },
+  required: [],
+};
+
 export default (props) => {
   return {
     title: 'Embed interactive Map',
@@ -30,6 +46,11 @@ export default (props) => {
           'with_share',
           'with_enlarge',
         ],
+      },
+      {
+        id: 'parameters',
+        title: 'Parameters',
+        fields: ['parameters'],
       },
     ],
     properties: {
@@ -74,6 +95,12 @@ export default (props) => {
         title: 'Show share button',
         type: 'boolean',
         defaultValue: true,
+      },
+      parameters: {
+        title: 'Parameters',
+        widget: 'object_list',
+        schema: parameters,
+        description: 'Set a list of parameters.',
       },
     },
 

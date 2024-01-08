@@ -31,7 +31,20 @@ test('renders a view embed map block component', () => {
             enabled: false,
           },
           useVisibilitySensor: false,
+          parameters: {
+            '@id': '647e4a0f-d4a0-4b8a-9965-0a016f017ebd',
+            field: 'zoomtocountry',
+            value: 'RO',
+          },
+          height: '800',
         }}
+        data_query={[
+          {
+            i: 'Country',
+            o: 'plone.app.querystring.operation.selection.is',
+            v: ['RO'],
+          },
+        ]}
       />
     </Provider>,
   );

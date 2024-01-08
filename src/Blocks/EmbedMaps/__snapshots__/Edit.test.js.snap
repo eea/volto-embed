@@ -270,6 +270,75 @@ Array [
           </div>
         </div>
       </div>
+      <div
+        className="accordion ui fluid styled form"
+      >
+        <div
+          id="blockform-fieldset-parameters"
+        >
+          <div
+            className="title"
+            onClick={[Function]}
+          >
+            Parameters
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "currentColor",
+                  "height": "20px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </div>
+          <div
+            className="content"
+          >
+            <div
+              aria-hidden={true}
+              className="rah-static rah-static--height-zero"
+              style={
+                Object {
+                  "height": 0,
+                  "overflow": "hidden",
+                }
+              }
+            >
+              <div
+                style={
+                  Object {
+                    "WebkitTransition": "opacity 500ms ease 0ms",
+                    "opacity": 0,
+                    "transition": "opacity 500ms ease 0ms",
+                  }
+                }
+              >
+                <div
+                  className="ui segment attached"
+                >
+                  <div
+                    className="mocked-default-widget"
+                    id="mocked-field-parameters"
+                  >
+                    Parameters
+                     - 
+                    Set a list of parameters.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>,
 ]
