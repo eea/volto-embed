@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { reduce } from 'lodash';
+import { reduce, isArray, isString } from 'lodash';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
 import { getContent } from '@plone/volto/actions';
@@ -29,9 +29,13 @@ function getParameters({ parameters, data_query }) {
       data_query,
       (acc, { i, v }) => {
         if (i && v) {
+          let value = isString(v) ? v : '';
+          if (isArray(v)) {
+            value = v.join(',');
+          }
           return {
             ...acc,
-            [i]: v[0],
+            [i]: value,
           };
         }
         return acc;
