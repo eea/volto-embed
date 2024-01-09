@@ -51,3 +51,21 @@ test('renders a view embed map block component', () => {
   const json = component.toJSON();
   expect(json).toMatchSnapshot();
 });
+
+test('renders an edit view embed map block component', () => {
+  const component = renderer.create(
+    <Provider store={global.store}>
+      <View
+        id="my-map"
+        mode="edit"
+        data={{
+          '@type': 'embed_maps',
+          url: '',
+          maps: {},
+        }}
+      />
+    </Provider>,
+  );
+  const json = component.toJSON();
+  expect(json).toMatchSnapshot();
+});

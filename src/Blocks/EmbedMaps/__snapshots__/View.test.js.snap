@@ -131,3 +131,11 @@ exports[`renders a view embed map block component 1`] = `
   </div>
 </div>
 `;
+
+exports[`renders an edit embed map block component 1`] = `
+<div
+  className="ui message"
+>
+  Please select a map from block editor.
+</div>
+`;
