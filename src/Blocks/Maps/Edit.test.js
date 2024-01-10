@@ -80,4 +80,30 @@ describe('Test Maps Block editing', () => {
     const json = component.toJSON();
     expect(json).toMatchSnapshot();
   });
+
+  test('test-3', () => {
+    const component = renderer.create(
+      <Provider store={global.store}>
+        <Edit
+          data={{
+            '@type': 'maps',
+            url: '',
+          }}
+          pathname="/news"
+          selected={true}
+          block="1234"
+          index={1}
+          onChangeBlock={() => {}}
+          onSelectBlock={() => {}}
+          onDeleteBlock={() => {}}
+          onFocusPreviousBlock={() => {}}
+          onFocusNextBlock={() => {}}
+          handleKeyDown={() => {}}
+          content={{}}
+        />
+      </Provider>,
+    );
+    const json = component.toJSON();
+    expect(json).toMatchSnapshot();
+  });
 });
