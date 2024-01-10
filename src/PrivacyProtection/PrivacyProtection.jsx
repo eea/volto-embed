@@ -167,7 +167,7 @@ const PrivacyProtection = (props) => {
         });
     }
   }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
-  console.log(config.settings.publicURL, 'publicurl');
+
   return (
     <VisibilitySensor
       Placeholder={() => (
