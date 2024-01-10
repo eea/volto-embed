@@ -322,3 +322,96 @@ exports[`Test Maps Block editing test-2 1`] = `
   </div>
 </div>
 `;
+
+exports[`Test Maps Block editing test-3 1`] = `
+<div
+  className="block maps align center"
+>
+  <div
+    className="ui message"
+  >
+    <center>
+      <img
+        alt=""
+        src="block-maps.svg"
+      />
+      <div
+        className="toolbar-inner"
+      >
+        <div
+          className="ui input"
+        >
+          <input
+            onChange={[Function]}
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Enter map Embed Code"
+            type="text"
+            value=""
+          />
+        </div>
+        
+        <div
+          className="ui buttons"
+        >
+          <button
+            className="ui basic primary button"
+            onClick={[Function]}
+          >
+            <svg
+              className="icon"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": undefined,
+                }
+              }
+              onClick={null}
+              style={
+                Object {
+                  "fill": "currentColor",
+                  "height": "30px",
+                  "width": "auto",
+                }
+              }
+              viewBox=""
+              xmlns=""
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        className="message-text"
+      >
+        Please enter the embed code or URL for the ESRI webmap.
+      </div>
+    </center>
+  </div>
+  <div
+    id="sidebar"
+  >
+    <div
+      className="ui secondary segment sidebar-metadata-container"
+    >
+      No map selected
+      <svg
+        className="icon"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": undefined,
+          }
+        }
+        onClick={null}
+        style={
+          Object {
+            "fill": "#b8c6c8",
+            "height": "100px",
+            "width": "auto",
+          }
+        }
+        viewBox=""
+        xmlns=""
+      />
+    </div>
+  </div>
+</div>
+`;

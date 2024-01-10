@@ -132,7 +132,7 @@ exports[`renders a view embed map block component 1`] = `
 </div>
 `;
 
-exports[`renders an edit embed map block component 1`] = `
+exports[`renders an edit view embed map block component 1`] = `
 <div
   className="ui message"
 >
