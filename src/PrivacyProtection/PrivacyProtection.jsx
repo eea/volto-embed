@@ -168,7 +168,17 @@ const PrivacyProtection = (props) => {
           }
         });
     }
-  }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
+  }, [
+    enabled,
+    url,
+    path,
+    dispatch,
+    bgImg,
+    show,
+    intl,
+    editable,
+    urlToScreenshot,
+  ]);
 
   return (
     <VisibilitySensor
