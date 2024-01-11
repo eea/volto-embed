@@ -5,10 +5,6 @@ import config from '@plone/volto/registry';
 
 import MapView from './MapView';
 
-jest.mock('@plone/volto/helpers', () => ({
-  toPublicURL: jest.fn(() => 'https://www.eea.europa.eu/'),
-}));
-
 config.settings = {
   ...config.settings,
   publicURL: 'https://www.eea.europa.eu/',
