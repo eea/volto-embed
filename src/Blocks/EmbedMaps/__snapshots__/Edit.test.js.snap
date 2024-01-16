@@ -39,6 +39,30 @@ Array [
           className="left-col"
         >
           <div
+            className="popup"
+          >
+            <div
+              className="trigger"
+            >
+              <div
+                className="sources"
+              >
+                <button
+                  className="trigger-button"
+                >
+                  Sources
+                </button>
+              </div>
+            </div>
+            <div
+              className="content"
+            >
+              <p>
+                Data provenance is not set for this visualization.
+              </p>
+            </div>
+          </div>
+          <div
             className="more-info"
           >
             <a
@@ -231,14 +255,6 @@ Array [
                     Show note
                      - 
                     No description
-                  </div>
-                  <div
-                    className="mocked-boolean-widget"
-                    id="mocked-field-with_sources"
-                  >
-                    Show sources
-                     - 
-                    Will show sources set in this page Data provenance
                   </div>
                   <div
                     className="mocked-boolean-widget"
