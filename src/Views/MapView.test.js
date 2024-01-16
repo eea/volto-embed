@@ -5,6 +5,11 @@ import config from '@plone/volto/registry';
 
 import MapView from './MapView';
 
+config.settings = {
+  ...config.settings,
+  publicURL: 'https://www.eea.europa.eu/',
+};
+
 config.blocks.blocksConfig = {
   ...config.blocks.blocksConfig,
   maps: {

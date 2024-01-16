@@ -15,7 +15,7 @@ import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { defineMessages, injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
-import { getBaseUrl } from '@plone/volto/helpers';
+import { getBaseUrl, toPublicURL, isInternalURL } from '@plone/volto/helpers';
 import { Toast } from '@plone/volto/components';
 import {
   getConnectedDataParametersForContext,
@@ -136,6 +136,8 @@ const PrivacyProtection = (props) => {
     [checkExistance],
   );
 
+  const urlToScreenshot = isInternalURL(url) ? toPublicURL(url) : url;
+
   //screenshot api
   React.useEffect(() => {
     if (enabled && !bgImg && !show && url) {
@@ -143,8 +145,8 @@ const PrivacyProtection = (props) => {
         `${getBaseUrl(
           '',
         )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(
-          url,
-        )}&w=1920&waitfor=4000`,
+          urlToScreenshot,
+        )}&w=1920&h=1000&waitfor=4000`,
       )
         .then((e) => e.blob())
         .then((blob) => {
@@ -166,7 +168,17 @@ const PrivacyProtection = (props) => {
           }
         });
     }
-  }, [enabled, url, path, dispatch, bgImg, show, intl, editable]);
+  }, [
+    enabled,
+    url,
+    path,
+    dispatch,
+    bgImg,
+    show,
+    intl,
+    editable,
+    urlToScreenshot,
+  ]);
 
   return (
     <VisibilitySensor
