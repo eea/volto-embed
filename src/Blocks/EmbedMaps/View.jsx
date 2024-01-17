@@ -65,7 +65,6 @@ function View(props) {
     parameters,
     useVisibilitySensor = true,
     with_notes = true,
-    with_sources = true,
     with_more_info = true,
     with_share = true,
     with_enlarge = true,
@@ -92,13 +91,17 @@ function View(props) {
 
   useEffect(() => {
     const mapsId = maps['@id'] ? flattenToAppURL(maps['@id']) : undefined;
-    if (url && url !== mapsId) {
+    if (mode === 'edit' && !maps.error && url && url !== mapsId) {
       getContent(url, null, id);
     }
   }, [id, getContent, mode, url, maps]);
 
   if (mode === 'edit' && !url) {
     return <Message>Please select a map from block editor.</Message>;
+  }
+
+  if (maps?.error) {
+    return <p dangerouslySetInnerHTML={{ __html: maps.error }} />;
   }
 
   if (!maps) {
@@ -114,7 +117,7 @@ function View(props) {
           parameters: queryParams,
           height: height || maps.height,
           with_notes,
-          with_sources,
+          with_sources: true,
           with_more_info,
           with_share,
           with_enlarge,

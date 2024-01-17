@@ -42,6 +42,30 @@ exports[`renders a view embed map block component 1`] = `
         className="left-col"
       >
         <div
+          className="popup"
+        >
+          <div
+            className="trigger"
+          >
+            <div
+              className="sources"
+            >
+              <button
+                className="trigger-button"
+              >
+                Sources
+              </button>
+            </div>
+          </div>
+          <div
+            className="content"
+          >
+            <p>
+              Data provenance is not set for this visualization.
+            </p>
+          </div>
+        </div>
+        <div
           className="more-info"
         >
           <a
