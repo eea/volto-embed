@@ -21,8 +21,8 @@ const messages = defineMessages({
 
 function MapEditorModal({ id, onClose, onChange, ...rest }) {
   const intl = useIntl();
-  const [value, setValue] = useState(rest.value);
-  const [url, setUrl] = useState(rest.value.url);
+  const [value, setValue] = useState(rest.value || {});
+  const [url, setUrl] = useState(rest.value?.url || '');
   const [error, setError] = useState(false);
 
   const schema = useMemo(
@@ -213,11 +213,11 @@ export default function MapsWidget(props) {
         </Button>
       </div>
       {description && <p className="help">{description}</p>}
-      {value.url && <EmbedMap {...props} data={value} />}
+      {value?.url && <EmbedMap {...props} data={value} />}
       {mapEditor && (
         <MapEditorModal
           id={id}
-          value={value}
+          value={value || {}}
           onChange={onChange}
           onClose={() => setMapEditor(false)}
         />
