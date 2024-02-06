@@ -145,11 +145,17 @@ class Edit extends Component {
    * @returns {undefined}
    */
   onSubmitUrl() {
-    this.props.onChangeBlock(this.props.block, {
-      ...this.props.data,
-      url: this.getSrc(this.state.url),
-      privacy_notification: this.state.privacy_notification,
-    });
+    try {
+      const url = this.getSrc(this.state.url);
+      new URL(url);
+      this.props.onChangeBlock(this.props.block, {
+        ...this.props.data,
+        url: this.getSrc(this.state.url),
+        privacy_notification: this.state.privacy_notification,
+      });
+    } catch {
+      this.setState({ error: true });
+    }
   }
 
   /**
