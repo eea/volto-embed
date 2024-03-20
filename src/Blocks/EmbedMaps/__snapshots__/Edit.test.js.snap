@@ -293,7 +293,7 @@ Array [
           id="blockform-fieldset-parameters"
         >
           <div
-            className="title"
+            className="active title"
             onClick={[Function]}
           >
             Parameters
@@ -317,15 +317,15 @@ Array [
             />
           </div>
           <div
-            className="content"
+            className="content active"
           >
             <div
-              aria-hidden={true}
-              className="rah-static rah-static--height-zero"
+              aria-hidden={false}
+              className="rah-static rah-static--height-auto"
               style={
                 Object {
-                  "height": 0,
-                  "overflow": "hidden",
+                  "height": "auto",
+                  "overflow": "visible",
                 }
               }
             >
@@ -333,7 +333,6 @@ Array [
                 style={
                   Object {
                     "WebkitTransition": "opacity 500ms ease 0ms",
-                    "opacity": 0,
                     "transition": "opacity 500ms ease 0ms",
                   }
                 }
