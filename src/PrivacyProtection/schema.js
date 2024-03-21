@@ -24,8 +24,7 @@ export const ProtectionSchema = () => ({
         {
           children: [
             {
-              text:
-                'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
+              text: 'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
             },
             {
               type: 'a',
@@ -37,8 +36,7 @@ export const ProtectionSchema = () => ({
               ],
             },
             {
-              text:
-                '. This includes their cookie policies, which we have no control over.',
+              text: '. This includes their cookie policies, which we have no control over.',
             },
           ],
         },
