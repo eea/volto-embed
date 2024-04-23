@@ -27,7 +27,7 @@ const parameters = {
   required: [],
 };
 
-export default (props) => {
+const getSchema = (props) => {
   return {
     title: 'Embed interactive Map',
     fieldsets: [
@@ -101,3 +101,5 @@ export default (props) => {
     required: [],
   };
 };
+
+export default getSchema;
