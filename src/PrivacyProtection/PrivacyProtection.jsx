@@ -115,7 +115,7 @@ const PrivacyProtection = (props) => {
 
   const height = React.useMemo(() => {
     if (!props.height) return 'auto';
-    if (isNumber(JSON.parse(props.height))) return `${props.height}px`;
+    if (isNumber(parseInt(props.height))) return `${props.height}px`;
     return props.height;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.height, enabled, show]);
