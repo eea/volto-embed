@@ -118,7 +118,7 @@ const PrivacyProtection = (props) => {
     if (isNumber(parseInt(props.height))) return `${props.height}px`;
     return props.height;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.height, enabled, show]);
+  }, []);
 
   React.useEffect(() => {
     if (bgImg) {
