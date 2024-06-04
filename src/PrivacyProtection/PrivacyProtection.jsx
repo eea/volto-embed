@@ -114,11 +114,11 @@ const PrivacyProtection = (props) => {
   const url = getFilteredURL(mapUrl, connected_data_parameters);
 
   const height = React.useMemo(() => {
-    if (!props.height || enabled || !show) return 'auto';
-    if (isNumber(props.height)) return `${props.height}px`;
+    if (!props.height) return 'auto';
+    if (isNumber(JSON.parse(props.height))) return `${props.height}px`;
     return props.height;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [enabled, show]);
+  }, [props.height, enabled, show]);
 
   React.useEffect(() => {
     if (bgImg) {
