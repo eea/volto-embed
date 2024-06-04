@@ -14,8 +14,8 @@ exports[`renders a view embed map block component 1`] = `
         className="privacy-protection-wrapper"
         style={
           Object {
-            "height": "auto",
-            "minHeight": "200px",
+            "height": "800pxpx",
+            "minHeight": "800pxpx",
             "overflow": "hidden",
             "position": "relative",
           }
