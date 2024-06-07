@@ -115,10 +115,13 @@ const PrivacyProtection = (props) => {
 
   const height = React.useMemo(() => {
     if (!props.height) return 'auto';
-    if (isNumber(parseInt(props.height))) return `${props.height}px`;
-    return props.height;
+    try {
+      const height = parseInt(props.height);
+      if (isNumber(height) && !isNaN(height)) return `${props.height}px`;
+    } catch {}
+    return 'auto';
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.height]);
 
   React.useEffect(() => {
     if (bgImg) {
