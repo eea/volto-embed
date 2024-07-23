@@ -28,7 +28,10 @@ function getHeight(data, screen) {
   if (asNumber) {
     return `${height}px`;
   }
-  return height || (useScreenHeight && screen ? screen.page.height - 50 : 400);
+  return (
+    height ||
+    (useScreenHeight && screen?.page?.height ? screen.page.height - 50 : 400)
+  );
 }
 
 function EmbedMap({ data, intl, id, screen }) {
