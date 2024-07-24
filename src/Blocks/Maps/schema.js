@@ -35,7 +35,7 @@ export const MapsSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['url', 'title', 'align', 'height'],
+        fields: ['url', 'title', 'align', 'height', 'useScreenHeight'],
       },
     ],
 
@@ -62,6 +62,11 @@ export const MapsSchema = (props) => {
           </a>
         ),
         description: props.intl.formatMessage(messages.CSSMapHeightDescription),
+      },
+      useScreenHeight: {
+        title: 'Use screen height',
+        type: 'boolean',
+        default: false,
       },
     },
     required: [],

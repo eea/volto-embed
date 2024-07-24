@@ -22,12 +22,16 @@ const messages = defineMessages({
   },
 });
 
-function getHeight(height) {
+function getHeight(data, screen) {
+  const { height, useScreenHeight } = data;
   const asNumber = isNumber(Number(height)) && !isNaN(Number(height));
   if (asNumber) {
     return `${height}px`;
   }
-  return height;
+  return (
+    height ||
+    (useScreenHeight && screen?.page?.height ? screen.page.height - 50 : 400)
+  );
 }
 
 function EmbedMap({ data, intl, id, screen }) {
@@ -78,7 +82,7 @@ function EmbedMap({ data, intl, id, screen }) {
         <PrivacyProtection
           data={data}
           id={id}
-          height={getHeight(data.height)}
+          height={getHeight(data, screen)}
           useVisibilitySensor={data.useVisibilitySensor ?? true}
         >
           <iframe
@@ -87,7 +91,7 @@ function EmbedMap({ data, intl, id, screen }) {
             className="google-map"
             frameBorder="0"
             allowFullScreen
-            style={data.height ? { height: getHeight(data.height) } : {}}
+            style={{ height: getHeight(data, screen) }}
           />
         </PrivacyProtection>
       </div>
