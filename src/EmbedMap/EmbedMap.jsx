@@ -86,7 +86,6 @@ function EmbedMap({ data, intl, id, screen }) {
           useVisibilitySensor={data.useVisibilitySensor ?? true}
         >
           <iframe
-            id="my-iframe"
             title={intl.formatMessage(messages.EmbededESRIMaps)}
             src={iframeSrc}
             className="google-map"
