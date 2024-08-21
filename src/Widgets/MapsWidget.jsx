@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
@@ -7,6 +7,7 @@ import { FormFieldWrapper, InlineForm } from '@plone/volto/components';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
+import { getBaseUrl } from '@plone/volto/helpers';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
@@ -18,6 +19,17 @@ const messages = defineMessages({
     defaultMessage: 'Enter map Embed Code',
   },
 });
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
 
 function MapEditorModal({ id, onClose, onChange, ...rest }) {
   const intl = useIntl();
@@ -189,13 +201,36 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
 }
 
 export default function MapsWidget(props) {
-  const { id, title, description, error, value } = props;
+  const { id, title, description, error, value, onChange } = props;
   const [mapEditor, setMapEditor] = useState(false);
 
-  function onChange(value) {
-    props.onChange(props.id, value);
+  function onChangeMap(value) {
+    onChange(id, value);
     setMapEditor(false);
   }
+
+  useEffect(() => {
+    if (value && value.url && value.preview_url_loaded != value.url) {
+      fetch(
+        `${getBaseUrl(
+          '',
+        )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(
+          value.url,
+        )}&w=1920&h=1000&waitfor=4000`,
+      )
+        .then((e) => e.blob())
+        .then((myBlob) => {
+          blobToBase64(myBlob).then((base64String) => {
+            onChange(id, {
+              ...value,
+              preview: base64String,
+              preview_url_loaded: value.url,
+            });
+          });
+        })
+        .catch(() => {});
+    }
+  }, [value, onChange]);
 
   return (
     <FormFieldWrapper {...props} columns={1}>
@@ -218,7 +253,7 @@ export default function MapsWidget(props) {
         <MapEditorModal
           id={id}
           value={value || {}}
-          onChange={onChange}
+          onChange={onChangeMap}
           onClose={() => setMapEditor(false)}
         />
       )}
