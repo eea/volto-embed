@@ -210,7 +210,7 @@ export default function MapsWidget(props) {
   }
 
   useEffect(() => {
-    if (value && value.url && value.preview_url_loaded != value.url) {
+    if (value && value.url && value.preview_url_loaded !== value.url) {
       fetch(
         `${getBaseUrl(
           '',
