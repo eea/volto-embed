@@ -230,7 +230,7 @@ export default function MapsWidget(props) {
         })
         .catch(() => {});
     }
-  }, [value, onChange]);
+  }, [value, onChange, id]);
 
   return (
     <FormFieldWrapper {...props} columns={1}>
