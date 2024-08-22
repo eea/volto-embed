@@ -21,7 +21,26 @@ describe('preview_image middleware', () => {
     middlewares = [];
   });
 
-  it('should pass through if action type is not CREATE_CONTENT or UPDATE_CONTENT', () => {
+  it('existing image', () => {
+    action = { type: 'UPDATE_CONTENT', request: { data: {} } };
+    const middleware = preview_image(middlewares)[0]; // Accesăm prima funcție din array
+    middleware(store)(next)(action); // Executăm funcția de middleware
+    expect(next).toHaveBeenCalledWith(action); // Verificăm că funcția next a fost apelată cu acțiunea originală
+  });
+  it('redo the image', () => {
+    store = {
+      getState: jest.fn(() => ({
+        content: {
+          data: {
+            '@type': 'map_interactive',
+            preview_image: 'preview_image_generated_map_interactive.png',
+            preview_image_saved: false,
+          },
+        },
+      })),
+    };
+    next = jest.fn();
+    middlewares = [];
     action = { type: 'UPDATE_CONTENT', request: { data: {} } };
     const middleware = preview_image(middlewares)[0]; // Accesăm prima funcție din array
     middleware(store)(next)(action); // Executăm funcția de middleware
