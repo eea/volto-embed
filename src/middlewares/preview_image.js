@@ -3,6 +3,29 @@ import {
   UPDATE_CONTENT,
 } from '@plone/volto/constants/ActionTypes';
 
+const cleanAction = (action) => {
+  if (action?.request?.data?.maps) {
+    const mapVisualizationData = {
+      ...action.request.data.maps,
+    };
+    if (mapVisualizationData.preview && mapVisualizationData.preview_url_loaded)
+      delete mapVisualizationData.preview;
+    delete mapVisualizationData.preview_url_loaded;
+
+    return {
+      ...action,
+      request: {
+        ...action.request,
+        data: {
+          ...action.request.data,
+
+          maps: mapVisualizationData,
+        },
+      },
+    };
+  } else return action;
+};
+
 export const preview_image = (middlewares) => [
   (store) => (next) => async (action) => {
     if (![CREATE_CONTENT, UPDATE_CONTENT].includes(action.type)) {
@@ -23,36 +46,15 @@ export const preview_image = (middlewares) => [
       contentData.preview_image_saved ||
       !action?.request?.data?.maps?.preview
     ) {
-      return next(action);
+      return next(cleanAction(action));
     }
 
     if (
       lastPreviewImage &&
-      lastPreviewImage !== 'preview_image_generated_map_interactive.png'
+      lastPreviewImage.filename !==
+        'preview_image_generated_map_interactive.png'
     ) {
-      if (action?.request?.data?.maps) {
-        const mapVisualizationData = {
-          ...action.request.data.maps,
-        };
-        if (
-          mapVisualizationData.preview &&
-          mapVisualizationData.preview_url_loaded
-        )
-          delete mapVisualizationData.preview;
-        delete mapVisualizationData.preview_url_loaded;
-
-        return next({
-          ...action,
-          request: {
-            ...action.request,
-            data: {
-              ...action.request.data,
-
-              maps: mapVisualizationData,
-            },
-          },
-        });
-      } else return next(action);
+      return next(cleanAction(action));
     }
 
     try {
