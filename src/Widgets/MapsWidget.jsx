@@ -216,7 +216,7 @@ export default function MapsWidget(props) {
           '',
         )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(
           value.url,
-        )}&w=1920&h=1000&waitfor=4000`,
+        )}&w=1920&h=1000&waitfor=8000`,
       )
         .then((e) => e.blob())
         .then((myBlob) => {
