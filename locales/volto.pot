@@ -1,111 +1,257 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2023-12-12T14:17:31.174Z\n"
+"POT-Creation-Date: 2025-01-08T13:34:41.757Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
-"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: volto\n"
 
+#. Default: "Alignment"
 #: Blocks/Maps/schema
-# defaultMessage: Alignment
 msgid "Alignment"
 msgstr ""
 
+#. Default: "Alt text"
 #: Blocks/Maps/schema
-# defaultMessage: Alt text
 msgid "Alt text"
 msgstr ""
 
+#. Default: "CSS height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
-# defaultMessage: CSS height
 msgid "CSS height"
 msgstr ""
 
+#. Default: "Center"
 #: Blocks/Maps/Edit
-# defaultMessage: Center
 msgid "Center"
 msgstr ""
 
+#. Default: "ESRI Maps Embedded Block"
 #: Blocks/Maps/Edit
-# defaultMessage: ESRI Maps Embedded Block
 msgid "ESRI Maps Embedded Block"
 msgstr ""
 
+#. Default: "Embed code error, please follow the instructions and try again."
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Embed code error, please follow the instructions and try again.
 msgid "Embed code error, please follow the instructions and try again."
 msgstr ""
 
+#. Default: "Embeded ESRI Maps"
 #: Blocks/Maps/View
 #: EmbedMap/EmbedMap
-# defaultMessage: Embeded ESRI Maps
 msgid "Embeded ESRI Maps"
 msgstr ""
 
+#. Default: "Enter map Embed Code"
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Enter map Embed Code
 msgid "Enter map Embed Code"
 msgstr ""
 
+#. Default: "Full"
 #: Blocks/Maps/Edit
-# defaultMessage: Full
 msgid "Full"
 msgstr ""
 
+#. Default: "Left"
 #: Blocks/Maps/Edit
-# defaultMessage: Left
 msgid "Left"
 msgstr ""
 
+#. Default: "Live image generated"
 #: PrivacyProtection/PrivacyProtection
-# defaultMessage: Live image generated
 msgid "Live image generated"
 msgstr ""
 
+#. Default: "Map height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
-# defaultMessage: Map height
 msgid "Map height"
 msgstr ""
 
+#. Default: "Maps"
 #: Blocks/Maps/MapsSidebar
 #: Blocks/Maps/schema
-# defaultMessage: Maps
 msgid "Maps"
 msgstr ""
 
+#. Default: "Maps URL"
 #: Blocks/Maps/schema
-# defaultMessage: Maps URL
 msgid "Maps URL"
 msgstr ""
 
+#. Default: "No map selected"
 #: Blocks/Maps/MapsSidebar
-# defaultMessage: No map selected
 msgid "No map selected"
 msgstr ""
 
+#. Default: "Please enter the embed code or URL for the ESRI webmap."
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Please enter the embed code or URL for the ESRI webmap.
 msgid "Please enter the embed code or URL for the ESRI webmap."
 msgstr ""
 
+#. Default: "Right"
 #: Blocks/Maps/Edit
-# defaultMessage: Right
 msgid "Right"
 msgstr ""
 
+#. Default: "Success"
 #: PrivacyProtection/PrivacyProtection
-# defaultMessage: Success
 msgid "Success"
+msgstr ""
+
+#. Default: "Use screen height"
+#: Blocks/Maps/schema
+msgid "Use screen height"
+msgstr ""
+
+#. Default: "Background image"
+#: PrivacyProtection/schema
+msgid "backgroundImage"
+msgstr ""
+
+#. Default: "The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here"
+#: PrivacyProtection/schema
+msgid "backgroundImageDescription"
+msgstr ""
+
+#. Default: "CSS Height"
+#: Blocks/EmbedMaps/schema
+msgid "cssHeight"
+msgstr ""
+
+#. Default: "Set the height of the map component using CSS height values."
+#: Blocks/EmbedMaps/schema
+msgid "cssMapHeightDescription"
+msgstr ""
+
+#. Default: "Data Protection"
+#: PrivacyProtection/schema
+#: PrivacyProtection/utils
+msgid "dataProtection"
+msgstr ""
+
+#. Default: "Embed interactive Map"
+#: Blocks/EmbedMaps/schema
+msgid "embedInteractiveMap"
+msgstr ""
+
+#. Default: "Data protection disclaimer enabled"
+#: PrivacyProtection/schema
+msgid "enabled"
+msgstr ""
+
+#. Default: "Enable/disable the privacy protection"
+#: PrivacyProtection/schema
+msgid "enabledDescription"
+msgstr ""
+
+#. Default: "Default"
+#: Blocks/EmbedMaps/schema
+msgid "mapDefaultLabel"
+msgstr ""
+
+#. Default: "Please select a map from block editor."
+#: Blocks/EmbedMaps/View
+msgid "mapSelection"
+msgstr ""
+
+#. Default: "Map url"
+#: Blocks/EmbedMaps/schema
+msgid "mapUrl"
+msgstr ""
+
+#. Default: "Value"
+#: Blocks/EmbedMaps/schema
+msgid "mapValueLabel"
+msgstr ""
+
+#. Default: "Set a list of parameters."
+#: Blocks/EmbedMaps/schema
+msgid "parametersDescription"
+msgstr ""
+
+#. Default: "Parameters"
+#: Blocks/EmbedMaps/schema
+msgid "parametersTitle"
+msgstr ""
+
+#. Default: "Privacy cookie key"
+#: PrivacyProtection/schema
+msgid "privacyCookieKey"
+msgstr ""
+
+#. Default: "Use default for Esri maps, otherwise change"
+#: PrivacyProtection/schema
+msgid "privacyCookieKeyDescription"
+msgstr ""
+
+#. Default: "Privacy statement"
+#: PrivacyProtection/schema
+msgid "privacyStatement"
+msgstr ""
+
+#. Default: "Defined in template. Change only if necessary"
+#: PrivacyProtection/schema
+msgid "privacyStatementDescription"
+msgstr ""
+
+#. Default: "esri.com"
+#: PrivacyProtection/schema
+msgid "privacyStatementLink"
+msgstr ""
+
+#. Default: "This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of"
+#: PrivacyProtection/schema
+msgid "privacyStatementPart1"
+msgstr ""
+
+#. Default: ". This includes their cookie policies, which we have no control over."
+#: PrivacyProtection/schema
+msgid "privacyStatementPart2"
+msgstr ""
+
+#. Default: "Show enlarge button"
+#: Blocks/EmbedMaps/schema
+msgid "showEnlargeButton"
+msgstr ""
+
+#. Default: "Show more info"
+#: Blocks/EmbedMaps/schema
+msgid "showMoreInfo"
+msgstr ""
+
+#. Default: "Show note"
+#: Blocks/EmbedMaps/schema
+msgid "showNote"
+msgstr ""
+
+#. Default: "Show share button"
+#: Blocks/EmbedMaps/schema
+msgid "showShareButton"
+msgstr ""
+
+#. Default: "Show sources"
+#: Blocks/EmbedMaps/schema
+msgid "showSources"
+msgstr ""
+
+#. Default: "Will show sources set in this page Data provenance"
+#: Blocks/EmbedMaps/schema
+msgid "showSourcesDescription"
+msgstr ""
+
+#. Default: "Toolbar"
+#: Blocks/EmbedMaps/schema
+msgid "toolbar"
 msgstr ""
