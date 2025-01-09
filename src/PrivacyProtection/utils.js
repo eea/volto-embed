@@ -5,8 +5,8 @@ const messages = defineMessages({
   dataProtection: {
     id: 'dataProtection',
     defaultMessage: 'Data Protection',
-  }
-})
+  },
+});
 
 export const addPrivacyProtectionToSchema = (schema, intl) => {
   return {

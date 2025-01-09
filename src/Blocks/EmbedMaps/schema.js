@@ -35,7 +35,8 @@ const messages = defineMessages({
   },
   cssMapHeightDescription: {
     id: 'cssMapHeightDescription',
-    defaultMessage: 'Set the height of the map component using CSS height values.',
+    defaultMessage:
+      'Set the height of the map component using CSS height values.',
   },
   showNote: {
     id: 'showNote',
@@ -73,7 +74,13 @@ const messages = defineMessages({
 
 const parameters = (intl) => ({
   title: 'Parameter',
-  fieldsets: [{ id: 'default', title: intl.formatMessage(messages.defaultLabel), fields: ['field', 'value'] }],
+  fieldsets: [
+    {
+      id: 'default',
+      title: intl.formatMessage(messages.defaultLabel),
+      fields: ['field', 'value'],
+    },
+  ],
   properties: {
     field: {
       title: 'Name',

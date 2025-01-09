@@ -35,11 +35,13 @@ const messages = defineMessages({
   },
   backgroundImageDescription: {
     id: 'backgroundImageDescription',
-    defaultMessage: 'The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here',
+    defaultMessage:
+      'The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here',
   },
   privacyStatementPart1: {
     id: 'privacyStatementPart1',
-    defaultMessage: 'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
+    defaultMessage:
+      'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
   },
   privacyStatementLink: {
     id: 'privacyStatementLink',
@@ -47,7 +49,8 @@ const messages = defineMessages({
   },
   privacyStatementPart2: {
     id: 'privacyStatementPart2',
-    defaultMessage: '. This includes their cookie policies, which we have no control over.',
+    defaultMessage:
+      '. This includes their cookie policies, which we have no control over.',
   },
 });
 

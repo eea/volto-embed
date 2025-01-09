@@ -11,9 +11,9 @@ import { defineMessages, useIntl } from 'react-intl';
 const messages = defineMessages({
   interactiveMapSelection: {
     id: 'mapSelection',
-    defaultMessage: 'Please select a map from block editor.'
-  }
-})
+    defaultMessage: 'Please select a map from block editor.',
+  },
+});
 
 let timer;
 
@@ -107,7 +107,9 @@ function View(props) {
   }, [id, getContent, mode, url, maps]);
 
   if (mode === 'edit' && !url) {
-    return <Message>{intl.formatMessage(messages.interactiveMapSelection)}</Message>;
+    return (
+      <Message>{intl.formatMessage(messages.interactiveMapSelection)}</Message>
+    );
   }
 
   if (maps?.error) {
