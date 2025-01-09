@@ -9,47 +9,107 @@ const messages = defineMessages({
     id: 'Map height',
     defaultMessage: 'Map height',
   },
+  defaultLabel: {
+    id: 'mapDefaultLabel',
+    defaultMessage: 'Default',
+  },
+  valueLabel: {
+    id: 'mapValueLabel',
+    defaultMessage: 'Value',
+  },
+  embedInteractiveMap: {
+    id: 'embedInteractiveMap',
+    defaultMessage: 'Embed interactive Map',
+  },
+  toolbar: {
+    id: 'toolbar',
+    defaultMessage: 'Toolbar',
+  },
+  mapUrl: {
+    id: 'mapUrl',
+    defaultMessage: 'Map url',
+  },
+  cssHeight: {
+    id: 'cssHeight',
+    defaultMessage: 'CSS Height',
+  },
+  cssMapHeightDescription: {
+    id: 'cssMapHeightDescription',
+    defaultMessage: 'Set the height of the map component using CSS height values.',
+  },
+  showNote: {
+    id: 'showNote',
+    defaultMessage: 'Show note',
+  },
+  showSources: {
+    id: 'showSources',
+    defaultMessage: 'Show sources',
+  },
+  showSourcesDescription: {
+    id: 'showSourcesDescription',
+    defaultMessage: 'Will show sources set in this page Data provenance',
+  },
+  showMoreInfo: {
+    id: 'showMoreInfo',
+    defaultMessage: 'Show more info',
+  },
+  showEnlargeButton: {
+    id: 'showEnlargeButton',
+    defaultMessage: 'Show enlarge button',
+  },
+  showShareButton: {
+    id: 'showShareButton',
+    defaultMessage: 'Show share button',
+  },
+  parametersTitle: {
+    id: 'parametersTitle',
+    defaultMessage: 'Parameters',
+  },
+  parametersDescription: {
+    id: 'parametersDescription',
+    defaultMessage: 'Set a list of parameters.',
+  },
 });
 
-const parameters = {
+const parameters = (intl) => ({
   title: 'Parameter',
-  fieldsets: [{ id: 'default', title: 'Default', fields: ['field', 'value'] }],
+  fieldsets: [{ id: 'default', title: intl.formatMessage(messages.defaultLabel), fields: ['field', 'value'] }],
   properties: {
     field: {
       title: 'Name',
       type: 'text',
     },
     value: {
-      title: 'Value',
+      title: intl.formatMessage(messages.valueLabel),
       type: 'text',
     },
   },
   required: [],
-};
+});
 
 const getSchema = (props) => {
   return {
-    title: 'Embed interactive Map',
+    title: props.intl.formatMessage(messages.embedInteractiveMap),
     fieldsets: [
       {
         id: 'default',
-        title: 'Default',
+        title: props.intl.formatMessage(messages.defaultLabel),
         fields: ['url', 'height'],
       },
       {
         id: 'toolbar',
-        title: 'Toolbar',
+        title: props.intl.formatMessage(messages.toolbar),
         fields: ['with_notes', 'with_more_info', 'with_share', 'with_enlarge'],
       },
       {
         id: 'parameters',
-        title: 'Parameters',
+        title: props.intl.formatMessage(messages.parametersTitle),
         fields: ['parameters'],
       },
     ],
     properties: {
       url: {
-        title: 'Map url',
+        title: props.intl.formatMessage(messages.mapUrl),
         widget: 'internal_url',
       },
       height: {
@@ -59,42 +119,42 @@ const getSchema = (props) => {
             target="_blank"
             href="https://developer.mozilla.org/en-US/docs/Web/CSS/height"
           >
-            {props.intl.formatMessage(messages.CSSHeight)}
+            {props.intl.formatMessage(messages.cssHeight)}
           </a>
         ),
-        description: props.intl.formatMessage(messages.CSSMapHeightDescription),
+        description: props.intl.formatMessage(messages.cssMapHeightDescription),
       },
       with_notes: {
-        title: 'Show note',
+        title: props.intl.formatMessage(messages.showNote),
         type: 'boolean',
         defaultValue: true,
       },
       with_sources: {
-        title: 'Show sources',
-        description: 'Will show sources set in this page Data provenance',
+        title: props.intl.formatMessage(messages.showSources),
+        description: props.intl.formatMessage(messages.showSourcesDescription),
         type: 'boolean',
         defaultValue: true,
       },
       with_more_info: {
-        title: 'Show more info',
+        title: props.intl.formatMessage(messages.showMoreInfo),
         type: 'boolean',
         defaultValue: true,
       },
       with_enlarge: {
-        title: 'Show enlarge button',
+        title: props.intl.formatMessage(messages.showEnlargeButton),
         type: 'boolean',
         defaultValue: true,
       },
       with_share: {
-        title: 'Show share button',
+        title: props.intl.formatMessage(messages.showShareButton),
         type: 'boolean',
         defaultValue: true,
       },
       parameters: {
-        title: 'Parameters',
+        title: props.intl.formatMessage(messages.parametersTitle),
         widget: 'object_list',
-        schema: parameters,
-        description: 'Set a list of parameters.',
+        schema: parameters(props.intl),
+        description: props.intl.formatMessage(messages.parametersDescription),
       },
     },
 

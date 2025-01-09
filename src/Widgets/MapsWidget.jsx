@@ -38,7 +38,7 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
   const [error, setError] = useState(false);
 
   const schema = useMemo(
-    () => addPrivacyProtectionToSchema(MapsSchema({ intl })),
+    () => addPrivacyProtectionToSchema(MapsSchema({ intl }), intl),
     [intl],
   );
 
