@@ -12,8 +12,8 @@ export const serializeText = (notes) => {
   const text = isArray(notes)
     ? serializeNodesToText(notes)
     : isString(notes)
-      ? notes
-      : '';
+    ? notes
+    : '';
   if (!text) return <p>There are no notes set for this visualization</p>;
   return content;
 };
