@@ -20,7 +20,10 @@ const messages = defineMessages({
 const MapsSidebar = (props) => {
   const { data, block, onChangeBlock } = props;
   const intl = useIntl();
-  const schema = addPrivacyProtectionToSchema(MapsSchema({ ...props, intl }));
+  const schema = addPrivacyProtectionToSchema(
+    MapsSchema({ ...props, intl }),
+    intl,
+  );
 
   return (
     <>

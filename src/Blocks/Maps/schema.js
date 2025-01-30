@@ -25,6 +25,10 @@ const messages = defineMessages({
     id: 'Map height',
     defaultMessage: 'Map height',
   },
+  useScreenHeight: {
+    id: 'Use screen height',
+    defaultMessage: 'Use screen height',
+  },
 });
 
 export const MapsSchema = (props) => {
@@ -64,7 +68,7 @@ export const MapsSchema = (props) => {
         description: props.intl.formatMessage(messages.CSSMapHeightDescription),
       },
       useScreenHeight: {
-        title: 'Use screen height',
+        title: props.intl.formatMessage(messages.useScreenHeight),
         type: 'boolean',
         default: false,
       },

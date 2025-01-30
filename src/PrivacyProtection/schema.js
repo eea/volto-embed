@@ -1,5 +1,61 @@
-export const ProtectionSchema = () => ({
-  title: 'Data Protection',
+import { defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+  dataProtection: {
+    id: 'dataProtection',
+    defaultMessage: 'Data Protection',
+  },
+  privacyStatement: {
+    id: 'privacyStatement',
+    defaultMessage: 'Privacy statement',
+  },
+  privacyStatementDescription: {
+    id: 'privacyStatementDescription',
+    defaultMessage: 'Defined in template. Change only if necessary',
+  },
+  privacyCookieKey: {
+    id: 'privacyCookieKey',
+    defaultMessage: 'Privacy cookie key',
+  },
+  privacyCookieKeyDescription: {
+    id: 'privacyCookieKeyDescription',
+    defaultMessage: 'Use default for Esri maps, otherwise change',
+  },
+  enabled: {
+    id: 'enabled',
+    defaultMessage: 'Data protection disclaimer enabled',
+  },
+  enabledDescription: {
+    id: 'enabledDescription',
+    defaultMessage: 'Enable/disable the privacy protection',
+  },
+  backgroundImage: {
+    id: 'backgroundImage',
+    defaultMessage: 'Background image',
+  },
+  backgroundImageDescription: {
+    id: 'backgroundImageDescription',
+    defaultMessage:
+      'The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here',
+  },
+  privacyStatementPart1: {
+    id: 'privacyStatementPart1',
+    defaultMessage:
+      'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
+  },
+  privacyStatementLink: {
+    id: 'privacyStatementLink',
+    defaultMessage: 'esri.com',
+  },
+  privacyStatementPart2: {
+    id: 'privacyStatementPart2',
+    defaultMessage:
+      '. This includes their cookie policies, which we have no control over.',
+  },
+});
+
+export const ProtectionSchema = (intl) => ({
+  title: intl.formatMessage(messages.dataProtection),
 
   fieldsets: [
     {
@@ -16,46 +72,45 @@ export const ProtectionSchema = () => ({
 
   properties: {
     privacy_statement: {
-      title: 'Privacy statement',
-      description: 'Defined in template. Change only if necessary',
+      title: intl.formatMessage(messages.privacyStatement),
+      description: intl.formatMessage(messages.privacyStatementDescription),
       widget: 'slate_richtext',
       className: 'slate-Widget',
       defaultValue: [
         {
           children: [
             {
-              text: 'This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of ',
+              text: intl.formatMessage(messages.privacyStatementPart1),
             },
             {
               type: 'a',
               url: 'https://www.esri.com',
               children: [
                 {
-                  text: 'esri.com',
+                  text: intl.formatMessage(messages.privacyStatementLink),
                 },
               ],
             },
             {
-              text: '. This includes their cookie policies, which we have no control over.',
+              text: intl.formatMessage(messages.privacyStatementPart2),
             },
           ],
         },
       ],
     },
     privacy_cookie_key: {
-      title: 'Privacy cookie key',
-      description: 'Use default for Esri maps, otherwise change',
+      title: intl.formatMessage(messages.privacyCookieKey),
+      description: intl.formatMessage(messages.privacyCookieKeyDescription),
       defaultValue: 'esri-maps',
     },
     enabled: {
-      title: 'Data protection disclaimer enabled',
-      description: 'Enable/disable the privacy protection',
+      title: intl.formatMessage(messages.enabled),
+      description: intl.formatMessage(messages.enabledDescription),
       type: 'boolean',
     },
     background_image: {
-      title: 'Background image',
-      description:
-        'The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here',
+      title: intl.formatMessage(messages.backgroundImage),
+      description: intl.formatMessage(messages.backgroundImageDescription),
       widget: 'file',
     },
   },
