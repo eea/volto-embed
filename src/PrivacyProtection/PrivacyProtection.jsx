@@ -260,7 +260,7 @@ const PrivacyProtection = (props) => {
                 <p className="discreet">
                   {serializeNodes(
                     privacy_statement ||
-                      ProtectionSchema().properties.privacy_statement
+                      ProtectionSchema(intl).properties.privacy_statement
                         .defaultValue,
                   )}
                 </p>

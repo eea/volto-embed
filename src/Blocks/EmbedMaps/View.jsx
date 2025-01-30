@@ -6,6 +6,14 @@ import { getContent } from '@plone/volto/actions';
 import { flattenToAppURL } from '@plone/volto/helpers';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
+import { defineMessages, useIntl } from 'react-intl';
+
+const messages = defineMessages({
+  interactiveMapSelection: {
+    id: 'mapSelection',
+    defaultMessage: 'Please select a map from block editor.',
+  },
+});
 
 let timer;
 
@@ -78,6 +86,8 @@ function View(props) {
     getParameters({ parameters, data_query }),
   );
 
+  const intl = useIntl();
+
   useEffect(() => {
     debounce(() => {
       setQueryParams(
@@ -97,7 +107,9 @@ function View(props) {
   }, [id, getContent, mode, url, maps]);
 
   if (mode === 'edit' && !url) {
-    return <Message>Please select a map from block editor.</Message>;
+    return (
+      <Message>{intl.formatMessage(messages.interactiveMapSelection)}</Message>
+    );
   }
 
   if (maps?.error) {

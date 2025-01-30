@@ -11,99 +11,245 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. Default: "Alignment"
 #: Blocks/Maps/schema
-# defaultMessage: Alignment
 msgid "Alignment"
-msgstr ""
+msgstr "Ausrichtung"
 
+#. Default: "Alt text"
 #: Blocks/Maps/schema
-# defaultMessage: Alt text
 msgid "Alt text"
 msgstr ""
 
+#. Default: "CSS height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
-# defaultMessage: CSS height
 msgid "CSS height"
-msgstr ""
+msgstr "CSS Höhe"
 
+#. Default: "Center"
 #: Blocks/Maps/Edit
-# defaultMessage: Center
 msgid "Center"
-msgstr ""
+msgstr "Mitte"
 
+#. Default: "ESRI Maps Embedded Block"
 #: Blocks/Maps/Edit
-# defaultMessage: ESRI Maps Embedded Block
 msgid "ESRI Maps Embedded Block"
-msgstr ""
+msgstr "ESRI-Karten eingebetteter Block"
 
+#. Default: "Embed code error, please follow the instructions and try again."
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Embed code error, please follow the instructions and try again.
 msgid "Embed code error, please follow the instructions and try again."
-msgstr ""
+msgstr "Einbettungscodefehler, bitte folgen Sie den Anweisungen und versuchen Sie es erneut."
 
+#. Default: "Embeded ESRI Maps"
 #: Blocks/Maps/View
 #: EmbedMap/EmbedMap
-# defaultMessage: Embeded ESRI Maps
 msgid "Embeded ESRI Maps"
-msgstr ""
+msgstr "Eingebettete ESRI Karten"
 
+#. Default: "Enter map Embed Code"
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Enter map Embed Code
 msgid "Enter map Embed Code"
-msgstr ""
+msgstr "Karten Code eingeben"
 
+#. Default: "Full"
 #: Blocks/Maps/Edit
-# defaultMessage: Full
 msgid "Full"
-msgstr ""
+msgstr "Voll"
 
+#. Default: "Left"
 #: Blocks/Maps/Edit
-# defaultMessage: Left
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
+#. Default: "Live image generated"
 #: PrivacyProtection/PrivacyProtection
-# defaultMessage: Live image generated
 msgid "Live image generated"
-msgstr ""
+msgstr "Live-Bild generiert"
 
+#. Default: "Map height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
-# defaultMessage: Map height
 msgid "Map height"
-msgstr ""
+msgstr "Kartenhöhe"
 
+#. Default: "Maps"
 #: Blocks/Maps/MapsSidebar
 #: Blocks/Maps/schema
-# defaultMessage: Maps
 msgid "Maps"
-msgstr ""
+msgstr "Karten"
 
+#. Default: "Maps URL"
 #: Blocks/Maps/schema
-# defaultMessage: Maps URL
 msgid "Maps URL"
-msgstr ""
+msgstr "Karten URL"
 
+#. Default: "No map selected"
 #: Blocks/Maps/MapsSidebar
-# defaultMessage: No map selected
 msgid "No map selected"
-msgstr ""
+msgstr "Keine Karte ausgewählt"
 
+#. Default: "Please enter the embed code or URL for the ESRI webmap."
 #: Blocks/Maps/Edit
 #: Widgets/MapsWidget
-# defaultMessage: Please enter the embed code or URL for the ESRI webmap.
 msgid "Please enter the embed code or URL for the ESRI webmap."
-msgstr ""
+msgstr "Bitte geben Sie den Einbettungscode oder die URL für die ESRI-Webkarte ein."
 
+#. Default: "Right"
 #: Blocks/Maps/Edit
-# defaultMessage: Right
 msgid "Right"
+msgstr "Rechts"
+
+#. Default: "Success"
+#: PrivacyProtection/PrivacyProtection
+msgid "Success"
+msgstr "Erfolgreich"
+
+#. Default: "Use screen height"
+#: Blocks/Maps/schema
+msgid "Use screen height"
+msgstr "Bildschirmhöhe verwenden"
+
+#. Default: "Background image"
+#: PrivacyProtection/schema
+msgid "backgroundImage"
+msgstr "Hintergrundbild"
+
+#. Default: "The component will automatically generate a static image as placeholder from the URL of the map defined. This image is refreshed on page edit. To override this, upload an image here"
+#: PrivacyProtection/schema
+msgid "backgroundImageDescription"
+msgstr "Die Komponente generiert automatisch ein statisches Bild als Platzhalter aus der URL der definierten Karte. Dieses Bild wird beim Bearbeiten der Seite erneuert. Um dies außer Kraft zu setzen, laden Sie hier ein Bild hoch"
+
+#. Default: "CSS Height"
+#: Blocks/EmbedMaps/schema
+msgid "cssHeight"
+msgstr "CSS Höhe"
+
+#. Default: "Set the height of the map component using CSS height values."
+#: Blocks/EmbedMaps/schema
+msgid "cssMapHeightDescription"
+msgstr "Legen Sie die Höhe der Kartenkomponente mithilfe von CSS-Höhenwerten fest."
+
+#. Default: "Data Protection"
+#: PrivacyProtection/schema
+#: PrivacyProtection/utils
+msgid "dataProtection"
+msgstr "Datenschutz"
+
+#. Default: "Embed interactive Map"
+#: Blocks/EmbedMaps/schema
+msgid "Embed interactive Map"
+msgstr "Interaktive Karte einbetten"
+
+#. Default: "Data protection disclaimer enabled"
+#: PrivacyProtection/schema
+msgid "enabled"
+msgstr "Haftungsausschluss für den Datenschutz aktiviert"
+
+#. Default: "Enable/disable the privacy protection"
+#: PrivacyProtection/schema
+msgid "enabledDescription"
+msgstr "Aktivieren/Deaktivieren des Datenschutzes"
+
+#. Default: "Default"
+#: Blocks/EmbedMaps/schema
+msgid "mapDefaultLabel"
+msgstr "Standard"
+
+#. Default: "Please select a map from block editor."
+#: Blocks/EmbedMaps/View
+msgid "mapSelection"
+msgstr "Bitte wählen Sie eine Karte aus dem Blockeditor."
+
+#. Default: "Map url"
+#: Blocks/EmbedMaps/schema
+msgid "mapUrl"
+msgstr "Karten URL"
+
+#. Default: "Value"
+#: Blocks/EmbedMaps/schema
+msgid "mapValueLabel"
+msgstr "Wert"
+
+#. Default: "Set a list of parameters."
+#: Blocks/EmbedMaps/schema
+msgid "parametersDescription"
+msgstr "Legen Sie eine Liste von Parametern fest."
+
+#. Default: "Parameters"
+#: Blocks/EmbedMaps/schema
+msgid "parametersTitle"
+msgstr "Parameter"
+
+#. Default: "Privacy cookie key"
+#: PrivacyProtection/schema
+msgid "privacyCookieKey"
+msgstr "Datenschutz-Cookie-Schlüssel"
+
+#. Default: "Use default for Esri maps, otherwise change"
+#: PrivacyProtection/schema
+msgid "privacyCookieKeyDescription"
+msgstr "Standard für Esri-Karten verwenden, sonst ändern"
+
+#. Default: "Privacy statement"
+#: PrivacyProtection/schema
+msgid "privacyStatement"
+msgstr "Datenschutzerklärung"
+
+#. Default: "Defined in template. Change only if necessary"
+#: PrivacyProtection/schema
+msgid "privacyStatementDescription"
+msgstr "Definiert in der Vorlage. Nur bei Bedarf ändern"
+
+#. Default: "esri.com"
+#: PrivacyProtection/schema
+msgid "privacyStatementLink"
 msgstr ""
 
-#: PrivacyProtection/PrivacyProtection
-# defaultMessage: Success
-msgid "Success"
+#. Default: "This map is hosted by a third party, Environmental Systems Research Institute. By showing the external content you accept the terms and conditions of"
+#: PrivacyProtection/schema
+msgid "privacyStatementPart1"
+msgstr "Diese Karte wird von einer dritten Partei, dem Environmental Systems Research Institute, gehostet. Durch die Anzeige des externen Inhalts akzeptieren Sie die Bedingungen von"
+
+#. Default: ". This includes their cookie policies, which we have no control over."
+#: PrivacyProtection/schema
+msgid "privacyStatementPart2"
+msgstr ". Dazu gehören auch deren Cookie-Richtlinien, über die wir keine Kontrolle haben."
+
+#. Default: "Show enlarge button"
+#: Blocks/EmbedMaps/schema
+msgid "showEnlargeButton"
+msgstr "Schaltfläche „Vergrößern“ anzeigen"
+
+#. Default: "Show more info"
+#: Blocks/EmbedMaps/schema
+msgid "showMoreInfo"
+msgstr "Mehr Infos anzeigen"
+
+#. Default: "Show note"
+#: Blocks/EmbedMaps/schema
+msgid "showNote"
+msgstr "Notiz anzeigen"
+
+#. Default: "Show share button"
+#: Blocks/EmbedMaps/schema
+msgid "showShareButton"
+msgstr "Schaltfläche „Teilen“ anzeigen"
+
+#. Default: "Show sources"
+#: Blocks/EmbedMaps/schema
+msgid "showSources"
+msgstr "Quellen anzeigen"
+
+#. Default: "Will show sources set in this page Data provenance"
+#: Blocks/EmbedMaps/schema
+msgid "showSourcesDescription"
+msgstr "Zeigt die auf dieser Seite festgelegten Quellen an "
+
+#. Default: "Toolbar"
+#: Blocks/EmbedMaps/schema
+msgid "toolbar"
 msgstr ""
