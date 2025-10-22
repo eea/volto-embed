@@ -235,6 +235,7 @@ class Edit extends Component {
               data={this.props.data}
               editable={this.props.editable}
               useVisibilitySensor={this.props.data.useVisibilitySensor ?? true}
+              height={this.props.data.height}
             >
               <iframe
                 title={this.props.intl.formatMessage(
