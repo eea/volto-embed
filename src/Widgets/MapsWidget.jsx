@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import { Icon } from '@plone/volto/components';
 import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
@@ -12,6 +12,7 @@ import { getBaseUrl } from '@plone/volto/helpers';
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
 import mapsBlockSVG from '@plone/volto/components/manage/Blocks/Maps/block-maps.svg';
+import './style.less';
 
 const messages = defineMessages({
   MapsBlockInputPlaceholder: {
@@ -93,7 +94,7 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
   }
 
   return (
-    <Modal open={true} size="fullscreen" className="chart-editor-modal">
+    <Modal open={true} className="editor-modal" size="fullscreen">
       <Modal.Content scrolling>
         <div className="block maps align center">
           {value.url && (
