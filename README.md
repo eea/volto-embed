@@ -3,16 +3,16 @@
 [![Releases](https://img.shields.io/github/v/release/eea/volto-embed)](https://github.com/eea/volto-embed/releases)
 
 [![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-embed%2Fmaster&subject=master)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-embed/job/master/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
+[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
 
 [![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-embed%2Fdevelop&subject=develop)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-embed/job/develop/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
+[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
 
 GDPR-compliant external resource embedding components for Volto.
 
