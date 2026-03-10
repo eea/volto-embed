@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import MapsViewWidget from './MapsViewWidget';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
-import '@testing-library/jest-dom/extend-expect'; // Importă jest-dom
+import '@testing-library/jest-dom'; // Importă jest-dom
 
 jest.mock('@eeacms/volto-embed/EmbedMap/EmbedMap', () =>
   jest.fn(() => <div>Mocked EmbedMap</div>),

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 import Edit from './Edit';
 
