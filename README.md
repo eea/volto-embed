@@ -3,16 +3,16 @@
 [![Releases](https://img.shields.io/github/v/release/eea/volto-embed)](https://github.com/eea/volto-embed/releases)
 
 [![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-embed%2Fmaster&subject=master)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-embed/job/master/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-master&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-master)
+[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
+[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed)
 
 [![Pipeline](https://ci.eionet.europa.eu/buildStatus/icon?job=volto-addons%2Fvolto-embed%2Fdevelop&subject=develop)](https://ci.eionet.europa.eu/view/Github/job/volto-addons/job/volto-embed/job/develop/display/redirect)
-[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
-[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed-develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed-develop)
+[![Lines of Code](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=ncloc)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Coverage](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=coverage)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Bugs](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=bugs)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
+[![Duplicated Lines (%)](https://sonarqube.eea.europa.eu/api/project_badges/measure?project=volto-embed&branch=develop&metric=duplicated_lines_density)](https://sonarqube.eea.europa.eu/dashboard?id=volto-embed&branch=develop)
 
 GDPR-compliant external resource embedding components for Volto.
 
@@ -38,6 +38,11 @@ See `src/Iframe/ViewIframe` for details on how to implement.
 
 Go to http://localhost:3000
 
+`make start` now defaults to Volto 18. To run the same setup against Volto 17, use:
+
+      VOLTO_VERSION=17 make
+      VOLTO_VERSION=17 make start
+
 ### Add volto-embed to your Volto project
 
 1. Make sure you have a [Plone backend](https://plone.org/download) up-and-running at http://localhost:8080/Plone
@@ -51,29 +56,38 @@ Go to http://localhost:3000
 * If you already have a volto project, just update `package.json`:
 
    ```JSON
-   "addons": [
-       "@eeacms/volto-embed"
-   ],
-
    "dependencies": {
        "@eeacms/volto-embed": "*"
    }
    ```
 
-* If not, create one:
+   and `volto.config.js`:
 
-   ```
-   npm install -g yo @plone/generator-volto
-   yo @plone/volto my-volto-project --canary --addon @eeacms/volto-embed
-   cd my-volto-project
+   ```JavaScript
+   const addons = ['@eeacms/volto-embed'];
    ```
 
-1. Install new add-ons and restart Volto:
+* If not, create one with Cookieplone, as recommended by the official Plone documentation for Volto 18+:
 
    ```
-   yarn
-   yarn start
+   uvx cookieplone project
+   cd project-title
    ```
+
+1. Install or update dependencies, then start the project:
+
+   ```
+   make install
+   ```
+
+   For a Cookieplone project, start the backend and frontend in separate terminals:
+
+   ```
+   make backend-start
+   make frontend-start
+   ```
+
+   For a legacy Volto 17 project, install the package with `yarn` and restart the frontend as usual.
 
 1. Go to http://localhost:3000
 

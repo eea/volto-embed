@@ -5,7 +5,7 @@ import config from '@plone/volto/registry';
 
 import Edit from './Edit';
 import installEmbedMaps from '.';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 installEmbedMaps(config);
 
