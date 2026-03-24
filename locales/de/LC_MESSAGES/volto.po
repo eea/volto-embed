@@ -141,8 +141,8 @@ msgstr "Datenschutz"
 
 #. Default: "Embed interactive Map"
 #: Blocks/EmbedMaps/schema
-msgid "Embed interactive Map"
-msgstr "Interaktive Karte einbetten"
+msgid "embedInteractiveMap"
+msgstr ""
 
 #. Default: "Data protection disclaimer enabled"
 #: PrivacyProtection/schema

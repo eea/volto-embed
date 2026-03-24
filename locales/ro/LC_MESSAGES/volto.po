@@ -141,7 +141,7 @@ msgstr ""
 
 #. Default: "Embed interactive Map"
 #: Blocks/EmbedMaps/schema
-msgid "Embed interactive Map"
+msgid "embedInteractiveMap"
 msgstr ""
 
 #. Default: "Data protection disclaimer enabled"

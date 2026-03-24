@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-embed",
-  "version": "10.1.4",
+  "version": "11.0.0",
   "description": "Embed external content",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
