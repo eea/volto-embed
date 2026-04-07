@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { reduce, isArray, isString } from 'lodash';
+import reduce from 'lodash/reduce';
+import isArray from 'lodash/isArray';
+import isString from 'lodash/isString';
 import { connect } from 'react-redux';
 import { Message } from 'semantic-ui-react';
-import { getContent } from '@plone/volto/actions';
-import { flattenToAppURL } from '@plone/volto/helpers';
+import { getContent } from '@plone/volto/actions/content/content';
+import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 import { defineMessages, useIntl } from 'react-intl';

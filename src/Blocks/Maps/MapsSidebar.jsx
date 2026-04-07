@@ -1,6 +1,7 @@
 import React from 'react';
 import { useIntl, defineMessages } from 'react-intl';
-import { Icon, BlockDataForm } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import globeSVG from '@plone/volto/icons/globe.svg';
 import { Segment } from 'semantic-ui-react';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';

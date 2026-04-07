@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 import { Modal } from 'semantic-ui-react';
 import cx from 'classnames';
 

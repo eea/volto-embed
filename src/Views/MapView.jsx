@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
-import { hasBlocksData } from '@plone/volto/helpers';
+import { hasBlocksData } from '@plone/volto/helpers/Blocks/Blocks';
 import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';

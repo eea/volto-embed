@@ -1,13 +1,14 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
-import { Icon } from '@plone/volto/components';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
 import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
-import { map } from 'lodash';
-import { FormFieldWrapper, InlineForm } from '@plone/volto/components';
+import map from 'lodash/map';
+import { FormFieldWrapper } from '@plone/volto/components/manage/Widgets';
+import { InlineForm } from '@plone/volto/components/manage/Form';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
-import { getBaseUrl } from '@plone/volto/helpers';
+import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
