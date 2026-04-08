@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
 import BlockDataForm from '@plone/volto/components/manage/Form/BlockDataForm';
-import { SidebarPortal } from '@plone/volto/components';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import View from './View';
 import getSchema from './schema';
 

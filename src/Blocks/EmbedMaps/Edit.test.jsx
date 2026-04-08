@@ -9,11 +9,9 @@ import '@testing-library/jest-dom';
 
 installEmbedMaps(config);
 
-jest.mock('@plone/volto/components', () => ({
-  SidebarPortal: ({ children }) => (
-    <div data-testid="sidebar-portal">{children}</div>
-  ),
-  UniversalLink: ({ children, href }) => <a href={href}>{children}</a>,
+jest.mock('@plone/volto/components/manage/Sidebar/SidebarPortal', () => ({
+  __esModule: true,
+  default: ({ children }) => <div data-testid="sidebar-portal">{children}</div>,
 }));
 
 jest.mock(

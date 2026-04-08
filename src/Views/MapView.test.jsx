@@ -6,6 +6,14 @@ import '@testing-library/jest-dom';
 
 import MapView from './MapView';
 
+jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
+  return ({ children, href, ...rest }) => (
+    <a href={href} {...rest}>
+      {children}
+    </a>
+  );
+});
+
 config.settings = {
   ...config.settings,
   publicURL: 'https://www.eea.europa.eu/',
