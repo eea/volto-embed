@@ -1,10 +1,18 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
-import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
+import {
+  Button,
+  Modal,
+  Grid,
+  Label,
+  Input,
+  Message,
+  Image,
+} from 'semantic-ui-react';
 import map from 'lodash/map';
-import { FormFieldWrapper } from '@plone/volto/components/manage/Widgets';
-import { InlineForm } from '@plone/volto/components/manage/Form';
+import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
+import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
@@ -133,7 +141,7 @@ function MapEditorModal({ id, onClose, onChange, ...rest }) {
           {!value.url && (
             <Message>
               <center>
-                <img src={mapsBlockSVG} alt="" />
+                <Image src={mapsBlockSVG} alt="" loading="lazy" />
                 <div className="toolbar-inner">
                   <Input
                     onKeyDown={onKeyDownVariantMenuForm}

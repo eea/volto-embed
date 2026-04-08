@@ -12,6 +12,7 @@ import { defineMessages, FormattedMessage, injectIntl } from 'react-intl';
 import cx from 'classnames';
 import { withBlockExtensions } from '@plone/volto/helpers//Extensions';
 import { compose } from 'redux';
+import Image from '@plone/volto/components/theme/Image/Image';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import clearSVG from '@plone/volto/icons/clear.svg';
@@ -258,7 +259,7 @@ class Edit extends Component {
         ) : (
           <Message>
             <center>
-              <img src={mapsBlockSVG} alt="" />
+              <Image src={mapsBlockSVG} alt="" loading="lazy" />
               <div className="toolbar-inner">
                 <Input
                   onKeyDown={this.onKeyDownVariantMenuForm}
