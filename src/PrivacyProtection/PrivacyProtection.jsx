@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 import { compose } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -15,8 +15,12 @@ import { serializeNodes } from '@plone/volto-slate/editor/render';
 import { defineMessages, injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 import config from '@plone/volto/registry';
-import { getBaseUrl, toPublicURL, isInternalURL } from '@plone/volto/helpers';
-import { Toast } from '@plone/volto/components';
+import {
+  getBaseUrl,
+  toPublicURL,
+  isInternalURL,
+} from '@plone/volto/helpers/Url/Url';
+import Toast from '@plone/volto/components/manage/Toast/Toast';
 import {
   getConnectedDataParametersForContext,
   getFilteredURL,

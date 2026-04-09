@@ -1,5 +1,5 @@
 import React from 'react';
-import { UniversalLink } from '@plone/volto/components';
+import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 
 const Link = ({ children, ...props }) => {
   if (props.href) {

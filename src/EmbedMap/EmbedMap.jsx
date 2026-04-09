@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { isNaN, isNumber, isEmpty } from 'lodash';
+import isNaN from 'lodash/isNaN';
+import isNumber from 'lodash/isNumber';
+import isEmpty from 'lodash/isEmpty';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { defineMessages, injectIntl } from 'react-intl';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popup } from 'semantic-ui-react';
-import { isArray, isString } from 'lodash';
+import isArray from 'lodash/isArray';
+import isString from 'lodash/isString';
 import cx from 'classnames';
 import {
   serializeNodes,
@@ -12,8 +13,8 @@ export const serializeText = (notes) => {
   const text = isArray(notes)
     ? serializeNodesToText(notes)
     : isString(notes)
-    ? notes
-    : '';
+      ? notes
+      : '';
   if (!text) return <p>There are no notes set for this visualization</p>;
   return content;
 };

@@ -1,4 +1,4 @@
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import installMaps from './Maps';
 import installEmbedMaps from './EmbedMaps';
 
