@@ -2,46 +2,17 @@ import React, { useState } from 'react';
 import cx from 'classnames';
 import isNumber from 'lodash/isNumber';
 import { compose } from 'redux';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  Placeholder,
-  Dimmer,
-  Loader,
-  Button,
-  Checkbox,
-} from 'semantic-ui-react';
+import { Placeholder, Button, Checkbox } from 'semantic-ui-react';
 import { withCookies } from 'react-cookie';
 import { serializeNodes } from '@plone/volto-slate/editor/render';
-import { defineMessages, injectIntl } from 'react-intl';
-import { toast } from 'react-toastify';
+import { injectIntl } from 'react-intl';
 import config from '@plone/volto/registry';
-import {
-  getBaseUrl,
-  toPublicURL,
-  isInternalURL,
-} from '@plone/volto/helpers/Url/Url';
-import Toast from '@plone/volto/components/manage/Toast/Toast';
-import {
-  getConnectedDataParametersForContext,
-  getFilteredURL,
-} from '@eeacms/volto-datablocks/helpers';
 import { VisibilitySensor } from '@eeacms/volto-datablocks/components';
 
 import { createImageUrl } from './helpers';
 import { ProtectionSchema } from './schema';
 
 import './styles.less';
-
-const messages = defineMessages({
-  success: {
-    id: 'Success',
-    defaultMessage: 'Success',
-  },
-  image: {
-    id: 'Live image generated',
-    defaultMessage: 'Live image generated',
-  },
-});
 
 const key = (domain_key) => `accept-${domain_key}`;
 
@@ -89,7 +60,6 @@ const PrivacyProtection = (props) => {
     id,
     editable,
     intl,
-    path,
     cookies,
     useVisibilitySensor = true,
   } = props;
@@ -106,17 +76,7 @@ const PrivacyProtection = (props) => {
   const [remember, setRemember] = useState(
     cookieExist(privacy_cookie_key, cookies) ? defaultShow : true,
   );
-  const dispatch = useDispatch();
   const checkExistance = CookieWatcher(privacy_cookie_key, cookies);
-  const connected_data_parameters = useSelector((state) => {
-    return getConnectedDataParametersForContext(
-      state?.connected_data_parameters,
-      state.router?.location?.pathname,
-    );
-  });
-  const mapUrl = data.url || data.vis_url;
-  const url = getFilteredURL(mapUrl, connected_data_parameters);
-
   const height = React.useMemo(() => {
     if (!props.height) return 'auto';
     try {
@@ -144,50 +104,6 @@ const PrivacyProtection = (props) => {
     [checkExistance],
   );
 
-  const urlToScreenshot = isInternalURL(url) ? toPublicURL(url) : url;
-
-  //screenshot api
-  React.useEffect(() => {
-    if (enabled && !bgImg && !show && url) {
-      fetch(
-        `${getBaseUrl(
-          '',
-        )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(
-          urlToScreenshot,
-        )}&w=1920&h=1000&waitfor=4000`,
-      )
-        .then((e) => e.blob())
-        .then((blob) => {
-          setImage(URL.createObjectURL(blob));
-          if (editable) {
-            toast.success(
-              <Toast
-                success
-                title={intl.formatMessage(messages.success)}
-                content={intl.formatMessage(messages.image)}
-              />,
-            );
-          }
-        })
-        .catch(() => {
-          if (__DEVELOPMENT__) {
-            /* eslint-disable-next-line */
-            console.log('Please enable your VPN!');
-          }
-        });
-    }
-  }, [
-    enabled,
-    url,
-    path,
-    dispatch,
-    bgImg,
-    show,
-    intl,
-    editable,
-    urlToScreenshot,
-  ]);
-
   return (
     <VisibilitySensor
       Placeholder={() => (
@@ -208,10 +124,6 @@ const PrivacyProtection = (props) => {
       >
         {!enabled || show ? (
           children
-        ) : !__DEVELOPMENT__ && !image && !process.env.JEST_WORKER_ID ? (
-          <Dimmer active>
-            <Loader />
-          </Dimmer>
         ) : (
           <div
             className="privacy-protection"

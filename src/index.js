@@ -13,10 +13,6 @@ export default function applyConfig(config) {
   config.widgets.id.maps = MapsWidget;
   config.widgets.views.id.maps = MapsViewWidget;
 
-  config.settings.allowed_cors_destinations = [
-    ...config.settings.allowed_cors_destinations,
-    'screenshot.eea.europa.eu',
-  ];
   config.settings.storeExtenders = [
     ...(config.settings.storeExtenders || []),
     preview_image,

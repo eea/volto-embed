@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
 import {
@@ -16,7 +16,6 @@ import InlineForm from '@plone/volto/components/manage/Form/InlineForm';
 import { addPrivacyProtectionToSchema } from '@eeacms/volto-embed';
 import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { MapsSchema } from '@eeacms/volto-embed/Blocks/Maps/schema';
-import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import aheadSVG from '@plone/volto/icons/ahead.svg';
@@ -29,17 +28,6 @@ const messages = defineMessages({
     defaultMessage: 'Enter map Embed Code',
   },
 });
-
-function blobToBase64(blob) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      resolve(reader.result);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
 
 function MapEditorModal({ id, onClose, onChange, ...rest }) {
   const intl = useIntl();
@@ -218,29 +206,6 @@ export default function MapsWidget(props) {
     onChange(id, value);
     setMapEditor(false);
   }
-
-  useEffect(() => {
-    if (value && value.url && value.preview_url_loaded !== value.url) {
-      fetch(
-        `${getBaseUrl(
-          '',
-        )}/cors-proxy/https://screenshot.eea.europa.eu/api/v1/retrieve_image_for_url?url=${encodeURIComponent(
-          value.url,
-        )}&w=1920&h=1000&waitfor=8000`,
-      )
-        .then((e) => e.blob())
-        .then((myBlob) => {
-          blobToBase64(myBlob).then((base64String) => {
-            onChange(id, {
-              ...value,
-              preview: base64String,
-              preview_url_loaded: value.url,
-            });
-          });
-        })
-        .catch(() => {});
-    }
-  }, [value, onChange, id]);
 
   return (
     <FormFieldWrapper {...props} columns={1}>
