@@ -8,7 +8,7 @@ export function pickMetadata(content) {
       'data_provenance',
       'figure_note',
       'other_organisations',
-      'temporan_coverage',
+      'temporal_coverage',
       'publisher',
       'geo_coverage',
     ]),
