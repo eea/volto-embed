@@ -65,11 +65,6 @@ msgstr "Voll"
 msgid "Left"
 msgstr "Links"
 
-#. Default: "Live image generated"
-#: PrivacyProtection/PrivacyProtection
-msgid "Live image generated"
-msgstr "Live-Bild generiert"
-
 #. Default: "Map height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
@@ -102,11 +97,6 @@ msgstr "Bitte geben Sie den Einbettungscode oder die URL für die ESRI-Webkarte 
 #: Blocks/Maps/Edit
 msgid "Right"
 msgstr "Rechts"
-
-#. Default: "Success"
-#: PrivacyProtection/PrivacyProtection
-msgid "Success"
-msgstr "Erfolgreich"
 
 #. Default: "Use screen height"
 #: Blocks/Maps/schema
