@@ -65,11 +65,6 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#. Default: "Live image generated"
-#: PrivacyProtection/PrivacyProtection
-msgid "Live image generated"
-msgstr ""
-
 #. Default: "Map height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
@@ -101,11 +96,6 @@ msgstr ""
 #. Default: "Right"
 #: Blocks/Maps/Edit
 msgid "Right"
-msgstr ""
-
-#. Default: "Success"
-#: PrivacyProtection/PrivacyProtection
-msgid "Success"
 msgstr ""
 
 #. Default: "Use screen height"

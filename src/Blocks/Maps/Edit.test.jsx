@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
+import { MemoryRouter } from 'react-router-dom';
 import config from '@plone/volto/registry';
 import '@testing-library/jest-dom';
 
@@ -38,20 +39,22 @@ describe('Test Maps Block editing', () => {
   it('renders the edit form with a map', () => {
     const { container } = render(
       <Provider store={global.store}>
-        <Edit
-          data={data}
-          pathname="/news"
-          selected={false}
-          block="1234"
-          index={1}
-          onChangeBlock={() => {}}
-          onSelectBlock={() => {}}
-          onDeleteBlock={() => {}}
-          onFocusPreviousBlock={() => {}}
-          onFocusNextBlock={() => {}}
-          handleKeyDown={() => {}}
-          content={{}}
-        />
+        <MemoryRouter>
+          <Edit
+            data={data}
+            pathname="/news"
+            selected={false}
+            block="1234"
+            index={1}
+            onChangeBlock={() => {}}
+            onSelectBlock={() => {}}
+            onDeleteBlock={() => {}}
+            onFocusPreviousBlock={() => {}}
+            onFocusNextBlock={() => {}}
+            handleKeyDown={() => {}}
+            content={{}}
+          />
+        </MemoryRouter>
       </Provider>,
     );
     expect(screen.getByTitle('ESRI Maps Embedded Block')).toBeInTheDocument();
@@ -61,23 +64,25 @@ describe('Test Maps Block editing', () => {
   it('renders the edit form without a map', () => {
     render(
       <Provider store={global.store}>
-        <Edit
-          data={{
-            '@type': 'maps',
-            url: '',
-          }}
-          pathname="/news"
-          selected={true}
-          block="1234"
-          index={1}
-          onChangeBlock={() => {}}
-          onSelectBlock={() => {}}
-          onDeleteBlock={() => {}}
-          onFocusPreviousBlock={() => {}}
-          onFocusNextBlock={() => {}}
-          handleKeyDown={() => {}}
-          content={{}}
-        />
+        <MemoryRouter>
+          <Edit
+            data={{
+              '@type': 'maps',
+              url: '',
+            }}
+            pathname="/news"
+            selected={true}
+            block="1234"
+            index={1}
+            onChangeBlock={() => {}}
+            onSelectBlock={() => {}}
+            onDeleteBlock={() => {}}
+            onFocusPreviousBlock={() => {}}
+            onFocusNextBlock={() => {}}
+            handleKeyDown={() => {}}
+            content={{}}
+          />
+        </MemoryRouter>
       </Provider>,
     );
     expect(
@@ -90,22 +95,24 @@ describe('Test Maps Block editing', () => {
   it('handles URL input', () => {
     const { container } = render(
       <Provider store={global.store}>
-        <Edit
-          data={{
-            '@type': 'maps',
-            url: '',
-          }}
-          pathname="/news"
-          selected={true}
-          block="1234"
-          index={1}
-          onChangeBlock={jest.fn()}
-          onSelectBlock={jest.fn()}
-          onDeleteBlock={jest.fn()}
-          onFocusPreviousBlock={jest.fn()}
-          onFocusNextBlock={jest.fn()}
-          handleKeyDown={jest.fn()}
-        />
+        <MemoryRouter>
+          <Edit
+            data={{
+              '@type': 'maps',
+              url: '',
+            }}
+            pathname="/news"
+            selected={true}
+            block="1234"
+            index={1}
+            onChangeBlock={jest.fn()}
+            onSelectBlock={jest.fn()}
+            onDeleteBlock={jest.fn()}
+            onFocusPreviousBlock={jest.fn()}
+            onFocusNextBlock={jest.fn()}
+            handleKeyDown={jest.fn()}
+          />
+        </MemoryRouter>
       </Provider>,
     );
 
