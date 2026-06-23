@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-03-10T22:12:54.862Z\n"
+"POT-Creation-Date: 2026-06-23T18:26:04.153Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -67,11 +67,6 @@ msgstr ""
 msgid "Left"
 msgstr ""
 
-#. Default: "Live image generated"
-#: PrivacyProtection/PrivacyProtection
-msgid "Live image generated"
-msgstr ""
-
 #. Default: "Map height"
 #: Blocks/EmbedMaps/schema
 #: Blocks/Maps/schema
@@ -103,11 +98,6 @@ msgstr ""
 #. Default: "Right"
 #: Blocks/Maps/Edit
 msgid "Right"
-msgstr ""
-
-#. Default: "Success"
-#: PrivacyProtection/PrivacyProtection
-msgid "Success"
 msgstr ""
 
 #. Default: "Use screen height"
