@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
+import { MemoryRouter } from 'react-router-dom';
 import config from '@plone/volto/registry';
 import '@testing-library/jest-dom';
 
@@ -53,7 +54,9 @@ describe('Maps Block View', () => {
   it('test-1', () => {
     const { container } = render(
       <Provider store={global.store}>
-        <View data={data} />
+        <MemoryRouter>
+          <View data={data} />
+        </MemoryRouter>
       </Provider>,
     );
 
@@ -67,12 +70,14 @@ describe('Maps Block View', () => {
   it('test-2', () => {
     const { container } = render(
       <Provider store={global.store}>
-        <View
-          data={{
-            ...data,
-            height: '100vh',
-          }}
-        />
+        <MemoryRouter>
+          <View
+            data={{
+              ...data,
+              height: '100vh',
+            }}
+          />
+        </MemoryRouter>
       </Provider>,
     );
 
@@ -85,17 +90,19 @@ describe('Maps Block View', () => {
   it('test-3', () => {
     const Component = (props) => (
       <Provider store={global.store}>
-        <View
-          data={{
-            ...data,
-            dataprotection: {
-              ...data.dataprotection,
-              enabled: true,
-            },
-            height: '100vh',
-            useVisibilitySensor: false,
-          }}
-        />
+        <MemoryRouter>
+          <View
+            data={{
+              ...data,
+              dataprotection: {
+                ...data.dataprotection,
+                enabled: true,
+              },
+              height: '100vh',
+              useVisibilitySensor: false,
+            }}
+          />
+        </MemoryRouter>
       </Provider>
     );
     const { container, rerender } = render(<Component />);

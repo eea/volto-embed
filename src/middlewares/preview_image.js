@@ -27,7 +27,7 @@ const cleanAction = (action) => {
 };
 
 export const preview_image = (middlewares) => [
-  (store) => (next) => async (action) => {
+  (store) => (next) => (action) => {
     if (![CREATE_CONTENT, UPDATE_CONTENT].includes(action.type)) {
       return next(action);
     }
