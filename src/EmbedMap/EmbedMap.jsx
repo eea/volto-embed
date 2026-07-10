@@ -52,16 +52,37 @@ function EmbedMap({ data, intl, id, screen }) {
   }, [url, parameters]);
 
   useEffect(() => {
-    if (el.current) {
+    const updateMobileLayout = () => {
+      if (!el.current) return;
+
       const visWidth = el.current.offsetWidth;
 
-      if (visWidth < 600 && !mobile) {
-        setMobile(true);
-      } else if (visWidth >= 600 && mobile) {
-        setMobile(false);
+      if (!visWidth) {
+        return;
       }
+
+      setMobile((isMobile) => {
+        if (visWidth < 600 && !isMobile) {
+          return true;
+        }
+        if (visWidth >= 600 && isMobile) {
+          return false;
+        }
+        return isMobile;
+      });
+    };
+
+    updateMobileLayout();
+
+    if (typeof ResizeObserver === 'undefined' || !el.current) {
+      return undefined;
     }
-  }, [screen, mobile]);
+
+    const resizeObserver = new ResizeObserver(updateMobileLayout);
+    resizeObserver.observe(el.current);
+
+    return () => resizeObserver.disconnect();
+  }, [screen]);
 
   if (!url) return null;
 

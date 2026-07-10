@@ -7,6 +7,32 @@ import '@testing-library/jest-dom';
 
 import EmbedMap from './EmbedMap';
 
+const offsetWidthDescriptor = Object.getOwnPropertyDescriptor(
+  HTMLElement.prototype,
+  'offsetWidth',
+);
+
+const setElementWidth = (width) => {
+  Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+    configurable: true,
+    get() {
+      return width;
+    },
+  });
+};
+
+afterEach(() => {
+  if (offsetWidthDescriptor) {
+    Object.defineProperty(
+      HTMLElement.prototype,
+      'offsetWidth',
+      offsetWidthDescriptor,
+    );
+  } else {
+    delete HTMLElement.prototype.offsetWidth;
+  }
+});
+
 config.blocks.blocksConfig = {
   ...config.blocks.blocksConfig,
   maps: {
@@ -28,8 +54,8 @@ config.blocks.blocksConfig = {
 describe('EmbedMap', () => {
   it('renders map component', () => {
     const { container } = render(
-      <Provider store={global.store}>
-        <MemoryRouter>
+      <MemoryRouter>
+        <Provider store={global.store}>
           <EmbedMap
             id="my-map"
             data={{
@@ -46,8 +72,8 @@ describe('EmbedMap', () => {
               },
             }}
           />
-        </MemoryRouter>
-      </Provider>,
+        </Provider>
+      </MemoryRouter>,
     );
     expect(screen.getByTitle('Embeded ESRI Maps')).toBeInTheDocument();
     expect(container.querySelector('iframe')).toHaveAttribute(
@@ -60,9 +86,11 @@ describe('EmbedMap', () => {
   });
 
   it('handles mobile view', () => {
+    setElementWidth(400);
+
     const { container } = render(
-      <Provider store={global.store}>
-        <MemoryRouter>
+      <MemoryRouter>
+        <Provider store={global.store}>
           <EmbedMap
             id="my-map"
             data={{
@@ -81,12 +109,45 @@ describe('EmbedMap', () => {
             intl={{ formatMessage: (message) => message.defaultMessage }}
             screen={{ width: 400 }}
           />
-        </MemoryRouter>
-      </Provider>,
+        </Provider>
+      </MemoryRouter>,
     );
 
     expect(container.querySelector('iframe')).toHaveClass('google-map');
     expect(container.querySelector('.visualization-toolbar')).toHaveClass(
+      'mobile',
+    );
+  });
+
+  it('does not treat hidden tabs as mobile view', () => {
+    setElementWidth(0);
+
+    const { container } = render(
+      <MemoryRouter>
+        <Provider store={global.store}>
+          <EmbedMap
+            id="my-map"
+            data={{
+              with_notes: false,
+              with_sources: false,
+              with_more_info: true,
+              with_share: true,
+              with_enlarge: true,
+              url: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3027.7835278268726!2d14.38842915203974!3d40.634655679238854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x133b994881d943cb%3A0x6ab93db57d3272f0!2sHotel+Mediterraneo+Sorrento!5e0!3m2!1sen!2ses!4v1550168740166',
+              useVisibilitySensor: false,
+              parameters: {
+                Country: 'RO',
+                zoomtocountry: 'RO',
+              },
+            }}
+            intl={{ formatMessage: (message) => message.defaultMessage }}
+            screen={{ width: 1024 }}
+          />
+        </Provider>
+      </MemoryRouter>,
+    );
+
+    expect(container.querySelector('.visualization-toolbar')).not.toHaveClass(
       'mobile',
     );
   });
