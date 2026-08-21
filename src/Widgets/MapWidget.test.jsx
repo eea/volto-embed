@@ -7,11 +7,11 @@ import EmbedMap from '@eeacms/volto-embed/EmbedMap/EmbedMap';
 import { pickMetadata } from '@eeacms/volto-embed/helpers';
 import '@testing-library/jest-dom'; // Importă jest-dom
 
-jest.mock('@eeacms/volto-embed/EmbedMap/EmbedMap', () =>
-  jest.fn(() => <div>Mocked EmbedMap</div>),
-);
-jest.mock('@eeacms/volto-embed/helpers', () => ({
-  pickMetadata: jest.fn(),
+vi.mock('@eeacms/volto-embed/EmbedMap/EmbedMap', () => ({
+  default: vi.fn(() => <div>Mocked EmbedMap</div>),
+}));
+vi.mock('@eeacms/volto-embed/helpers', () => ({
+  pickMetadata: vi.fn(),
 }));
 
 const mockStore = configureStore([]);

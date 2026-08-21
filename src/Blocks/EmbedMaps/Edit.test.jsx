@@ -9,23 +9,22 @@ import '@testing-library/jest-dom';
 
 installEmbedMaps(config);
 
-jest.mock('@plone/volto/components/manage/Sidebar/SidebarPortal', () => ({
+vi.mock('@plone/volto/components/manage/Sidebar/SidebarPortal', () => ({
   __esModule: true,
   default: ({ children }) => <div data-testid="sidebar-portal">{children}</div>,
 }));
 
-jest.mock(
-  '@plone/volto/components/manage/Form/BlockDataForm',
-  () => (props) => (
+vi.mock('@plone/volto/components/manage/Form/BlockDataForm', () => ({
+  default: (props) => (
     <div data-testid="block-data-form">
       <p>Mocked BlockDataForm</p>
       <input data-testid="block-data-input" onChange={props.onChangeField} />
     </div>
   ),
-);
+}));
 
-jest.mock('./View', () =>
-  jest.fn((props) => (
+vi.mock('./View', () => ({
+  default: vi.fn((props) => (
     <div>
       <div data-testid="view-component" mode={props.mode}>
         Mocked View Component
@@ -33,10 +32,10 @@ jest.mock('./View', () =>
       {props.children}
     </div>
   )),
-);
+}));
 
 describe('Edit component', () => {
-  const mockOnChangeBlock = jest.fn();
+  const mockOnChangeBlock = vi.fn();
   const props = {
     id: 'my-map',
     data: {
@@ -61,12 +60,12 @@ describe('Edit component', () => {
     selected: true,
     block: '1234',
     index: 1,
-    onChangeBlock: jest.fn(),
-    onSelectBlock: jest.fn(),
-    onDeleteBlock: jest.fn(),
-    onFocusPreviousBlock: jest.fn(),
-    onFocusNextBlock: jest.fn(),
-    handleKeyDown: jest.fn(),
+    onChangeBlock: vi.fn(),
+    onSelectBlock: vi.fn(),
+    onDeleteBlock: vi.fn(),
+    onFocusPreviousBlock: vi.fn(),
+    onFocusNextBlock: vi.fn(),
+    handleKeyDown: vi.fn(),
     content: {},
   };
 

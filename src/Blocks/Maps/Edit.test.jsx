@@ -105,12 +105,12 @@ describe('Test Maps Block editing', () => {
             selected={true}
             block="1234"
             index={1}
-            onChangeBlock={jest.fn()}
-            onSelectBlock={jest.fn()}
-            onDeleteBlock={jest.fn()}
-            onFocusPreviousBlock={jest.fn()}
-            onFocusNextBlock={jest.fn()}
-            handleKeyDown={jest.fn()}
+            onChangeBlock={vi.fn()}
+            onSelectBlock={vi.fn()}
+            onDeleteBlock={vi.fn()}
+            onFocusPreviousBlock={vi.fn()}
+            onFocusNextBlock={vi.fn()}
+            handleKeyDown={vi.fn()}
           />
         </MemoryRouter>
       </Provider>,

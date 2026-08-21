@@ -3,12 +3,14 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import Sources from './Sources';
 import '@testing-library/jest-dom';
 
-jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
-  return ({ children, href, ...rest }) => (
-    <a href={href} {...rest}>
-      {children}
-    </a>
-  );
+vi.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
+  return {
+    default: ({ children, href, ...rest }) => (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    ),
+  };
 });
 
 const mockSources = [

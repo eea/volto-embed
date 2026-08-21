@@ -8,12 +8,14 @@ import '@testing-library/jest-dom';
 import View from './View';
 import installEmbedMaps from '.';
 
-jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
-  return ({ children, href, ...rest }) => (
-    <a href={href} {...rest}>
-      {children}
-    </a>
-  );
+vi.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
+  return {
+    default: ({ children, href, ...rest }) => (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    ),
+  };
 });
 
 installEmbedMaps(config);

@@ -7,12 +7,14 @@ import '@testing-library/jest-dom';
 
 import MapView from './MapView';
 
-jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
-  return ({ children, href, ...rest }) => (
-    <a href={href} {...rest}>
-      {children}
-    </a>
-  );
+vi.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
+  return {
+    default: ({ children, href, ...rest }) => (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    ),
+  };
 });
 
 config.settings = {

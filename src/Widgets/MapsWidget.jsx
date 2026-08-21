@@ -1,15 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useIntl, FormattedMessage, defineMessages } from 'react-intl';
 import Icon from '@plone/volto/components/theme/Icon/Icon';
-import {
-  Button,
-  Modal,
-  Grid,
-  Label,
-  Input,
-  Message,
-  Image,
-} from 'semantic-ui-react';
+import Image from '@plone/volto/components/theme/Image/Image';
+import { Button, Modal, Grid, Label, Input, Message } from 'semantic-ui-react';
 import map from 'lodash/map';
 import FormFieldWrapper from '@plone/volto/components/manage/Widgets/FormFieldWrapper';
 import InlineForm from '@plone/volto/components/manage/Form/InlineForm';

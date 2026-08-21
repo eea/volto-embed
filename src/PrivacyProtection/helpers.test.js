@@ -9,11 +9,11 @@ describe('createImageUrl', () => {
     };
 
     // Mock the atob function
-    jest.spyOn(window, 'atob').mockImplementation(() => 'hello world');
+    vi.spyOn(window, 'atob').mockImplementation(() => 'hello world');
 
     // Mock the URL.createObjectURL function
     const mockUrl = 'blob:http://localhost:3000/some-url';
-    global.URL.createObjectURL = jest.fn().mockReturnValue(mockUrl);
+    global.URL.createObjectURL = vi.fn().mockReturnValue(mockUrl);
 
     // Call the function
     const imageUrl = createImageUrl(mockResult);
@@ -29,6 +29,6 @@ describe('createImageUrl', () => {
     expect(blobArgs.size).toBe(11); // "hello world" is 11 bytes
 
     // Clean up mocks
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 });

@@ -7,7 +7,7 @@ describe('preview_image middleware', () => {
 
   beforeEach(() => {
     store = {
-      getState: jest.fn(() => ({
+      getState: vi.fn(() => ({
         content: {
           data: {
             '@type': 'map_interactive',
@@ -17,7 +17,7 @@ describe('preview_image middleware', () => {
         },
       })),
     };
-    next = jest.fn();
+    next = vi.fn();
     middlewares = [];
   });
 
@@ -29,7 +29,7 @@ describe('preview_image middleware', () => {
   });
   it('redo the image', () => {
     store = {
-      getState: jest.fn(() => ({
+      getState: vi.fn(() => ({
         content: {
           data: {
             '@type': 'map_interactive',
@@ -39,7 +39,7 @@ describe('preview_image middleware', () => {
         },
       })),
     };
-    next = jest.fn();
+    next = vi.fn();
     middlewares = [];
     action = { type: 'UPDATE_CONTENT', request: { data: {} } };
     const middleware = preview_image(middlewares)[0]; // Accesăm prima funcție din array

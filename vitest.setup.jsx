@@ -1,4 +1,4 @@
-import { jest } from '@jest/globals';
+import { vi } from 'vitest';
 import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore();
@@ -15,10 +15,19 @@ global.store = mockStore({
   connected_data_parameters: {},
 });
 
-const mockSemanticComponents = jest.requireActual('semantic-ui-react');
-const mockComponents = jest.requireActual('@plone/volto/components');
+const mockSemanticComponents = await vi.importActual('semantic-ui-react');
+const mockComponents = await vi.importActual('@plone/volto/components');
+const mockReactCookie = await vi.importActual('react-cookie');
+const cookies = {
+  get: vi.fn(),
+  getAll: vi.fn(() => ({})),
+  set: vi.fn(),
+  remove: vi.fn(),
+  addChangeListener: vi.fn(),
+  removeChangeListener: vi.fn(),
+};
 
-jest.mock('semantic-ui-react', () => ({
+vi.doMock('semantic-ui-react', () => ({
   ...mockSemanticComponents,
   Popup: ({ content, trigger }) => {
     return (
@@ -30,7 +39,7 @@ jest.mock('semantic-ui-react', () => ({
   },
 }));
 
-jest.doMock('@plone/volto/components', () => {
+vi.doMock('@plone/volto/components', () => {
   return {
     __esModule: true,
     ...mockComponents,
@@ -42,7 +51,14 @@ jest.doMock('@plone/volto/components', () => {
   };
 });
 
-jest.doMock('@plone/volto-slate/editor/render', () => ({
+vi.doMock('react-cookie', () => ({
+  ...mockReactCookie,
+  withCookies: (Component) => (props) => (
+    <Component {...props} cookies={cookies} />
+  ),
+}));
+
+vi.doMock('@plone/volto-slate/editor/render', () => ({
   __esModule: true,
   serializeNodes: (nodes) => {
     return nodes.map((node, index) => {
@@ -70,7 +86,7 @@ jest.doMock('@plone/volto-slate/editor/render', () => ({
   },
 }));
 
-global.fetch = jest.fn(() =>
+global.fetch = vi.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({}),
   }),
