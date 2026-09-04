@@ -1,6 +1,8 @@
 import { vi } from 'vitest';
 import configureStore from 'redux-mock-store';
 
+global.jest = vi;
+
 const mockStore = configureStore();
 
 global.store = mockStore({
