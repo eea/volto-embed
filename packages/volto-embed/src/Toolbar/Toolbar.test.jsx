@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
 import config from '@plone/volto/registry';
 import '@testing-library/jest-dom';
@@ -87,4 +87,99 @@ test('renders toolbar components', () => {
     '/path/to/embeded/content',
   );
   expect(container.querySelector('button.copy-button')).toBeInTheDocument();
+});
+
+const setClipboard = (writeText) => {
+  Object.defineProperty(navigator, 'clipboard', {
+    configurable: true,
+    value: { writeText },
+  });
+};
+
+const renderShare = () =>
+  render(
+    <Provider store={global.store}>
+      <Share href="/path/to/embeded/content" />
+    </Provider>,
+  );
+
+test('Share reports a successful copy', async () => {
+  setClipboard(vi.fn().mockResolvedValue());
+  renderShare();
+
+  fireEvent.click(screen.getByText('Copy'));
+
+  await waitFor(() => expect(screen.getByText('Copied!')).toBeInTheDocument());
+});
+
+test('Share reports a failed copy', async () => {
+  setClipboard(vi.fn().mockRejectedValue(new Error('clipboard unavailable')));
+  renderShare();
+
+  fireEvent.click(screen.getByText('Copy'));
+
+  await waitFor(() =>
+    expect(
+      screen.getByText('Copy failed. Please try again.'),
+    ).toBeInTheDocument(),
+  );
+});
+
+test('Enlarge opens a modal with the enlarged content', () => {
+  render(
+    <Provider store={global.store}>
+      <Enlarge className="enlarge-embed-maps">
+        <div>Some enlarged content</div>
+      </Enlarge>
+    </Provider>,
+  );
+
+  fireEvent.click(screen.getByText('Enlarge'));
+
+  expect(screen.getByText('Some enlarged content')).toBeInTheDocument();
+});
+
+test('Enlarge closes the modal through the close icon', () => {
+  render(
+    <Provider store={global.store}>
+      <Enlarge className="enlarge-embed-maps">
+        <div>Some enlarged content</div>
+      </Enlarge>
+    </Provider>,
+  );
+
+  fireEvent.click(screen.getByText('Enlarge'));
+
+  const closeIcon = document.querySelector('.enlarge-modal .close.icon');
+  expect(closeIcon).toBeInTheDocument();
+
+  fireEvent.click(closeIcon);
+  expect(screen.queryByText('Some enlarged content')).not.toBeInTheDocument();
+});
+
+test('Enlarge forwards a custom onClick with a setOpen callback', () => {
+  const onClick = vi.fn();
+  render(
+    <Provider store={global.store}>
+      <Enlarge onClick={onClick}>
+        <div>Some enlarged content</div>
+      </Enlarge>
+    </Provider>,
+  );
+
+  fireEvent.click(screen.getByText('Enlarge'));
+
+  expect(onClick).toHaveBeenCalledWith({ setOpen: expect.any(Function) });
+});
+
+test('Enlarge does not render a modal without children', () => {
+  const { container } = render(
+    <Provider store={global.store}>
+      <Enlarge />
+    </Provider>,
+  );
+
+  fireEvent.click(screen.getByText('Enlarge'));
+
+  expect(container.querySelector('.enlarge-modal')).not.toBeInTheDocument();
 });

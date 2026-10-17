@@ -3,6 +3,21 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import Sources from './Sources';
 import '@testing-library/jest-dom';
 
+vi.mock('semantic-ui-react', async () => {
+  const actual = await vi.importActual('semantic-ui-react');
+  return {
+    ...actual,
+    Popup: ({ trigger, content, onOpen, onClose }) => (
+      <div className="popup">
+        {trigger}
+        <button className="popup-open" onClick={onOpen} />
+        <button className="popup-close" onClick={onClose} />
+        <div className="content">{content}</div>
+      </div>
+    ),
+  };
+});
+
 vi.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
   return {
     default: ({ children, href, ...rest }) => (
@@ -78,5 +93,56 @@ describe('Sources', () => {
     expect(
       screen.getByText('Data provenance is not set for this visualization.'),
     ).toBeInTheDocument();
+  });
+
+  it('renders a chart source without a link as plain text', () => {
+    render(<Sources sources={[{ chart_source: 'Source 3' }]} />);
+
+    fireEvent.click(screen.getByText('Sources'));
+
+    expect(screen.getByText('Source 3').closest('a')).toBeNull();
+  });
+
+  it('renders a fallback source with link and organisation', () => {
+    render(
+      <Sources
+        sources={[
+          {
+            title: 'Title 4',
+            link: 'http://example.com/link4',
+            organisation: 'Organisation 4',
+          },
+        ]}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Sources'));
+
+    expect(screen.getByText('Title 4').closest('a')).toHaveAttribute(
+      'href',
+      'http://example.com/link4',
+    );
+    expect(screen.getByText('Organisation 4')).toBeInTheDocument();
+  });
+
+  it('renders a fallback source without a link as plain text', () => {
+    render(<Sources sources={[{ title: 'Title 5' }]} />);
+
+    fireEvent.click(screen.getByText('Sources'));
+
+    expect(screen.getByText('Title 5').closest('a')).toBeNull();
+  });
+
+  it('opens and closes the popup through the trigger', () => {
+    const { container } = render(<Sources sources={mockSources} />);
+
+    const triggerButton = screen.getByText('Sources');
+    expect(triggerButton).not.toHaveClass('open');
+
+    fireEvent.click(container.querySelector('.popup-open'));
+    expect(screen.getByText('Sources')).toHaveClass('open');
+
+    fireEvent.click(container.querySelector('.popup-close'));
+    expect(screen.getByText('Sources')).not.toHaveClass('open');
   });
 });
