@@ -5,7 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-import View from './View';
+import View, { View as UnconnectedView } from './View';
 import installEmbedMaps from '.';
 
 jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
@@ -19,6 +19,12 @@ jest.mock('@plone/volto/components/manage/UniversalLink/UniversalLink', () => {
 installEmbedMaps(config);
 
 describe('EmbedMaps Block View', () => {
+  const imagePreview = {
+    data: 'cHJpbnQtbWFwLXByZXZpZXc=',
+    filename: 'map-preview.png',
+    'content-type': 'image/png',
+  };
+
   it('renders a view embed map block component', () => {
     render(
       <Provider store={global.store}>
@@ -86,6 +92,84 @@ describe('EmbedMaps Block View', () => {
     expect(
       screen.getByText('Please select a map from block editor.'),
     ).toBeInTheDocument();
+  });
+
+  it('loads the iframe without a visibility sensor in print mode', () => {
+    render(
+      <Provider store={global.store}>
+        <MemoryRouter>
+          <UnconnectedView
+            id="print-map"
+            isPrint
+            data={{
+              '@type': 'embed_maps',
+              url: '/path/to/map',
+              maps: {
+                '@id': '/path/to/map',
+                url: 'https://example.com/embedded-map',
+              },
+            }}
+          />
+        </MemoryRouter>
+      </Provider>,
+    );
+
+    expect(screen.getByTitle('Embeded ESRI Maps')).toHaveAttribute(
+      'src',
+      'https://example.com/embedded-map',
+    );
+  });
+
+  it('keeps the iframe lazy-loaded in normal browsing mode', () => {
+    render(
+      <Provider store={global.store}>
+        <MemoryRouter>
+          <UnconnectedView
+            id="lazy-map"
+            data={{
+              '@type': 'embed_maps',
+              url: '/path/to/map',
+              maps: {
+                '@id': '/path/to/map',
+                url: 'https://example.com/lazy-map',
+              },
+              useVisibilitySensor: true,
+            }}
+          />
+        </MemoryRouter>
+      </Provider>,
+    );
+
+    expect(screen.queryByTitle('Embeded ESRI Maps')).not.toBeInTheDocument();
+  });
+
+  it('uses the image preview instead of the iframe in print mode', () => {
+    const { container } = render(
+      <Provider store={global.store}>
+        <MemoryRouter>
+          <UnconnectedView
+            id="print-preview-map"
+            isPrint
+            data={{
+              '@type': 'embed_maps',
+              url: '/path/to/map',
+              image_preview: imagePreview,
+              maps: {
+                '@id': '/path/to/map',
+                title: 'My map',
+                url: 'https://example.com/embedded-map',
+              },
+            }}
+          />
+        </MemoryRouter>
+      </Provider>,
+    );
+
+    expect(screen.getByRole('img', { name: 'My map' })).toHaveAttribute(
+      'src',
+      'data:image/png;base64,cHJpbnQtbWFwLXByZXZpZXc=',
+    );
+    expect(container.querySelector('iframe')).not.toBeInTheDocument();
   });
 
   it('handles map error', () => {
