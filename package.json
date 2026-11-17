@@ -20,7 +20,8 @@
   ],
   "dependencies": {
     "@eeacms/volto-corsproxy": "*",
-    "@eeacms/volto-datablocks": "*"
+    "@eeacms/volto-datablocks": "*",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
