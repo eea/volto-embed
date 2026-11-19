@@ -14,6 +14,19 @@ Right now it does several things:
   wrapped in `<PrivacyProtection>`.
 See `src/Iframe/ViewIframe` for details on how to implement.
 
+## Upgrade
+
+### Upgrading to 12.x
+
+> This version requires `Volto 18` or `Volto 19` and Node.js 22.
+
+This release adds Volto 19 support, and the published package moves to `packages/volto-embed`. The maps widget now renders its block icon with Volto's `Image` component instead of the `semantic-ui-react` one; the exports, the block schemas and the widget registration stay the same.
+
+#### Breaking changes
+
+- **Node.js 22 or newer is required** (`engines.node >= 22`), 11.x declared no engine.
+- **React 18 is required.** The package declares `react` and `react-dom` as `^18.2.0` peers, 11.x declared no peers.
+
 ## Requirements
 
 ### Backend
