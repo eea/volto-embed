@@ -145,7 +145,11 @@ describe('EmbedMaps Block View', () => {
     expect(screen.queryByTitle('Embeded ESRI Maps')).not.toBeInTheDocument();
   });
 
-  it('uses the image preview instead of the iframe in print mode', () => {
+  it('uses the image preview instead of the iframe in print mode', async () => {
+    global.URL.createObjectURL = vi
+      .fn()
+      .mockReturnValue('blob:http://localhost/print-map-preview');
+
     const { container } = render(
       <Provider store={global.store}>
         <MemoryRouter>
@@ -167,9 +171,9 @@ describe('EmbedMaps Block View', () => {
       </Provider>,
     );
 
-    expect(screen.getByRole('img', { name: 'My map' })).toHaveAttribute(
+    expect(await screen.findByRole('img', { name: 'My map' })).toHaveAttribute(
       'src',
-      'data:image/png;base64,cHJpbnQtbWFwLXByZXZpZXc=',
+      'blob:http://localhost/print-map-preview',
     );
     expect(container.querySelector('iframe')).not.toBeInTheDocument();
   });
