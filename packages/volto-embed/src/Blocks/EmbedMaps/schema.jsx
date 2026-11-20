@@ -70,6 +70,14 @@ const messages = defineMessages({
     id: 'parametersDescription',
     defaultMessage: 'Set a list of parameters.',
   },
+  imagePreview: {
+    id: 'Image preview',
+    defaultMessage: 'Image preview',
+  },
+  imagePreviewDescription: {
+    id: 'Image preview description',
+    defaultMessage: 'Image preview used for print and PDF export.',
+  },
 });
 
 const parameters = (intl) => ({
@@ -101,7 +109,7 @@ const getSchema = (props) => {
       {
         id: 'default',
         title: props.intl.formatMessage(messages.defaultLabel),
-        fields: ['url', 'height'],
+        fields: ['url', 'height', 'image_preview'],
       },
       {
         id: 'toolbar',
@@ -130,6 +138,11 @@ const getSchema = (props) => {
           </a>
         ),
         description: props.intl.formatMessage(messages.cssMapHeightDescription),
+      },
+      image_preview: {
+        title: props.intl.formatMessage(messages.imagePreview),
+        description: props.intl.formatMessage(messages.imagePreviewDescription),
+        widget: 'file',
       },
       with_notes: {
         title: props.intl.formatMessage(messages.showNote),
