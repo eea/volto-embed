@@ -106,12 +106,14 @@ const aliases = {
   'load-volto-addons': addonsLoader,
   [addonPackage.name]: path.join(__dirname, 'src'),
 };
-function addSourceAlias(packageRoot) {
+function addSourceAlias(packageRoot, { overwrite = true } = {}) {
   const manifestPath = path.join(packageRoot, 'package.json');
   const sourceRoot = path.join(packageRoot, 'src');
   if (!fs.existsSync(manifestPath) || !fs.existsSync(sourceRoot)) return;
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (manifest.name) aliases[manifest.name] = sourceRoot;
+  if (manifest.name && (overwrite || !(manifest.name in aliases))) {
+    aliases[manifest.name] = sourceRoot;
+  }
 }
 
 const workspacePackages = path.join(projectRoot, 'packages');
@@ -141,7 +143,9 @@ if (fs.existsSync(pnpmStore)) {
       );
       if (!fs.existsSync(scopeRoot)) continue;
       for (const packageDirectory of fs.readdirSync(scopeRoot)) {
-        addSourceAlias(path.join(scopeRoot, packageDirectory));
+        addSourceAlias(path.join(scopeRoot, packageDirectory), {
+          overwrite: false,
+        });
       }
     }
   }
