@@ -8,8 +8,10 @@ import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withBlockExtensions } from '@plone/volto/helpers//Extensions';
 import PrivacyProtection from '@eeacms/volto-embed/PrivacyProtection/PrivacyProtection';
+import PreviewImage from '@eeacms/volto-embed/EmbedMap/PreviewImage';
 
 const messages = defineMessages({
   EmbededESRIMaps: {
@@ -24,7 +26,7 @@ const messages = defineMessages({
  * @extends Component
  */
 
-const View = ({ data, intl, id }) => {
+export const View = ({ data, intl, id, isPrint }) => {
   return (
     <div
       className={cx(
@@ -40,20 +42,29 @@ const View = ({ data, intl, id }) => {
           'full-width': data.align === 'full',
         })}
       >
-        <PrivacyProtection
-          data={data}
-          id={id}
-          useVisibilitySensor={data.useVisibilitySensor}
-        >
-          <iframe
-            title={intl.formatMessage(messages.EmbededESRIMaps)}
-            src={data.url}
-            className="google-map"
-            frameBorder="0"
-            allowFullScreen
-            style={data.height ? { height: data.height } : {}}
+        {isPrint && data.image_preview ? (
+          <PreviewImage
+            image={data.image_preview}
+            alt={data.title || intl.formatMessage(messages.EmbededESRIMaps)}
           />
-        </PrivacyProtection>
+        ) : (
+          <PrivacyProtection
+            data={data}
+            id={id}
+            useVisibilitySensor={
+              isPrint ? false : data.useVisibilitySensor ?? true
+            }
+          >
+            <iframe
+              title={intl.formatMessage(messages.EmbededESRIMaps)}
+              src={data.url}
+              className="google-map"
+              frameBorder="0"
+              allowFullScreen
+              style={data.height ? { height: data.height } : {}}
+            />
+          </PrivacyProtection>
+        )}
       </div>
     </div>
   );
@@ -68,4 +79,10 @@ View.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default compose(injectIntl, withBlockExtensions)(View);
+export default compose(
+  injectIntl,
+  withBlockExtensions,
+  connect((state) => ({
+    isPrint: state.print?.isPrint || false,
+  })),
+)(View);
