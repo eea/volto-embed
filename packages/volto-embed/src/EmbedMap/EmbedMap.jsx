@@ -14,6 +14,7 @@ import {
   Enlarge,
 } from '@eeacms/volto-embed/Toolbar';
 import PrivacyProtection from '@eeacms/volto-embed/PrivacyProtection/PrivacyProtection';
+import PreviewImage from '@eeacms/volto-embed/EmbedMap/PreviewImage';
 
 import './style.less';
 
@@ -36,7 +37,7 @@ function getHeight(data, screen) {
   );
 }
 
-function EmbedMap({ data, intl, id, screen }) {
+function EmbedMap({ data, intl, id, isPrint, screen }) {
   const { parameters, url } = data;
   const el = useRef();
   const [mobile, setMobile] = useState(false);
@@ -102,21 +103,28 @@ function EmbedMap({ data, intl, id, screen }) {
           'full-width': data.align === 'full',
         })}
       >
-        <PrivacyProtection
-          data={data}
-          id={id}
-          height={getHeight(data, screen)}
-          useVisibilitySensor={data.useVisibilitySensor ?? true}
-        >
-          <iframe
-            title={intl.formatMessage(messages.EmbededESRIMaps)}
-            src={iframeSrc}
-            className="google-map"
-            frameBorder="0"
-            allowFullScreen
-            style={{ height: getHeight(data, screen) }}
+        {isPrint && data.image_preview ? (
+          <PreviewImage
+            image={data.image_preview}
+            alt={data.title || intl.formatMessage(messages.EmbededESRIMaps)}
           />
-        </PrivacyProtection>
+        ) : (
+          <PrivacyProtection
+            data={data}
+            id={id}
+            height={getHeight(data, screen)}
+            useVisibilitySensor={data.useVisibilitySensor ?? true}
+          >
+            <iframe
+              title={intl.formatMessage(messages.EmbededESRIMaps)}
+              src={iframeSrc}
+              className="google-map"
+              frameBorder="0"
+              allowFullScreen
+              style={{ height: getHeight(data, screen) }}
+            />
+          </PrivacyProtection>
+        )}
       </div>
       <div className={cx('visualization-toolbar', { mobile })}>
         <div className="left-col">
@@ -142,6 +150,7 @@ function EmbedMap({ data, intl, id, screen }) {
                 }}
                 id={id}
                 intl={intl}
+                isPrint={isPrint}
               />
             </Enlarge>
           )}
@@ -153,7 +162,8 @@ function EmbedMap({ data, intl, id, screen }) {
 
 export default compose(
   injectIntl,
-  connect((state) => ({
+  connect((state, props) => ({
+    isPrint: props.isPrint ?? state.print?.isPrint ?? false,
     screen: state.screen,
   })),
 )(EmbedMap);

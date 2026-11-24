@@ -68,8 +68,8 @@ function getParameters({ parameters, data_query }) {
   };
 }
 
-function View(props) {
-  const { id, getContent, mode, data_query } = props;
+export function View(props) {
+  const { id, getContent, isPrint, mode, data_query } = props;
   const {
     height,
     parameters,
@@ -127,7 +127,8 @@ function View(props) {
       <EmbedMap
         data={{
           ...maps,
-          useVisibilitySensor,
+          useVisibilitySensor: isPrint ? false : useVisibilitySensor,
+          image_preview: props.data.image_preview || maps.image_preview,
           parameters: queryParams,
           height: height || maps.height,
           with_notes,
@@ -137,6 +138,7 @@ function View(props) {
           with_enlarge,
         }}
         id={props.id}
+        isPrint={isPrint}
       />
     </div>
   );
@@ -146,6 +148,7 @@ export default connect(
   (state, props) => ({
     mapsContent: state.content.subrequests?.[props.id]?.data,
     data_query: state.content?.data?.data_query,
+    isPrint: state.print?.isPrint || false,
   }),
   { getContent },
 )(View);

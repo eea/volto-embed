@@ -29,6 +29,14 @@ const messages = defineMessages({
     id: 'Use screen height',
     defaultMessage: 'Use screen height',
   },
+  imagePreview: {
+    id: 'Image preview',
+    defaultMessage: 'Image preview',
+  },
+  imagePreviewDescription: {
+    id: 'Image preview description',
+    defaultMessage: 'Image preview used for print and PDF export.',
+  },
 });
 
 export const MapsSchema = (props) => {
@@ -39,7 +47,14 @@ export const MapsSchema = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['url', 'title', 'align', 'height', 'useScreenHeight'],
+        fields: [
+          'url',
+          'title',
+          'align',
+          'height',
+          'useScreenHeight',
+          'image_preview',
+        ],
       },
     ],
 
@@ -71,6 +86,11 @@ export const MapsSchema = (props) => {
         title: props.intl.formatMessage(messages.useScreenHeight),
         type: 'boolean',
         default: false,
+      },
+      image_preview: {
+        title: props.intl.formatMessage(messages.imagePreview),
+        description: props.intl.formatMessage(messages.imagePreviewDescription),
+        widget: 'file',
       },
     },
     required: [],
