@@ -1,9 +1,15 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { Provider } from 'react-intl-redux';
 import '@testing-library/jest-dom';
 
 import MapsWidget from './MapsWidget';
+import { renderMapPreview } from './mapPreview';
+
+vi.mock('./mapPreview', async (importOriginal) => ({
+  ...(await importOriginal()),
+  renderMapPreview: vi.fn(),
+}));
 
 vi.mock('@eeacms/volto-embed/EmbedMap/EmbedMap', () => ({
   default: vi.fn(() => <div data-testid="embed-map" />),
@@ -186,5 +192,100 @@ describe('MapsWidget', () => {
 
     fireEvent.click(screen.getByText('Close'));
     expect(screen.queryByTestId('inline-form')).not.toBeInTheDocument();
+  });
+});
+
+describe('MapsWidget preview', () => {
+  const arcgisUrl =
+    'https://portal.discomap.eea.europa.eu/arcgis/apps/dashboards/' +
+    '9f1e6f5bea6946d8b4de09c340ad89c9';
+  const preview = 'data:image/png;base64,cG5n';
+
+  const renderWith = (value, onChange = vi.fn()) => {
+    const props = { id: 'map-1', title: 'Map', onChange };
+    const view = render(
+      <Provider store={global.store}>
+        <MapsWidget {...props} value={value} />
+      </Provider>,
+    );
+    const setValue = (newValue) =>
+      view.rerender(
+        <Provider store={global.store}>
+          <MapsWidget {...props} value={newValue} />
+        </Provider>,
+      );
+    return { onChange, setValue };
+  };
+
+  beforeEach(() => renderMapPreview.mockReset());
+
+  it('renders a preview when the map url changes', async () => {
+    renderMapPreview.mockResolvedValue(preview);
+    const { onChange, setValue } = renderWith({});
+
+    setValue({ url: arcgisUrl, height: '600' });
+
+    expect(renderMapPreview).toHaveBeenCalledWith(arcgisUrl, {
+      signal: expect.any(AbortSignal),
+    });
+    expect(
+      screen.getByText('Generating the preview image…'),
+    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(onChange).toHaveBeenCalledWith('map-1', {
+        url: arcgisUrl,
+        height: '600',
+        preview,
+      }),
+    );
+    expect(screen.getByText(/Preview image generated/)).toBeInTheDocument();
+  });
+
+  it('does not render for the saved url or non-ArcGIS urls', () => {
+    const { setValue } = renderWith({ url: arcgisUrl });
+    setValue({ url: arcgisUrl, height: '700' });
+    setValue({ url: 'https://example.com/map' });
+
+    expect(renderMapPreview).not.toHaveBeenCalled();
+  });
+
+  it('tells the editor when the preview could not be generated', async () => {
+    renderMapPreview.mockRejectedValue(new Error('print service down'));
+    const { onChange, setValue } = renderWith({});
+
+    setValue({ url: arcgisUrl });
+
+    expect(
+      await screen.findByText(/could not be generated/),
+    ).toBeInTheDocument();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('gives up on a hung render after a timeout', async () => {
+    vi.useFakeTimers();
+    renderMapPreview.mockImplementation(
+      (url, { signal }) =>
+        new Promise((resolve, reject) =>
+          signal.addEventListener('abort', () => reject(signal.reason)),
+        ),
+    );
+    const { setValue } = renderWith({});
+    setValue({ url: arcgisUrl });
+
+    await vi.advanceTimersByTimeAsync(60000);
+    vi.useRealTimers();
+
+    expect(screen.getByText(/could not be generated/)).toBeInTheDocument();
+  });
+
+  it('drops the preview of the previous map when the url changes', () => {
+    const { onChange } = renderWith({ url: arcgisUrl, preview });
+    openEditor();
+    fireEvent.click(screen.getByTestId('inline-change-url'));
+    fireEvent.click(screen.getByText('Apply changes'));
+
+    expect(onChange).toHaveBeenCalledWith('map-1', {
+      url: 'https://changed.example/map',
+    });
   });
 });
